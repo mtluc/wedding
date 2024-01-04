@@ -1,0 +1,35 @@
+{
+  "name": "wedding",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "node server.js",
+    "start_next": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "loader-utils": "^3.2.1",
+    "md5": "^2.3.0",
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.69.7",
+    "sqlite3": "^5.1.7-rc.0",
+    "iron-session": "^6.3.1",
+    "swr": "^2.0.0"
+    
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/react-transition-group": "^4.4.5",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "react-transition-group": "^4.4.5",
+    "typescript": "^5",
+    "react-router-dom": "^6.10.0"
+  }
+}

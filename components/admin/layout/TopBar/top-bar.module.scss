@@ -1,0 +1,70 @@
+.wap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    box-shadow: $box-shadow;
+    background-color: $background-color;
+    margin-left: 0.4rem;
+    border-radius: 0 0 0 0.4rem;
+
+    .page_title {
+        flex: 1;
+        margin: 0 1rem;
+        font-weight: $font-bold;
+        font-size: 1.1rem;
+        color: #000;
+    }
+
+    .user_box {
+        margin-right: 0.4rem;
+        .btn_user {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+
+            &:active {
+                background-color: rgba(10, 10, 10, 0.1);
+            }
+
+            .icon_user {
+                margin-right: 0.6rem;
+            }
+
+            .user_name {
+                color: #000;
+                font-weight: $font-bold;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+.list_item {
+    background-color: $background-color;
+    box-shadow: $box-shadow;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    border: 1px solid $border-color;
+
+    .item {
+        padding: 0.6rem 1rem;
+        white-space: nowrap;
+
+        a {
+            text-decoration: none;
+            color: $text-color;
+        }
+
+        &:hover {
+            background-color: $border-color;
+        }
+
+        :global(.icon-svg) {
+            margin-right: 0.6rem;
+        }
+
+        span {
+            vertical-align: middle;
+        }
+    }
+}

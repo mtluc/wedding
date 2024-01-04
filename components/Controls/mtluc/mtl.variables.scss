@@ -1,0 +1,87 @@
+@import '/styles/variables.scss';
+//#region Color
+// $primary: #007bff;
+// $secondary: #6c757d;
+// $success: #28a745;
+// $info: #17a2b8;
+// $warning: #ffc107;
+// $danger: #dc3545;
+// $light: #f8f9fa;
+// $dark: #343a40;
+// $border: #dadada;
+
+$primary: $primary-color;
+$secondary: #6c757d;
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #343a40;
+$border: #dadada;
+
+
+
+
+$bg-checkbox-checked: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='square' stroke-linejoin='square' stroke-width='2' d='M3,8 l3,3 l7-7'/></svg>";
+$bg-radio-checked: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><circle cx='50%25' cy='50%25' r='4' fill='rgb(0 123 255)'/></svg>";
+$bg-switch: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='rgba(0, 0, 0, 0.3)'/></svg>";
+$bg-switch-checked: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%23fff'/></svg>";
+$icon-arrow: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="%236c757d"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>';
+$icon-calendar: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="%23464c52"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z"/></svg>';
+$icon-close: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="48px" height="48px"><path d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z"/></svg>';
+$icon-close-danger: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px"><path fill="%23dc3545" d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z"/></svg>';
+
+$bg-radio-checked: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><circle cx='50%25' cy='50%25' r='4' fill='rgb(253 205 11)'/></svg>";
+
+$background-color: $background-color;
+$color: $text-color;
+$font-bold: bold;
+$title-color: $title-color;
+$note-color: $note-color;
+
+$box-shadow: 0 0 0.8rem 0 rgba(0, 0, 0, 0.1);
+//#endregion
+
+// #region Noti
+$noti-primary: #004085;
+$noti-bg-primary: #cce5ff;
+$noti-border-primary: #b8daff;
+
+$noti-secondary: #383d41;
+$noti-bg-secondary: #e2e3e5;
+$noti-border-secondary: #d6d8db;
+
+$noti-success: #28a745;
+$noti-bg-success: #d4edda;
+$noti-border-success: #c3e6cb;
+
+$noti-danger: #721c24;
+$noti-bg-danger: #f8d7da;
+$noti-border-danger: #f5c6cb;
+
+$noti-warning: #856404;
+$noti-bg-warning: #fff3cd;
+$noti-border-warning: #ffeeba;
+// #endregion
+
+// #region button
+$btn-backgroud: $background-color;
+$btn-backgroud-color: $color;
+$btn-backgroud-hover: #f4f4f4;
+$btn-backgroud-active: #bfbfbf;
+
+$btn-pr-backgroud: $primary;
+$btn-pr-backgroud-color: $light;
+$btn-pr-backgroud-hover: $primary;
+$btn-pr-backgroud-active: $primary;
+
+// #endregion
+
+// #region dark-mode
+
+// $background-color: #2b2b2b;
+// $color: #f8f9fa;
+// $box-shadow: 0 0 0.8rem 0 rgba(255, 255, 255, 0.2);
+// $border: #7b7b7b;
+// #endregion

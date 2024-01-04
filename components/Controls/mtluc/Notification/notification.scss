@@ -1,0 +1,94 @@
+.mtl-noti-wap {
+    border: thin solid $border;
+    box-shadow: $box-shadow;
+    padding: 0.3rem 0.2rem;
+    border-radius: 0.4rem;
+    display: inline-block;
+    min-width: 100px;
+}
+
+.mtl-noti-wap.primary {
+    color: $noti-primary;
+    background-color: $noti-bg-primary;
+    border-color: $noti-border-primary;
+}
+.mtl-noti-wap.primary .mtl-noti-icon {
+    fill: $noti-primary;
+}
+
+.mtl-noti-wap.secondary {
+    color: $noti-secondary;
+    background-color: $noti-bg-secondary;
+    border-color: $noti-border-secondary;
+}
+.mtl-noti-wap.secondary .mtl-noti-icon {
+    fill: $noti-secondary;
+}
+
+.mtl-noti-wap.success {
+    color: $noti-success;
+    background-color: $noti-bg-success;
+    border-color: $noti-border-success;
+}
+.mtl-noti-wap.success .mtl-noti-icon {
+    fill: $noti-success;
+}
+
+.mtl-noti-wap.danger {
+    color: $noti-danger;
+    background-color: $noti-bg-danger;
+    border-color: $noti-border-danger;
+}
+.mtl-noti-wap.danger .mtl-noti-icon {
+    fill: $noti-danger;
+}
+
+.mtl-noti-wap.warning {
+    color: $noti-warning;
+    background-color: $noti-bg-warning;
+    border-color: $noti-border-warning;
+}
+.mtl-noti-wap.warning .mtl-noti-icon {
+    fill: $noti-warning;
+}
+
+.mtl-noti-icon {
+    margin: 0.2rem 0.4rem;
+}
+
+.mtl-noti-btn-close {
+    background-image: url($icon-close-danger);
+    background-size: 1rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+    margin: 0 0.2rem;
+    box-sizing: border-box;
+}
+
+.mtl-noti-btn-close,
+.mtl-noti-btn-close:focus {
+    border: none;
+    background-color: transparent;
+    width: 20px;
+    height: 20px;
+}
+
+.mtl-noti-btn-close:hover {
+    color: $note-color;
+    cursor: pointer;
+}
+
+.mtl-noti-btn-close:active {
+    color: $title-color;
+}
+
+.mtl-noti-main {
+    display: flex;
+}
+
+.mtl-noti-message {
+    flex: 1;
+    margin: 0 0.2rem;
+    box-sizing: border-box;
+}

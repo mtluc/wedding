@@ -1,0 +1,68 @@
+.modal-wapper {
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba($color: #000, $alpha: 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+
+.modal-main {
+    min-width: 300px;
+    max-width: calc(100% - 32px);
+    max-height: calc(100% - 32px);
+    background-color: $background-color;
+    box-shadow: $box-shadow;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.mtl-modal-header {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    background-color: $primary;
+}
+
+.mtl-modal-title {
+    flex: 1;
+    overflow: hidden;
+    padding: 0 6px;
+    font-weight: $font-bold;
+    color: $title-color;
+    vertical-align: middle;
+}
+
+.modal-btn-close {
+    background-image: url($icon-close-danger);
+    background-size: 85%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+    margin-top: 0;
+}
+
+.modal-btn-close,
+.modal-btn-close:focus {
+    border: none;
+    background-color: transparent;
+    width: 20px;
+    height: 20px;
+}
+
+.modal-btn-close:hover {
+    color: $note-color;
+    cursor: pointer;
+}
+
+.modal-btn-close:active {
+    color: $title-color;
+}

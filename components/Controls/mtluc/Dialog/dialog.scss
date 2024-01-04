@@ -1,0 +1,70 @@
+@import "./../mtl.variables.scss";
+.mtl-dialog-content {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.mtl-dialog-content .icons {
+    font-size: 38px;
+    padding: 0 8px;
+
+    .icon-svg {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+.mtl-dialog-content .icon-question {
+    fill: #007bff;
+}
+
+.mtl-dialog-content .icon-noti {
+    fill: #007bff;
+}
+
+.mtl-dialog-content .icon-error {
+    fill: $danger;
+}
+
+.mtl-dialog-toolbar {
+    padding: 4px;
+    border-top: 1px solid $border-color;
+    text-align: center;
+}
+
+.mtl-dialog-toolbar button {
+    margin: 4px;
+    vertical-align: middle;
+    min-width: 85px;
+
+    span {
+        vertical-align: middle;
+    }
+
+    .icon-svg {
+        margin-right: 0.4rem;
+        height: 0.8rem;
+        width: 0.8rem;
+    }
+
+    &.btn-close {
+        .icon-svg {
+            fill: $note-color;
+        }
+    }
+
+    &.btn-primary-ltr {
+        .icon-svg {
+            fill: $background-color;
+        }
+    }
+}
+
+.mtl-dialog-toolbar button i {
+    margin-right: 6px;
+}
+
+.mtl-dialog-toolbar .content-info {
+    padding: 0 8px;
+}

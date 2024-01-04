@@ -1,0 +1,24 @@
+.mtl-grid-header .mtl-cell-header {
+    border: 0px solid $border;
+    border-inline-end-width: 1px;
+    text-align: center;
+    padding: 4px 8px;
+    vertical-align: bottom;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: $font-bold;
+    box-sizing: border-box;
+
+    &.col-docked {
+        position: sticky;
+        right: 0;
+        z-index: 1;
+        background: #fff;
+        border-inline-start-width: 1px;
+    }
+}
+
+.mtl-grid-header .mtl-cell-header:last-child {
+    border-inline-end-width: 0;
+}

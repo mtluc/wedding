@@ -1,0 +1,13 @@
+.no_item {
+    border-top: 1px dashed $border-color;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    min-height: 300px;
+
+    .no_item_wap {
+        text-align: center;
+    }
+}

@@ -1,0 +1,50 @@
+.mtl-switch {
+    width: 2.16rem;
+    height: 1.16rem;
+    vertical-align: middle;
+    background-color: $background-color;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid $border;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    outline: 0;
+    background-image: url($bg-switch);
+    background-position: left center;
+    border-radius: 2em;
+    transition: background-position 0.15s ease-in-out;
+    box-sizing: border-box;
+}
+
+.mtl-switch:focus {
+    border-color: $primary;
+
+    box-shadow: 0 0 0.25rem 0 $primary;
+}
+
+.mtl-switch:checked {
+    background-position: right center;
+    background-image: url($bg-switch-checked);
+    background-color: $primary;
+    border-color: $primary;
+}
+
+.mtl-switch:disabled {
+    pointer-events: none;
+    filter: none;
+    opacity: 0.5;
+}
+
+.mtl-switch ~ label {
+    width: auto;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    line-height: 1rem;
+    white-space: nowrap;
+    cursor: pointer;
+}

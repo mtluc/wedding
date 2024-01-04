@@ -1,0 +1,33 @@
+.wap {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #e9f1fe;
+
+    .nav_wap {
+        width: 15rem;
+        height: 100%;
+    }
+
+    .main_wap {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        overflow: hidden;
+
+        .top_bar_wap {
+            height: 3.5rem;
+        }
+
+        .main_box {
+            flex: 1;
+            overflow: hidden;
+            background-color: $background-color;
+            margin-top: 0.8rem;
+            margin-left: 0.4rem;
+            // border-radius: 0.4rem 0 0 0;
+            box-shadow: $box-shadow;
+            border-top: 2px $note-color solid;
+        }
+    }
+}

@@ -1,0 +1,45 @@
+@import "./../../mtl.variables.scss";
+
+.dict-base-form {
+    max-width: 100%;
+    padding: 0.5rem 0.75rem;
+}
+
+.dict-base-form .control {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.dict-base-form .control label {
+    vertical-align: middle;
+}
+
+.dict-base-form .control label span {
+    margin-left: 0.2rem;
+    color: $note-color;
+    vertical-align: middle;
+}
+
+.dict-base-form .control > label {
+    width: 5.5rem;
+}
+
+.dict-base-form .control .check-box ~ label,
+.dict-base-form .control .radio ~ label {
+    width: auto;
+    margin-left: 0.4rem;
+}
+
+.dict-base-form .taskbar {
+    text-align: center;
+    border-top: 1px solid #dadada;
+    margin-top: 0.4rem;
+    margin-bottom: -0.4rem;
+}
+
+.dict-base-form .taskbar button {
+    margin: 0.5rem 0.25rem;
+    min-width: 6rem;
+    border-color: $border-color;
+}

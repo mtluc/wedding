@@ -1,0 +1,19 @@
+
+.label {
+    width: 5rem;
+}
+
+.time{
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    span{
+        margin: auto 0.4rem;
+    }
+
+    :global(.invalid-msg){
+        bottom: -1rem;
+        left: -0.4rem;
+    }
+}

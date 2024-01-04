@@ -1,0 +1,117 @@
+.mtl-combobox-wapper {
+    display: inline-block;
+    position: relative;
+}
+
+.mtl-combobox {
+    padding: 0.4rem;
+    border: 1px solid #dadada;
+    border-radius: 0.4rem;
+    position: relative;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.mtl-combobox:disabled {
+    opacity: 0.5;
+    filter: none;
+    pointer-events: none;
+}
+
+.mtl-combobox:read-only {
+    background-color: $light;
+}
+
+.btn-dropdown {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 1px solid $border;
+    border-left: 0;
+    border-radius: 0 0.4rem 0.4rem 0;
+    background: $background-color;
+    padding: 0.4rem 0.6rem;
+    background-image: url($icon-arrow);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.8rem;
+    width: 1.6rem;
+    height: auto;
+}
+
+.mtl-combobox:focus,
+.mtl-combobox-wapper:has(.btn-dropdown:focus) .mtl-combobox {
+    border-color: $primary;
+    outline: none;
+    box-shadow: 0 0 0.4rem 0 $primary;
+}
+
+.invalid.mtl-combobox {
+    outline: none;
+    border-color: $danger;
+}
+
+.invalid.mtl-combobox:focus,
+.mtl-combobox-wapper:has(.invalid + .btn-dropdown:focus) .mtl-combobox {
+    outline: none;
+    border-color: $danger;
+    box-shadow: 0 0 0.4rem 0 $danger;
+}
+
+.btn-dropdown:focus {
+    background-color: $border;
+    box-shadow: none;
+}
+
+.mtl-combobox:focus ~ .btn-dropdown,
+.btn-dropdown:focus {
+    border-color: $primary;
+    border-left: 0;
+}
+
+.invalid.mtl-combobox ~ .btn-dropdown,
+.invalid.mtl-combobox ~ .btn-dropdown:focus {
+    border-color: $danger;
+}
+
+.btn-dropdown i {
+    font-size: 1.2em;
+    line-height: 1.2em;
+}
+
+.btn-dropdown:hover {
+    background-color: $border;
+}
+
+.btn-dropdown:disabled,
+.btn-dropdown:read-only {
+    background-color: $light;
+}
+
+.options-wap {
+    background-color: $background-color;
+    border-radius: 0.4rem;
+    box-shadow: $box-shadow;
+    max-height: 15rem;
+    border: 1px solid $border;
+}
+
+.option-item {
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0.3rem 0 0.3rem 0.6rem;
+    border-bottom: 1px solid $light;
+}
+
+.option-item:hover,
+.focus-row {
+    background-color: $border;
+}
+
+.option-item.selected {
+    background-color: $primary;
+    color: $background-color;
+}

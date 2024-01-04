@@ -1,0 +1,183 @@
+.mtl-calendar {
+    display: flex;
+    flex-direction: column;
+    background: $background-color;
+    border-radius: 0.6rem;
+    box-shadow: 0 0 0.8rem 0 rgba(0, 0, 0, 0.25);
+    padding: 0.8rem;
+    width: 19rem;
+    height: 20rem;
+    max-width: 100%;
+}
+.mtl-calendar .mtl-calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 2rem;
+}
+
+.mtl-calendar-header .current-date button {
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.mtl-calendar-header .btn-back,
+.mtl-calendar-header .btn-next,
+.mtl-calendar-header .btn-today {
+    background-color: transparent;
+    border: none;
+    width: auto;
+    height: auto;
+    padding: 0.2rem 0.4rem;
+    margin: 0;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.mtl-calendar-header .btn-back,
+.mtl-calendar-header .btn-next {
+    width: 1rem;
+    height: 1rem;
+    background-image: url($icon-arrow);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.mtl-calendar-header .btn-next {
+    transform: rotate(-90deg);
+}
+
+.mtl-calendar-header .btn-back {
+    transform: rotate(90deg);
+}
+
+.mtl-calendar-header .btn-back:active,
+.mtl-calendar-header .btn-next:active,
+.mtl-calendar-header .btn-today:active,
+.mtl-calendar-header .current-date button:active {
+    color: $primary;
+}
+
+.mtl-calendar .calendar-main {
+    margin-top: 0.8rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.mtl-calendar .calendar-main ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.mtl-calendar .calendar-main li {
+    color: #333;
+    width: calc(100% / 7);
+}
+
+.mtl-calendar .calendar-main .weeks li {
+    font-weight: bold;
+    cursor: default;
+    margin-bottom: 0.8rem;
+}
+
+.mtl-calendar .calendar-main .days {
+    flex: 1;
+}
+
+.mtl-calendar .calendar-main .days li {
+    height: calc(100% / 7);
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+}
+
+.mtl-calendar .calendar-main .days li button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.mtl-calendar .days li.inactive,
+.mtl-calendar .days li.inactive button {
+    color: #aaa;
+}
+
+.mtl-calendar .days li.active,
+.mtl-calendar .calendar-main .days li.active button {
+    color: #fff;
+}
+
+.mtl-calendar .days li::before {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    height: 2rem;
+    width: 2rem;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.mtl-calendar .days li.is-today::before {
+    border: 1px solid $primary;
+}
+
+.mtl-calendar .days li.active::before {
+    background: $primary;
+    color: $light;
+    border: 1px solid $primary;
+}
+
+.mtl-calendar .days li:not(.active):hover::before {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mtl-calendar .years,
+.mtl-calendar .months {
+    flex: 1;
+}
+
+.mtl-calendar .years li,
+.mtl-calendar .months li {
+    width: calc(100% / 4);
+    text-align: center;
+}
+
+.mtl-calendar .years li button,
+.mtl-calendar .months li button {
+    padding: 0.6rem;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    line-height: 1.8rem;
+    white-space: nowrap;
+}
+
+.mtl-calendar .years li button:hover,
+.mtl-calendar .months li button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.mtl-calendar .years li button.active,
+.mtl-calendar .months li button.active {
+    color: $primary;
+}

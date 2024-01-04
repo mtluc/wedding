@@ -1,0 +1,26 @@
+.mtl-loading-wapper {
+    position: absolute;
+    z-index: 100000;
+    width: 100%;
+    height: 100%;
+}
+
+.mtl-loading-root{
+    position: fixed;
+    z-index: 1000000;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.mtl-loading-wapper .svg-loading {
+    position: relative;
+    transform: translateY(-50%);
+    top: 50%;
+    margin: auto;
+    background: transparent;
+    display: block;
+    width: 60px;
+    height: 60px;
+}

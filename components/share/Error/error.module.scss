@@ -1,0 +1,116 @@
+.wap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+}
+
+.container {
+    text-align: center;
+}
+
+.container h1 {
+    font-size: 15em;
+    color: rgb(255, 0, 0);
+    font-weight: 400;
+    text-shadow:
+        #af5757 1px 1px,
+        #b05a5a 1px 1px,
+        #b15c5c 2px 2px,
+        #b25f5f 3px 3px,
+        #b36262 4px 4px,
+        #b46464 5px 5px,
+        #b56767 6px 6px,
+        #b56a6a 7px 7px,
+        #b66c6c 8px 8px,
+        #b76f6f 9px 9px,
+        #b87272 10px 10px,
+        #b97474 11px 11px,
+        #ba7777 12px 12px,
+        #bb7a7a 13px 13px,
+        #bc7d7d 14px 14px,
+        #bd7f7f 15px 15px,
+        #be8282 16px 16px,
+        #bf8585 17px 17px,
+        #c08787 18px 18px,
+        #c08a8a 19px 19px,
+        #c18d8d 20px 20px,
+        #c28f8f 21px 21px,
+        #c39292 22px 22px,
+        #c49595 23px 23px,
+        #c59797 24px 24px,
+        #c69a9a 25px 25px,
+        #c79d9d 26px 26px,
+        #c89f9f 27px 27px,
+        #c9a2a2 28px 28px,
+        #caa5a5 29px 29px,
+        #cba7a7 30px 30px,
+        #ccaaaa 31px 31px,
+        #ccadad 32px 32px,
+        #cdafaf 33px 33px,
+        #ceb2b2 34px 34px,
+        #cfb5b5 35px 35px,
+        #d0b7b7 36px 36px,
+        #d1baba 37px 37px,
+        #d2bdbd 38px 38px,
+        #d3c0c0 39px 39px,
+        #d4c2c2 40px 40px,
+        #d5c5c5 41px 41px,
+        #d6c8c8 42px 42px,
+        #d7caca 43px 43px,
+        #d7cdcd 44px 44px,
+        #d8d0d0 45px 45px,
+        #d9d2d2 46px 46px,
+        #dad5d5 47px 47px,
+        #dbd8d8 48px 48px,
+        #dcdada 49px 49px,
+        #dddddd 50px 50px,
+        #dee0e0 51px 51px;
+}
+
+.description {
+    font-size: 2rem;
+    padding: 16px 0;
+}
+
+.goToHome {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 4px;
+    background-image: linear-gradient(90deg, #eeab00, #eb3337 51%, #eeab00);
+    background-size: 200% auto;
+    font-weight: 400;
+    color: #fff;
+    padding: 6px 16px;
+    font-size: 1.25em;
+    margin-top: 46px;
+    transition: background-position 0.3s;
+    background-position: 100%;
+    min-width: 125px;
+    white-space: nowrap;
+}
+
+.goToHome:hover {
+    color: #fff;
+    background-position: 0%;
+}
+
+.back {
+    font-size: 1.25em;
+    margin-top: 46px;
+    margin-right: 1rem;
+    font-weight: 400;
+    padding: 6px 16px;
+    background-color: $background-color;
+    border: 1px solid $border-color;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 4px;
+    min-width: 125px;
+
+    &:hover{
+        background-color: #f1f1f1;
+    }
+}

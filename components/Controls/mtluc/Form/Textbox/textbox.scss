@@ -1,0 +1,34 @@
+.mtl-textbox {
+    padding: 0.4rem;
+    border: 1px solid $border;
+    border-radius: 0.4rem;
+    position: relative;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.mtl-textbox:focus {
+    border-color: $primary;
+    outline: none;
+    box-shadow: 0 0 0.4rem 0 $primary;
+}
+
+.invalid.mtl-textbox,
+.invalid.mtl-textbox:focus {
+    outline: none;
+    border-color: $danger;
+}
+
+.invalid.mtl-textbox:focus {
+    box-shadow: 0 0 0.4rem 0 $danger;
+}
+
+.mtl-textbox:disabled {
+    opacity: 0.5;
+    filter: none;
+    pointer-events: none;
+}
+
+.mtl-textbox:read-only {
+    background-color: $light;
+}

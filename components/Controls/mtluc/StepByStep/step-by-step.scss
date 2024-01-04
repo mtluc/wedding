@@ -1,0 +1,59 @@
+.mtl-steps {
+    display: flex;
+
+    .mtl-step {
+        flex: 1;
+        text-align: center;
+        padding: 0 0.8rem;
+        position: relative;
+        opacity: 0.6;
+
+        &::before {
+            content: "";
+            display: block;
+            border-top: 2px solid $border-color;
+            position: relative;
+            top: 20px;
+            transform: translate(-50%, 50%);
+            z-index: -1;
+        }
+
+        &:first-child::before {
+            display: none;
+        }
+
+        .mtl-step-no {
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            margin: auto;
+            border-radius: 50%;
+            border: 1px solid $border-color;
+            background-color: $background-color;
+            position: relative;
+        }
+
+        .mtl-step-title {
+            margin-top: 0.8rem;
+            color: #000;
+        }
+
+        .mtl-step-description {
+            font-size: $font-size-small;
+        }
+
+        &.active {
+            opacity: 1;
+            .mtl-step-no {
+                background-color: $primary-color;
+                border-color: $primary-color;
+                color: $background-color;
+            }
+
+            &::before {
+                border-color: $primary-color;
+            }
+        }
+    }
+}

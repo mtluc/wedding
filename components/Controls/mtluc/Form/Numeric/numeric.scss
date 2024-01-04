@@ -1,0 +1,151 @@
+.mtl-numeric-wap {
+    border: 1px solid $border;
+    border-radius: 0.4rem;
+    position: relative;
+    vertical-align: middle;
+    box-sizing: border-box;
+    display: flex;
+    overflow: hidden;
+}
+
+.mtl-numeric {
+    padding: 0.4rem;
+    vertical-align: middle;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    flex: 1;
+    width: 100%;
+    text-align: right;
+}
+
+.mtl-numeric-wap.horizontal .mtl-numeric {
+    text-align: center;
+}
+
+.mtl-numeric-wap:focus-within {
+    border-color: $primary;
+    outline: none;
+    box-shadow: 0 0 0.4rem 0 $primary;
+}
+
+input.mtl-numeric,
+input.mtl-numeric:hover,
+input.mtl-numeric:focus,
+input.mtl-numeric:active {
+    box-shadow: none;
+    border: none;
+}
+
+.invalid.mtl-numeric-wap,
+.invalid.mtl-numeric-wap:focus-within {
+    outline: none;
+    border-color: $danger;
+}
+
+.invalid.mtl-numeric-wap:focus-within {
+    box-shadow: 0 0 0.4rem 0 $danger;
+}
+
+.mtl-numeric-wap.disabled {
+    opacity: 0.5;
+    filter: none;
+    pointer-events: none;
+}
+
+.mtl-numeric:read-only {
+    background-color: $light;
+}
+
+.btn-h-decrease,
+.btn-h-increase {
+    border: 0px solid $border;
+    cursor: pointer;
+    background-color: $btn-backgroud;
+    padding: 0 0.4rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+}
+
+.btn-h-increase {
+    left: auto;
+    right: 0;
+}
+
+.btn-h-decrease:hover,
+.btn-h-increase:hover {
+    background-color: $btn-backgroud-hover;
+}
+
+.btn-h-decrease:active,
+.btn-h-increase:active,
+.btn-h-decrease:focus,
+.btn-h-increase:focus {
+    background-color: $btn-backgroud-active;
+    outline: none;
+}
+
+.horizontal .mtl-numeric {
+    margin-left: 1.7rem;
+    margin-right: 1.7rem;
+}
+
+.btn-h-icon {
+    fill: none;
+    stroke: $text-color;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2px;
+    width: 1rem;
+    vertical-align: middle;
+}
+
+.btn-h-decrease:hover .btn-h-icon,
+.btn-h-increase:hover .btn-h-icon {
+    stroke: $primary;
+}
+
+.btn-v-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-v-group button {
+    flex: 1;
+    border: 0px solid $border;
+    background-color: $btn-backgroud;
+    border-left-width: thin;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 1.4rem;
+    overflow: hidden;
+}
+
+.btn-v-group button:hover,
+.btn-v-group button:hover {
+    background-color: $btn-backgroud-hover;
+    cursor: pointer;
+}
+
+.btn-v-group button:active,
+.btn-v-group button:active {
+    background-color: $btn-backgroud-active;
+}
+
+.btn-v-group .btn-v-increase {
+    border-bottom-width: thin;
+}
+.btn-v-group .btn-v-decrease {
+    border-top-width: thin;
+}
+
+.btn-v-group button .btn-h-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

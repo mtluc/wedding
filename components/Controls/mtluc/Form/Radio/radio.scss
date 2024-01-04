@@ -1,0 +1,46 @@
+.mtl-radio {
+    vertical-align: middle;
+    width: 1.16rem;
+    height: 1.16rem;
+    outline: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid $border;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: $background-color;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+}
+
+.mtl-radio:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0.25rem 0 $primary;
+}
+
+.mtl-radio:checked {
+    border-color: $primary;
+    background-image: url($bg-radio-checked);
+    border-color: $primary;
+}
+
+.mtl-radio:disabled {
+    pointer-events: none;
+    filter: none;
+    opacity: 0.5;
+}
+.mtl-radio:read-only {
+    background-color: $light;
+}
+
+.mtl-radio ~ label {
+    width: auto;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    line-height: 1rem;
+    white-space: nowrap;
+    cursor: pointer;
+}

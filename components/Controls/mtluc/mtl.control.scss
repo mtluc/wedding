@@ -1,0 +1,212 @@
+@import "./mtl.variables.scss";
+.flex-1 {
+    flex: 1;
+}
+
+.mtl-control {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+}
+
+.mtl-lable {
+    vertical-align: middle;
+    white-space: nowrap;
+    cursor: pointer;
+    margin-right: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.mtl-lable span {
+    margin-left: 0.2rem;
+    color: $danger;
+    vertical-align: middle;
+}
+
+.invalid-msg {
+    position: absolute;
+    font-style: italic;
+    font-size: 0.6rem;
+    line-height: 0.8rem;
+    color: $danger;
+    display: block;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.col-1 {
+    width: 8.333%;
+}
+
+.col-2 {
+    width: 16.666%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.333%;
+}
+
+.col-5 {
+    width: 41.666%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.333%;
+}
+
+.col-8 {
+    width: 66.666%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.333%;
+}
+
+.col-11 {
+    width: 91.666%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+.hide-overflow {
+    overflow: hidden;
+}
+
+.custom-scroll {
+    overflow: auto;
+}
+
+.custom-scroll::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #aaaaaa;
+    border-radius: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.custom-scroll:hover::-webkit-scrollbar-thumb {
+    background-color: #aaaaaa;
+}
+
+.custom-scroll:hover {
+    overflow: auto;
+}
+
+button,
+button.btn {
+    border: 1px solid $border;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    // height: 2.2rem;
+    color: $color;
+    background-color: $btn-backgroud;
+    outline: none;
+    color: $btn-backgroud-color;
+    padding: 4px 12px;
+}
+
+button:hover,
+button:focus {
+    background-color: $btn-backgroud-hover;
+}
+
+button:focus {
+    box-shadow: $box-shadow;
+}
+
+button:active {
+    background-color: $btn-backgroud-active;
+}
+
+.btn-primary,
+button.btn-primary,
+button.btn.btn-primary {
+    background-color: $btn-pr-backgroud;
+    color: $btn-pr-backgroud-color;
+    box-shadow: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+button.btn-primary:hover,
+button.btn-primary:focus,
+button.btn.btn-primary:hover,
+button.btn.btn-primary:focus {
+    background-color: $btn-pr-backgroud-hover;
+    box-shadow: none;
+}
+
+.btn-primary:active,
+button.btn-primary:active,
+button.btn.btn-primary:active {
+    background-color: $btn-pr-backgroud-active;
+    box-shadow: none;
+}
+
+button.btn-danger {
+    color: $btn-pr-backgroud-color;
+    background-color: $danger;
+    border-color: $danger;
+}
+
+button.btn-danger:disabled {
+    border: 1px solid #dadada;
+    color: #4f555b;
+    background-color: #dadada;
+}
+
+@import "./Form/Textbox/textbox.scss";
+@import "./Form/Numeric/numeric.scss";
+@import "./Form/TextArea/textarea.scss";
+@import "./Form/Checkbox/checkbox.scss";
+@import "./Form/Switch/switch.scss";
+@import "./Form/Radio/radio.scss";
+@import "./Form/Date/Calendar/calendar.scss";
+@import "./Popup/popup.scss";
+@import "./Form/Date/DatePicker/datepicker.scss";
+@import "./Form/Combobox/combobox.scss";
+@import "./Grid/grid.scss";
+@import "./Grid/Cell/cell-header.scss";
+@import "./Grid/Cell/cell.scss";
+@import "./Modal/modal.scss";
+@import "./Notification/notification.scss";
+@import "./NotificationManager/notification-manager.scss";
+@import "./Dialog/dialog.scss";
+@import "./Loading/loading.scss";
+@import "./DictBase/Listing/dict-base-listing.scss";
+@import "./DictBase/Editor/dict-base-editor.scss";
+@import "./Dropdown/dropdown.scss";
+@import "./Paper/paper.scss";
+@import "./StepByStep/step-by-step.scss";

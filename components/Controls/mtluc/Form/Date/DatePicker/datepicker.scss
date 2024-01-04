@@ -1,0 +1,85 @@
+.mtl-date-picker {
+    padding: 0.4rem;
+    border: 1px solid $border;
+    border-radius: 0.4rem;
+    position: relative;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.mtl-date-picker:disabled {
+    opacity: 0.5;
+    filter: none;
+    pointer-events: none;
+}
+.mtl-date-picker:read-only {
+    background-color: $light;
+}
+
+.mtl-date-picker-wapper {
+    position: relative;
+    display: inline-block;
+}
+
+.btn-calendar {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 1.6rem;
+    bottom: 0px;
+    border: 1px solid $border;
+    border-left: 0;
+    border-radius: 0 0.4rem 0.4rem 0;
+    background: transparent;
+    padding: 0.4rem 0.6rem;
+    background-image: url($icon-calendar);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.8rem;
+}
+
+.mtl-date-picker:focus,
+.mtl-date-picker-wapper:has(.btn-calendar:focus) .mtl-date-picker {
+    border-color: $primary;
+    outline: none;
+    box-shadow: 0 0 0.4rem 0 $primary;
+}
+
+.invalid.mtl-date-picker {
+    outline: none;
+    border-color: $danger;
+}
+
+.invalid.mtl-date-picker:focus,
+.mtl-date-picker-wapper:has(.invalid + .btn-calendar:focus) .mtl-date-picker {
+    outline: none;
+    border-color: $danger;
+    box-shadow: 0 0 0.4rem 0 $danger;
+}
+
+.btn-calendar:focus {
+    background-color: $border;
+    box-shadow: none;
+}
+
+.mtl-date-picker:focus ~ .btn-calendar,
+.btn-calendar:focus {
+    border-color: $primary;
+    border-left: 0;
+}
+
+.invalid.mtl-date-picker ~ .btn-calendar,
+.invalid.mtl-date-picker ~ .btn-calendar:focus {
+    border-color: $danger;
+}
+
+.btn-calendar:hover {
+    background-color: $border;
+}
+
+.btn-calendar:disabled {
+    opacity: 0.5;
+}
+.btn-calendar:read-only {
+    background-color: $light;
+}

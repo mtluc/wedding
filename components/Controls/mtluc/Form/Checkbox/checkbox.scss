@@ -1,0 +1,45 @@
+.mtl-checkbox {
+    width: 1.16rem;
+    height: 1.16rem;
+    vertical-align: middle;
+    background-color: $background-color;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid $border;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+.mtl-checkbox:focus {
+    border-color: $primary;
+
+    box-shadow: 0 0 0.25rem 0 $primary;
+}
+
+.mtl-checkbox:checked {
+    background-image: url($bg-checkbox-checked);
+    background-color: $primary;
+    border-color: $primary;
+}
+
+.mtl-checkbox:disabled {
+    pointer-events: none;
+    filter: none;
+    opacity: 0.5;
+}
+
+.mtl-checkbox ~ label{
+    width: auto;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    line-height: 1rem;
+    white-space: nowrap;
+    cursor: pointer;
+}

@@ -1,0 +1,92 @@
+.wap {
+    height: 100%;
+    margin-right: 0.6rem;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+
+    .top {
+        height: 3.5rem;
+        background-color: $background-color;
+        display: flex;
+        align-items: center;
+
+        .box_icon {
+            background-color: #4f555b;
+            margin: 0.6rem;
+            padding: 0.4rem;
+            border-radius: 0.4rem;
+
+            :global(.icon-svg) {
+                width: 1.2rem;
+                height: 1.2rem;
+                fill: $background-color;
+            }
+        }
+
+        .user_info {
+            .title {
+                font-size: 0.9rem;
+                color: $note-color;
+                font-weight: $font-bold;
+            }
+
+            .user_name {
+                color: #000;
+                font-weight: $font-bold;
+                margin-top: 0.1rem;
+            }
+        }
+    }
+
+    .main {
+        margin-top: 0.8rem;
+        flex: 1;
+
+        .group {
+            .group_name {
+                padding: 0.4rem 0.6rem;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+            }
+
+            .nav_item {
+                background-color: $background-color;
+                display: block;
+                padding: 0.66rem 0.6rem;
+                transition: padding-left 0.3s linear;
+                white-space: nowrap;
+                width: 100%;
+                overflow: hidden;
+                text-decoration: none;
+                color: $text-color;
+
+                span {
+                    vertical-align: middle;
+                }
+
+                :global(.icon-svg) {
+                    margin-right: 0.4rem;
+                    fill: $text-color;
+                }
+
+                &:hover {
+                    padding-left: 1.2rem;
+                    font-weight: $font-bold;
+                    :global(.icon-svg) {
+                        fill: #000;
+                    }
+                }
+
+                &:global(.active) {
+                    font-weight: $font-bold;
+                    color: $note-color;
+
+                    :global(.icon-svg) {
+                        fill: $note-color;
+                    }
+                }
+            }
+        }
+    }
+}
