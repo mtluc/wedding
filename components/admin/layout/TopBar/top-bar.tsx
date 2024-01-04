@@ -34,7 +34,7 @@ const TopBar = () => {
     try {
       e.preventDefault();
       setAppLoading(true);
-      await httpClient.postJson(`/api/system/logout`);
+      await httpClient.getJson(`/api/system/logout?v=${(new Date().toJSON())}`);
       location.href = "/dang-nhap";
     } catch (error) {
       handlerRequertException(error);
