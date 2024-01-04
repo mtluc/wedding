@@ -1,12 +1,14 @@
 import { Database } from "sqlite3";
+const path = require('path');
 
 const sqlite3 = require("sqlite3").verbose();
 
 export class DbContext {
-  pathDbFile: string = `./db/mydb.sqlite3`;
+  pathDbFile: string = `${path.resolve(__dirname).split('.next')[0]}/db/mydb.sqlite3`;
   db?: Database;
 
-  constructor() {}
+  constructor() {
+  }
   open() {
     return new Promise<Database>((resolve, rejects) => {
       this.db = new sqlite3.Database(
