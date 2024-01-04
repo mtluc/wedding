@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { BaseBl } from "../Bl/base-bl";
+import { BaseBlPostgres } from "../Bl/base-bl.postgres";
 import { ISession } from "../session";
 
-export abstract class BaseApi<T extends BaseBl<any>> {
+export abstract class BaseApi<T extends BaseBlPostgres<any>> {
   query: any;
   body: any;
   action?: string;
