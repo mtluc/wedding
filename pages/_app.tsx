@@ -1,7 +1,7 @@
 import DiaLogManager from '@/components/Controls/mtluc/DialogManager/dialog-manager';
 import Loading from '@/components/Controls/mtluc/Loading/loading';
 import NotificationManager from '@/components/Controls/mtluc/NotificationManager/notification-manager';
-import "../Components/Controls/mtluc/mtl.control.scss";
+import "../components/Controls/mtluc/mtl.control.scss";
 import '@/styles/globals.scss';
 import { useMemo } from 'react';
 
