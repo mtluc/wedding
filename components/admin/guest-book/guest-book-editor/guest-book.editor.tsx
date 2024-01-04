@@ -14,9 +14,9 @@ import { Relationship } from "@/model/Relationship/Relationship";
 import DatePicker from "@/components/Controls/mtluc/Form/Date/DatePicker/datepicker";
 import Numeric from "@/components/Controls/mtluc/Form/Numeric/numeric";
 
-export interface IGuestBookEditorProps extends IDictBaseEditorProps {}
+export interface IGuestBookEditorProps extends IDictBaseEditorProps { }
 
-export interface IGuestBookEditorState extends IDictBaseEditorState {}
+export interface IGuestBookEditorState extends IDictBaseEditorState { }
 
 class GuestBookEditor extends DictBaseEditor<
   IGuestBookEditorProps,
@@ -196,7 +196,7 @@ class GuestBookEditor extends DictBaseEditor<
             ? xác nhận
           </label>
           <div className="flex-1">
-            <CheckBox className="col-12" name="IsConfirm" />
+            <CheckBox name="IsConfirm" />
           </div>
         </div>
 
@@ -208,7 +208,7 @@ class GuestBookEditor extends DictBaseEditor<
             ? chọn xe
           </label>
           <div className="flex-1">
-            <CheckBox className="col-12" name="IsConfirmBus" />
+            <CheckBox name="IsConfirmBus" />
           </div>
         </div>
 
@@ -220,7 +220,7 @@ class GuestBookEditor extends DictBaseEditor<
             Tham dự
           </label>
           <div className="flex-1">
-            <CheckBox className="col-12" name="Agree" />
+            <CheckBox name="Agree" />
           </div>
         </div>
 

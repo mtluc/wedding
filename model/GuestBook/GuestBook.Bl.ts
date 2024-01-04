@@ -1,22 +1,22 @@
-import { BaseBl } from "../../base/Bl/base-bl";
+import { BaseBlPostgres } from "@/base/Bl/base-bl.postgres";
 import { GuestBook } from "./GuestBook";
 
-export class GuestBookBl extends BaseBl<GuestBook> {
+export class GuestBookBl extends BaseBlPostgres<GuestBook> {
   _tableName: string = "GuestBook";
   _idField: string = "Id";
 
   override async getById(id: any) {
-    return await this.dbContext.get<GuestBook>(
-      `SELECT * FROM ${this._tableName} WHERE ${this._idField} = ? AND UserName = ?;`,
-      [id, this.session?.user?.UserName]
-    );
+    const { rows, fields } = await this.sqlQuery(
+      `SELECT * 
+        FROM ${this._tableName} 
+        WHERE ${this._idField} = $1 AND UserName =  $2 LIMIT 1;`,
+      [id, this.session?.user?.UserName]);
+    return this.mapObj(rows)?.[0];
   }
 
   override async getAll() {
-    return await this.dbContext.getAll<GuestBook>(
-      `SELECT * FROM ${this._tableName} WHERE  UserName = ?;`,
-      [this.session?.user?.UserName]
-    );
+    const { rows, fields } = await this.sqlQuery(`SELECT * FROM ${this._tableName} WHERE  UserName = $1;`, [this.session?.user?.UserName]);
+    return this.mapObj(rows);
   }
 
   protected override async checkBusiness(

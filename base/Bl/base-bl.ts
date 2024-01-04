@@ -9,7 +9,7 @@ export abstract class BaseBl<T extends object> {
   abstract _idField: string;
   protected activator: () => T;
 
-  constructor(type: { new (): T }, _dbContext?: DbContext) {
+  constructor(type: { new(): T }, _dbContext?: DbContext) {
     this.activator = () => {
       return new type();
     };
