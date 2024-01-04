@@ -75,12 +75,8 @@ class Api extends BaseApi<UserBl> {
   }
   async logout() {
     try {
-      if (this.req.method == "GET") {
-        await this.req.session.destroy();
-        this.res.status(200).json(true);
-      } else {
-        this.processMethodNotAllowed();
-      }
+      await this.req.session.destroy();
+      this.res.status(200).json(true);
     } catch (error) {
       this.processError(error);
     }
