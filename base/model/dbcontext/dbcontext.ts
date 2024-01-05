@@ -4,7 +4,7 @@ const path = require('path');
 const sqlite3 = require("sqlite3").verbose();
 
 export class DbContext {
-  pathDbFile: string = `${path.resolve(__dirname).split('.next')[0]}/public/mydb.sqlite3`;
+  pathDbFile: string = `${path.resolve(__dirname).split('.next')[0]}/db/mydb.sqlite3`;
   db?: Database;
 
   constructor() {

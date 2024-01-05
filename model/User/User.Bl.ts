@@ -1,9 +1,9 @@
-import { BaseBlPostgres } from "@/base/Bl/base-bl.postgres";
+import { BaseBl } from "@/base/Bl/base-bl";
 import { MD5 } from "@/components/Controls/mtluc/base/common";
 import { User } from "./User";
 
-export class UserBl extends BaseBlPostgres<User> {
-  _tableName: string = "SysUser";
+export class UserBl extends BaseBl<User> {
+  _tableName: string = "User";
   _idField: string = "UserName";
 
   protected override async checkBusiness(
