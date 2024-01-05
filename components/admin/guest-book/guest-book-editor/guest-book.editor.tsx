@@ -92,67 +92,6 @@ class GuestBookEditor extends DictBaseEditor<
         <div className="mtl-control col-4">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
-            htmlFor="Relationship"
-          >
-            Quan hệ<span>*</span>
-          </label>
-          <div className="flex-1">
-            <ComboBox
-              className="col-12"
-              name="Relationship"
-              dataSource={Relationship}
-              fieldId="Name"
-              required
-              placeholder="Quan hệ"
-            />
-          </div>
-        </div>
-
-        <div className="mtl-control col-4">
-          <label
-            className={buildClass([classNames.label, "mtl-lable"])}
-            htmlFor="GuestDate"
-          >
-            Ngày mời<span>*</span>
-          </label>
-          <div className="flex-1">
-            <DatePicker name="GuestDate" className="col-12" required />
-          </div>
-        </div>
-
-        <div className="mtl-control col-4">
-          <label
-            className={buildClass([classNames.label, "mtl-lable"])}
-            htmlFor="Hours"
-          >
-            Giờ mời<span>*</span>
-          </label>
-          <div className={buildClass(["flex-1", classNames.time])}>
-            <Numeric
-              name="Hours"
-              className="flex-1"
-              creaseButton="none"
-              format="0"
-              min={0}
-              max={23}
-              required
-            />
-            <span>/</span>
-            <Numeric
-              name="Minute"
-              className="flex-1"
-              format="0"
-              creaseButton="none"
-              min={0}
-              max={59}
-              required
-            />
-          </div>
-        </div>
-
-        <div className="mtl-control col-4">
-          <label
-            className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="ShortName"
           >
             Tên<span>*</span>
@@ -234,6 +173,67 @@ class GuestBookEditor extends DictBaseEditor<
           </label>
           <div className="flex-1">
             <CheckBox name="Agree" />
+          </div>
+        </div>
+
+        <div className="mtl-control col-4">
+          <label
+            className={buildClass([classNames.label, "mtl-lable"])}
+            htmlFor="Relationship"
+          >
+            Quan hệ<span>*</span>
+          </label>
+          <div className="flex-1">
+            <ComboBox
+              className="col-12"
+              name="Relationship"
+              dataSource={Relationship}
+              fieldId="Name"
+              required
+              placeholder="Quan hệ"
+            />
+          </div>
+        </div>
+
+        <div className="mtl-control col-4">
+          <label
+            className={buildClass([classNames.label, "mtl-lable"])}
+            htmlFor="GuestDate"
+          >
+            Ngày mời<span>*</span>
+          </label>
+          <div className="flex-1">
+            <DatePicker name="GuestDate" className="col-12" required />
+          </div>
+        </div>
+
+        <div className="mtl-control col-4">
+          <label
+            className={buildClass([classNames.label, "mtl-lable"])}
+            htmlFor="Hours"
+          >
+            Giờ mời<span>*</span>
+          </label>
+          <div className={buildClass(["flex-1", classNames.time])}>
+            <Numeric
+              name="Hours"
+              className="flex-1"
+              creaseButton="none"
+              format="0"
+              min={0}
+              max={23}
+              required
+            />
+            <span>/</span>
+            <Numeric
+              name="Minute"
+              className="flex-1"
+              format="0"
+              creaseButton="none"
+              min={0}
+              max={59}
+              required
+            />
           </div>
         </div>
 
