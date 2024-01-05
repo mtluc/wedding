@@ -1,4 +1,4 @@
-import { FormEvent, MouseEvent, PureComponent } from "react";
+import { FormEvent, KeyboardEvent, MouseEvent, PureComponent } from "react";
 import Form from "../../Form/form";
 import MyFormContext, { IFormContext } from "../../Form/form-context";
 import Loading from "../../Loading/loading";
@@ -8,10 +8,10 @@ import { IActionResult } from "../../base/IActionResult";
 import {
   handlerRequertException,
   pushDialog,
-  pushNotification,
+  pushNotification
 } from "../../base/common";
-import { DictBaseService } from "../Service/dict-base.service";
 import IconSvg from "../../icon/icon-svg";
+import { DictBaseService } from "../Service/dict-base.service";
 
 export interface IDictBaseEditorProps {
   actionResult?: (actionResult: IActionResult<any>) => {};
@@ -55,6 +55,53 @@ abstract class DictBaseEditor<
 
   set isShow(isShow: boolean) {
     this.setState({ isShow });
+  }
+
+
+  handlerKeyDown(e: KeyboardEvent) {
+    if (e.ctrlKey) {
+      const key = e.key.toLowerCase();
+      if (['q', 'e', 'r', 'd', 's'].indexOf(key) >= 0) {
+        switch (key) {
+          //Thêm mới
+          case 'q':
+            if (this.mode != "ADD" && this.isAdd) {
+              e.preventDefault();
+              this.add({});
+            }
+            break;
+          //Thêm sửa
+          case 'e':
+            if (this.mode != "ADD" && this.mode != "EDIT" && this.mode != "DELETE" && this.isEdit) {
+              e.preventDefault();
+              this.edit(this.currentRow);
+            }
+            break;
+
+          //Sao
+          case 'r':
+            if (this.mode != "ADD" && this.mode != "EDIT" && this.mode != "DELETE" && this.isAdd) {
+              e.preventDefault();
+              this.duplicate(this.currentRow);
+            }
+            break;
+          //Xóa
+          case 'e':
+            if (this.mode != "ADD" && this.mode != "DELETE" && this.isDelete) {
+              e.preventDefault();
+              this.delete();
+            }
+            break;
+          //Lưu
+          case 's':
+            if (this.mode == "ADD" || this.mode == "EDIT") {
+              e.preventDefault();
+              this.onSubmit(e, this.formCtx.getValues(), this.formCtx);
+            }
+            break;
+        }
+      }
+    }
   }
 
   get mode() {
@@ -108,7 +155,7 @@ abstract class DictBaseEditor<
 
   handlerTaskBarClick(
     e: MouseEvent,
-    type: "ADD" | "EDIT" | "DELETE" | "SUBMIT"
+    type: "ADD" | "EDIT" | "DELETE" | "SUBMIT" | "DUPLICATE"
   ) {
     if (type === "SUBMIT") {
       return;
@@ -117,6 +164,9 @@ abstract class DictBaseEditor<
     switch (type) {
       case "ADD":
         this.add({});
+        break;
+      case "DUPLICATE":
+        this.duplicate(this.currentRow);
         break;
       case "EDIT":
         this.edit(this.currentRow);
@@ -160,6 +210,20 @@ abstract class DictBaseEditor<
                 <span>Thêm</span>
               </button>
             ) : null}
+
+            {this.isAdd ? (
+              <button
+                type="button"
+                className="btn"
+                onClick={(e) => {
+                  this.handlerTaskBarClick(e, "DUPLICATE");
+                }}
+              >
+                <IconSvg iconKeys="duplicate" />
+                <span>Sao</span>
+              </button>
+            ) : null}
+
             {this.isEdit ? (
               <button
                 type="button"
@@ -242,6 +306,21 @@ abstract class DictBaseEditor<
     return param;
   }
 
+  focusFirstControlEnable() {
+    const controls = this.formCtx?.controls;
+    if (controls?.length) {
+      for (let i = 0; i < controls.length; i++) {
+        const control = controls[i];
+        if (!control.readonly && !control.disabled) {
+          setTimeout(() => {
+            this.formCtx.focus?.(control.id);
+          }, 100);
+          return;
+        }
+      }
+    }
+  }
+
   view(currentRow: any) {
     currentRow = currentRow || {};
     this.isShow = true;
@@ -258,68 +337,77 @@ abstract class DictBaseEditor<
   }
 
   add(currentRow: any) {
-    currentRow = currentRow || {};
-    this.isShow = true;
-    this.mode = "ADD";
-    this.currentRow = currentRow;
-    this.formCtx?.clearError();
-    setTimeout(() => {
-      this.setReadonlyByMode("ADD");
-      this.parseFormValue(currentRow);
-      if (this.formCtx?.controls?.[0]) {
-        this.formCtx.focus?.(this.formCtx.controls?.[0]?.id);
-      }
+    if (this.isAdd) {
+      currentRow = currentRow || {};
+      this.isShow = true;
+      this.mode = "ADD";
+      this.currentRow = currentRow;
       this.formCtx?.clearError();
-    }, 100);
+      setTimeout(() => {
+        this.setReadonlyByMode("ADD");
+        this.parseFormValue(currentRow);
+        this.focusFirstControlEnable();
+        this.formCtx?.clearError();
+      }, 100);
+    }
+
   }
 
   edit(currentRow: any) {
-    currentRow = currentRow || {};
-    this.isShow = true;
-    this.mode = "EDIT";
-    this.currentRow = currentRow;
-    this.formCtx?.clearError();
-    setTimeout(() => {
-      this.setReadonlyByMode("EDIT");
-      this.parseFormValue(currentRow);
-      if (this.formCtx?.controls?.[0]) {
-        this.formCtx.focus?.(this.formCtx.controls?.[0]?.id);
-      }
+    if (this.isEdit) {
+      currentRow = currentRow || {};
+      this.isShow = true;
+      this.mode = "EDIT";
+      this.currentRow = currentRow;
       this.formCtx?.clearError();
-    }, 100);
+      setTimeout(() => {
+        this.setReadonlyByMode("EDIT");
+        this.parseFormValue(currentRow);
+        this.formCtx?.clearError();
+        this.focusFirstControlEnable();
+      }, 100);
+    }
+
+  }
+
+  duplicate(row: any) {
+    const _row = { ...row, [this.fieldId]: undefined }
+    this.add(_row);
   }
 
   async delete() {
-    try {
-      const confirmResult = await pushDialog({
-        content: `Bạn muốn xóa ${this.title?.toLowerCase()} <strong>${
-          this.currentRow[this.fieldName]
-        }</strong>?`,
-        type: "question",
-        title: "Xác nhận xóa",
-      });
+    if (this.isDelete) {
 
-      if (confirmResult == "accept" && this.currentRow) {
-        this.setLoading(true);
-        const respon = await this.service.deleteItem(
-          this.currentRow[this.fieldId]
-        );
-        if (respon?.data) {
-          this.isShow = false;
-          pushNotification({
-            message: `Đã xóa ${this.title?.toLowerCase()}`,
-            type: "success",
-          });
-          this.props.actionResult?.({
-            mode: "DELETE",
-            record: this.currentRow,
-          });
+      try {
+        const confirmResult = await pushDialog({
+          content: `Bạn muốn xóa ${this.title?.toLowerCase()} <strong>${this.currentRow[this.fieldName]
+            }</strong>?`,
+          type: "question",
+          title: "Xác nhận xóa",
+        });
+
+        if (confirmResult == "accept" && this.currentRow) {
+          this.setLoading(true);
+          const respon = await this.service.deleteItem(
+            this.currentRow[this.fieldId]
+          );
+          if (respon?.data) {
+            this.isShow = false;
+            pushNotification({
+              message: `Đã xóa ${this.title?.toLowerCase()}`,
+              type: "success",
+            });
+            this.props.actionResult?.({
+              mode: "DELETE",
+              record: this.currentRow,
+            });
+          }
         }
+      } catch (error) {
+        handlerRequertException(error);
+      } finally {
+        this.setLoading(false);
       }
-    } catch (error) {
-      handlerRequertException(error);
-    } finally {
-      this.setLoading(false);
     }
   }
 
@@ -333,7 +421,7 @@ abstract class DictBaseEditor<
     });
   }
 
-  async loadData() {}
+  async loadData() { }
 
   componentDidMount(): void {
     this.loadData();
@@ -346,8 +434,9 @@ abstract class DictBaseEditor<
             <Modal
               title={this.getTitle()}
               onClose={() => {
-                this.setState({ isShow: false });
+                this.isShow = false;
               }}
+              onKeyDown={(e) => this.handlerKeyDown(e)}
             >
               <Form
                 class="dict-base-form"

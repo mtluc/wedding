@@ -1,6 +1,6 @@
 import { KeyboardEvent, PureComponent, RefObject, createRef } from "react";
 import { Transition } from "react-transition-group";
-import { buildClass } from "../base/common";
+import { buildClass, handlerDocumentKeyDown } from "../base/common";
 interface IModalProps {
   /**
    * Tiêu đề
@@ -28,6 +28,8 @@ interface IModalProps {
   className?: string;
 
   width?: number;
+
+  onKeyDown?: (e: KeyboardEvent) => void
 }
 
 interface IModalState {
@@ -61,6 +63,9 @@ class Modal extends PureComponent<IModalProps, IModalState> {
           isIn: false,
         });
 
+        this.removeKeydownEvent?.();
+        this.removeKeydownEvent = undefined;
+
         setTimeout(async () => {
           onClose?.();
           this.setState({
@@ -73,16 +78,22 @@ class Modal extends PureComponent<IModalProps, IModalState> {
     }
   }
 
+  removeKeydownEvent?: () => void;
   componentDidMount(): void {
     this.setState({ isIn: true, hidden: false });
+    this.removeKeydownEvent = handlerDocumentKeyDown((e) => {
+      this.onKeyDown(e);
+    })
   }
 
   async onKeyDown(e: KeyboardEvent) {
     try {
       if (e.keyCode == 27) {
         this.onClose();
+      } else {
+        this.props.onKeyDown?.(e);
       }
-    } catch (error) {}
+    } catch (error) { }
   }
 
   render() {
@@ -91,22 +102,21 @@ class Modal extends PureComponent<IModalProps, IModalState> {
         nodeRef={this.nodeRef}
         in={this.state.isIn}
         timeout={0}
-        onExited={() => {}}
+        onExited={() => { }}
       >
         {(state) => (
           <div
             className={buildClass(["modal-wapper", this.props.className])}
             hidden={this.state.hidden}
-            onKeyDown={this.onKeyDown.bind(this)}
-            tabIndex={0}
+          // onKeyDown={this.onKeyDown.bind(this)}
+          // tabIndex={0}
           >
             <div
               className="modal-main"
               style={{
                 ...{
-                  transition: `all ${
-                    this.props?.duration || 300
-                  }ms ease-in-out`,
+                  transition: `all ${this.props?.duration || 300
+                    }ms ease-in-out`,
                   opacity: 0,
                 },
                 ...(transitionStyles as any)[state],

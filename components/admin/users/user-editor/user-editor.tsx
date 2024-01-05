@@ -10,9 +10,9 @@ import { ReactNode } from "react";
 import UserService from "../user.service";
 import classNames from "./user-editor.module.scss";
 
-export interface IUserEditorProps extends IDictBaseEditorProps {}
+export interface IUserEditorProps extends IDictBaseEditorProps { }
 
-export interface IUserEditorState extends IDictBaseEditorState {}
+export interface IUserEditorState extends IDictBaseEditorState { }
 
 class UserEditor extends DictBaseEditor<IUserEditorProps, IUserEditorState> {
   override title: string = "Người dùng";
@@ -30,6 +30,10 @@ class UserEditor extends DictBaseEditor<IUserEditorProps, IUserEditorState> {
 
   override add(currentRow: any) {
     super.add({ ...currentRow, Actived: true });
+  }
+
+  override duplicate(currentRow: any) {
+    super.duplicate({ ...currentRow, Password: "" });
   }
 
   override setDataAfterSubmit(data: any, mode: "ADD" | "UPDATE") {

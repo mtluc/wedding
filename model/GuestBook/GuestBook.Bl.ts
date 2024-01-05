@@ -19,24 +19,6 @@ export class GuestBookBl extends BaseBl<GuestBook> {
     );
   }
 
-  // override async getById(id: any) {
-  //   const { rows, fields } = await this.sqlQuery(
-  //     `SELECT *
-  //       FROM ${this._tableName}
-  //       WHERE ${this._idField} = $1 AND UserName =  $2 LIMIT 1;`,
-  //     [id, this.session?.user?.UserName]
-  //   );
-  //   return this.mapObj(rows)?.[0];
-  // }
-
-  // override async getAll() {
-  //   const { rows, fields } = await this.sqlQuery(
-  //     `SELECT * FROM ${this._tableName} WHERE  UserName = $1;`,
-  //     [this.session?.user?.UserName]
-  //   );
-  //   return this.mapObj(rows);
-  // }
-
   protected override async checkBusiness(
     obj: GuestBook,
     mode: "ADD" | "UPDATE" | "DELETE"

@@ -20,7 +20,8 @@ export type IconKeys =
   | "check"
   | "warning"
   | "question"
-  | "save";
+  | "save"
+  | "duplicate";
 
 const IconSvg = ({
   iconKeys,

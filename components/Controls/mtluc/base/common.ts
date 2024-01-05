@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect } from "react";
+import { KeyboardEvent, MutableRefObject, useEffect } from "react";
 
 /**
  * Kiểm tra email có hợp lệ không
@@ -302,14 +302,14 @@ export const compareShortDate = (v1?: Date, v2?: Date) => {
 export const addDay = (date: Date, daynumber: number) => {
   return date
     ? new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate() + daynumber,
-        date.getHours(),
-        date.getMinutes(),
-        date.getSeconds(),
-        date.getMilliseconds()
-      )
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate() + daynumber,
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+      date.getMilliseconds()
+    )
     : null;
 };
 
@@ -328,3 +328,14 @@ export const parseDate = (input: any) => {
     return new Date(Date.parse(input));
   }
 };
+
+export const handlerDocumentKeyDown = (fn: (e: KeyboardEvent) => void) => {
+  const oldEvent = document.onkeydown;
+  document.onkeydown = function (_e: any) {
+    fn(_e);
+  }
+
+  return () => {
+    document.onkeydown = oldEvent;
+  }
+}

@@ -1,5 +1,6 @@
 import {
   Component,
+  KeyboardEvent,
   MouseEvent,
   ReactElement,
   RefObject,
@@ -11,6 +12,7 @@ import Loading from "../../Loading/loading";
 import { IActionResult } from "../../base/IActionResult";
 import { IToolbar } from "../../base/Itoolbar";
 import {
+  handlerDocumentKeyDown,
   handlerRequertException,
   pushDialog,
   pushNotification,
@@ -26,11 +28,11 @@ export interface IDictBaseListState {
   isLoading: boolean;
   toolbars: IToolbar[];
   rowSelected:
-    | {
-        row: any;
-        idx: number;
-      }
-    | undefined;
+  | {
+    row: any;
+    idx: number;
+  }
+  | undefined;
   datas: any[];
   columns: IColumn[];
 }
@@ -122,6 +124,13 @@ abstract class DictBaseListing<
         iconKey: "plus",
       },
       {
+        id: "DUPLICATE",
+        text: "Sao",
+        disabled: true,
+        class: "btn btn-add",
+        iconKey: "duplicate",
+      },
+      {
         id: "EDIT",
         text: "Sửa",
         disabled: true,
@@ -166,6 +175,7 @@ abstract class DictBaseListing<
         case "VIEW":
         case "EDIT":
         case "DELETE":
+        case "DUPLICATE":
           button.disabled = !currentRow;
           break;
       }
@@ -184,6 +194,9 @@ abstract class DictBaseListing<
           break;
         case "EDIT":
           this.edit();
+          break;
+        case "DUPLICATE":
+          this.duplicate();
           break;
         case "DELETE":
           this.delete();
@@ -217,9 +230,8 @@ abstract class DictBaseListing<
     try {
       if (this.rowSelected?.row) {
         const confirmResult = await pushDialog({
-          content: `Bạn muốn xóa ${this.title?.toLowerCase()} <strong>${
-            this.rowSelected?.row[this.fieldName]
-          }</strong>?`,
+          content: `Bạn muốn xóa ${this.title?.toLowerCase()} <strong>${this.rowSelected?.row[this.fieldName]
+            }</strong>?`,
           type: "question",
           title: "Xác nhận xóa",
         });
@@ -335,8 +347,58 @@ abstract class DictBaseListing<
     this.setState({ isLoading });
   }
 
+  removeKeydownEvent?: () => void;
   componentDidMount(): void {
     this.initData();
+    this.removeKeydownEvent = handlerDocumentKeyDown((e) => {
+      this.onKeyDown(e);
+    })
+  }
+
+  async onKeyDown(e: KeyboardEvent) {
+    try {
+      if (e.ctrlKey) {
+        const key = e.key.toLowerCase();
+        if (['q', 'e', 'r', 'd', 's'].indexOf(key) >= 0) {
+          switch (key) {
+            //Thêm mới
+            case 'q':
+              e.preventDefault();
+              this.add();
+              break;
+            //Thêm sửa
+            case 'e':
+              e.preventDefault();
+              this.edit();
+              break;
+            //Sao
+            case 'r':
+              e.preventDefault();
+              this.duplicate();
+              break;
+            //Xóa
+            case 'd':
+              const toolbar = this.initToolbar();
+              if (toolbar.find(x => x.iconKey == 'delete')) {
+                e.preventDefault();
+                this.delete();
+              }
+              break;
+          }
+        }
+      }
+    } catch (error) { }
+  }
+
+  duplicate() {
+    if (this.rowSelected?.row) {
+      this.detailComponent?.duplicate(this.rowSelected?.row);
+    }
+  }
+
+  componentWillUnmount(): void {
+    this.removeKeydownEvent?.();
+    this.removeKeydownEvent = undefined;
   }
   render() {
     return (
