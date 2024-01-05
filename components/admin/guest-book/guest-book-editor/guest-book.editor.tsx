@@ -14,9 +14,9 @@ import { Relationship } from "@/model/Relationship/Relationship";
 import DatePicker from "@/components/Controls/mtluc/Form/Date/DatePicker/datepicker";
 import Numeric from "@/components/Controls/mtluc/Form/Numeric/numeric";
 
-export interface IGuestBookEditorProps extends IDictBaseEditorProps { }
+export interface IGuestBookEditorProps extends IDictBaseEditorProps {}
 
-export interface IGuestBookEditorState extends IDictBaseEditorState { }
+export interface IGuestBookEditorState extends IDictBaseEditorState {}
 
 class GuestBookEditor extends DictBaseEditor<
   IGuestBookEditorProps,
@@ -52,6 +52,19 @@ class GuestBookEditor extends DictBaseEditor<
       minute = guestDate.getMinutes();
     }
     super.edit({ ...currentRow, Hours: hours, Minute: minute });
+  }
+
+  override duplicate(currentRow: any): void {
+    let guestDate: Date = currentRow.GuestDate;
+    let hours = 0,
+      minute = 0;
+    if (guestDate) {
+      guestDate = parseDate(guestDate);
+      currentRow.GuestDate = parseDate(guestDate);
+      hours = guestDate.getHours();
+      minute = guestDate.getMinutes();
+    }
+    super.duplicate({ ...currentRow, Hours: hours, Minute: minute });
   }
 
   override setDataAfterSubmit(data: any, mode: "ADD" | "UPDATE") {
