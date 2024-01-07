@@ -52,7 +52,7 @@ class GuestBookList extends DictBaseListing<
         Id: "GuestDate",
         Title: "Thời gian mời",
         Type: "date",
-        Format: "HH:MM  - dd/mm/yyyy",
+        Format: "HH:MM - dd/mm/yyyy",
         MinWidth: 150,
       },
       {

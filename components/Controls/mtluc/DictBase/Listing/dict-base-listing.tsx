@@ -13,8 +13,10 @@ import { IActionResult } from "../../base/IActionResult";
 import { IToolbar } from "../../base/Itoolbar";
 import {
   buildClass,
+  formatDate,
   handlerDocumentKeyDown,
   handlerRequertException,
+  parseDate,
   pushDialog,
   pushNotification,
 } from "../../base/common";
@@ -161,7 +163,7 @@ abstract class DictBaseListing<
           }
         }
       }
-      return true;
+      return false;
     });
 
     result = result.filter((item) => {
@@ -185,7 +187,64 @@ abstract class DictBaseListing<
                     }
                   }
                   break;
+                case "number":
+                  if (filter.Value != undefined) {
+                    switch (filter.Operator) {
+                      case "eq":
+                        if (item[col.Id] != filter.Value) {
+                          return false;
+                        }
+                        break;
+                      case "neq":
+                        if (item[col.Id] == filter.Value) {
+                          return false;
+                        }
+                        break;
+                      case ">":
+                        if (item[col.Id] <= filter.Value) {
+                          return false;
+                        }
+                        break;
+                      case "<":
+                        if (item[col.Id] >= filter.Value) {
+                          return false;
+                        }
+                        break;
+                    }
+                  }
+                  break;
                 default:
+                  let _value = item[col.Id] || "";
+                  if (col.Type == "date") {
+                    if (_value) {
+                      _value = formatDate(parseDate(_value), col.Format);
+                    } else {
+                      _value = "";
+                    }
+                  }
+
+                  switch (filter.Operator) {
+                    case "like":
+                      if ((_value as string).indexOf(filter.Value || "") < 0) {
+                        return false;
+                      }
+                      break;
+                    case "nlike":
+                      if ((_value as string).indexOf(filter.Value || "") >= 0) {
+                        return false;
+                      }
+                      break;
+                    case "eq":
+                      if (_value != (filter.Value || "")) {
+                        return false;
+                      }
+                      break;
+                    case "neq":
+                      if (_value == (filter.Value || "")) {
+                        return false;
+                      }
+                      break;
+                  }
                   break;
               }
             }
