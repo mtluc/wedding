@@ -6,6 +6,9 @@
                     :global(.mtl-grid-row-data) {
                         :global(.mtl-cell-data) {
                             width: 50%;
+                            &::before {
+                                min-width: 7rem;
+                            }
                         }
                     }
 
@@ -16,11 +19,8 @@
                     }
                 }
             }
-
-
         }
     }
-
 }
 
 @media (max-width: 575.99px) {
@@ -37,5 +37,4 @@
             }
         }
     }
-
 }

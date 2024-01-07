@@ -6,6 +6,9 @@
                     :global(.mtl-grid-row-data) {
                         :global(.mtl-cell-data) {
                             width: 50%;
+                            &::before{
+                                min-width: 6.5rem;
+                            }
                         }
                     }
 
