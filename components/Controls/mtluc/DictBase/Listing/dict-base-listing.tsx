@@ -560,7 +560,11 @@ abstract class DictBaseListing<
                   return (
                     <button
                       key={idx}
-                      className={buildClass(["bt-filter", btn.class])}
+                      className={buildClass([
+                        "bt-filter",
+                        btn.class,
+                        this.state.filters?.length ? "active" : "",
+                      ])}
                       type="button"
                       ref={this.btFilterRef}
                     >

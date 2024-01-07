@@ -41,6 +41,10 @@
         width: 0.9rem;
         height: 0.9rem;
     }
+
+    &.bt-filter.active {
+        background-color: $primary-color;
+    }
 }
 
 .dict-base-list div.listing {
@@ -66,5 +70,5 @@
 }
 
 .filter-list {
-    background-color: $background-color     ;
+    background-color: $background-color;
 }
