@@ -20,7 +20,11 @@
         flex: 1;
         flex-direction: column;
         overflow: hidden;
-        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
 
         .top_bar_wap {
             height: 3.5rem;
@@ -44,6 +48,14 @@
         display: flex;
         height: 100vh;
         overflow: hidden;
+
+        .main_wap {
+            position: relative;
+            top: auto;
+            right: auto;
+            bottom: auto;
+            left: auto;
+        }
 
         .nav_wap {
             width: 15rem;
