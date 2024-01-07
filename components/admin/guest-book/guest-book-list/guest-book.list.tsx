@@ -1,7 +1,7 @@
 import DictBaseEditor from "@/components/Controls/mtluc/DictBase/Editor/dict-base-editor";
 import DictBaseListing, {
-    IDictBaseListProps,
-    IDictBaseListState,
+  IDictBaseListProps,
+  IDictBaseListState,
 } from "@/components/Controls/mtluc/DictBase/Listing/dict-base-listing";
 import { DictBaseService } from "@/components/Controls/mtluc/DictBase/Service/dict-base.service";
 import { IColumn } from "@/components/Controls/mtluc/Grid/Column/column";
@@ -46,6 +46,7 @@ class GuestBookList extends DictBaseListing<
         Id: "Phone",
         Title: "Số điện thoại",
         MinWidth: 100,
+        Type: "phone",
       },
       {
         Id: "GuestDate",
@@ -88,6 +89,13 @@ class GuestBookList extends DictBaseListing<
         DataSource: [],
         FieldId: "BusId",
         FieldName: "BusName",
+      },
+      {
+        Id: "Sent",
+        Title: "Đã mời",
+        Type: "check",
+        MinWidth: 80,
+        MaxWidth: 100,
       },
     ];
   }

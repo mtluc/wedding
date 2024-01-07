@@ -68,7 +68,7 @@ class Popup extends PureComponent<IPopupProp, IPopupState> {
       }
     }
   }
-
+  
   componentDidMount() {
     if (this.props.closeOutSide !== false) {
       this.methodClickOutSide = createMethodClickOutSide(this.ref, (e: any) => {

@@ -8,6 +8,23 @@
     background-color: $background-color;
     width: 100%;
     height: 100%;
+
+    .search-bar {
+        padding: 6px;
+        border-bottom: 1px solid $border-color;
+        position: relative;
+
+        input {
+            width: 100%;
+            padding-right: 2.2rem;
+        }
+
+        .icon-svg {
+            position: absolute;
+            right: 1.2rem;
+            top: 1rem;
+        }
+    }
 }
 
 .dict-base-list .toolbar {
@@ -46,4 +63,8 @@
     border-radius: 0 0 1.1rem 0;
     font-weight: $font-bold;
     font-size: 1.2em;
+}
+
+.filter-list {
+    background-color: $background-color     ;
 }

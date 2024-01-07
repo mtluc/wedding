@@ -1,6 +1,5 @@
 .wap {
     height: 100%;
-    margin-right: 0.6rem;
     box-shadow: $box-shadow;
     display: flex;
     flex-direction: column;
@@ -10,6 +9,20 @@
         background-color: $background-color;
         display: flex;
         align-items: center;
+        position: relative;
+
+        .btn_close_nav {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            border-color: transparent;
+
+            :global(.icon-svg) {
+                margin-right: 0;
+                fill: $note-color;
+            }
+        }
 
         .box_icon {
             background-color: #4f555b;
@@ -39,8 +52,21 @@
         }
     }
 
+    .bottom {
+        button {
+            display: block;
+            text-align: center;
+            width: 100%;
+            padding: 0.6rem;
+            border-left-width: 0;
+            border-right-width: 0;
+            border-bottom-width: 0;
+            border-radius: 0;
+        }
+    }
+
     .main {
-        margin-top: 0.8rem;
+        margin: 0.8rem 0;
         flex: 1;
 
         .group {
@@ -87,6 +113,26 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media (min-width: 920px) {
+    .wap {
+        margin-right: 0.6rem;
+
+        .top {
+            .btn_close_nav {
+                display: none   ;
+            }
+        }
+
+        .main {
+            margin-bottom: 0;
+        }
+
+        .bottom {
+            display: none;
         }
     }
 }

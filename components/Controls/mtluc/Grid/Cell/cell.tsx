@@ -154,6 +154,20 @@ class Cell extends Component<ICellProps, ICellState> {
             cellValue = this.props.Row[this.col.Id]?.toString?.();
           }
           break;
+        case "phone":
+          cellValue = (
+            <a href={`tel:${this.props.Row[this.col.Id]}`}>
+              {this.props.Row[this.col.Id]}
+            </a>
+          );
+          break;
+        case "email":
+          cellValue = (
+            <a href={`mailto:${this.props.Row[this.col.Id]}`}>
+              {this.props.Row[this.col.Id]}
+            </a>
+          );
+          break;
         default:
           cellValue = this.props.Row[this.col.Id]?.toString?.();
           break;

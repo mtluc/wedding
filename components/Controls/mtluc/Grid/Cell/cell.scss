@@ -28,11 +28,14 @@
         background: #fff;
         border-inline-start-width: 1px;
 
-        .mtl-cell-data-content{
+        .mtl-cell-data-content {
             overflow: visible;
             text-overflow: unset;
             text-align: center;
         }
+    }
+    a {
+        text-decoration: none;
     }
 }
 

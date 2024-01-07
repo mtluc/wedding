@@ -2,7 +2,7 @@ import { MouseEvent, PureComponent, RefObject, createRef } from "react";
 import EmptyRow from "../EmptyRow/empty-row";
 import ComboBox from "../Form/Combobox/combobox";
 import Numeric from "../Form/Numeric/numeric";
-import { buildClass } from "../base/common";
+import { buildClass, formatNumber } from "../base/common";
 import Cell from "./Cell/cell";
 import CellHeader from "./Cell/cell-header";
 import { IColumn } from "./Column/column";
@@ -10,6 +10,10 @@ import { IColumn } from "./Column/column";
 interface IGridProps {
   columns?: IColumn[];
   showIndexCol?: boolean;
+  localSinglePageInfo?: {
+    countItem: number;
+    totalItem: number;
+  };
   datas: any[];
   onCellClick?: (
     e: MouseEvent,
@@ -78,7 +82,7 @@ class Grid extends PureComponent<IGridProps, IGridState> {
   static getDerivedStateFromProps(props: IGridProps, state: IGridState) {
     if (props.paper !== state.paper) {
       let paper = props.paper;
-      if(paper && (!paper.pageIndex || paper.pageIndex <= 0)){
+      if (paper && (!paper.pageIndex || paper.pageIndex <= 0)) {
         paper.pageIndex = 1;
       }
       return {
@@ -88,7 +92,6 @@ class Grid extends PureComponent<IGridProps, IGridState> {
     }
     return null;
   }
-  
 
   handlerBodyScroll(e: any) {
     if (this.headerRef.current)
@@ -306,12 +309,28 @@ class Grid extends PureComponent<IGridProps, IGridState> {
             <div className="flex-1"></div>
             <div>
               Từ{" "}
-              {(this.state.paper.pageIndex - 1) * this.state.paper.pageSize +
-                (this.props?.datas?.length ? 1 : 0)}{" "}
+              {formatNumber(
+                (this.state.paper.pageIndex - 1) * this.state.paper.pageSize +
+                  (this.props?.datas?.length ? 1 : 0),
+                0
+              )}{" "}
               đến{" "}
-              {(this.state.paper.pageIndex - 1) * this.state.paper.pageSize +
-                (this.props?.datas?.length || 0)}{" "}
-              trên {this.state?.paper?.totalItemCount} dòng
+              {formatNumber(
+                (this.state.paper.pageIndex - 1) * this.state.paper.pageSize +
+                  (this.props?.datas?.length || 0),
+                0
+              )}{" "}
+              trên {formatNumber(this.state?.paper?.totalItemCount, 0)} dòng
+            </div>
+          </div>
+        ) : this.props.localSinglePageInfo ? (
+          <div className="mtl-grid-paper">
+            <div>Tổng số</div>
+            <div className="flex-1"></div>
+            <div>
+              {formatNumber(this.props.localSinglePageInfo.countItem || 0, 0)} /{" "}
+              {formatNumber(this.props.localSinglePageInfo.totalItem || 0, 0)}{" "}
+              bản ghi
             </div>
           </div>
         ) : null}

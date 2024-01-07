@@ -1,16 +1,26 @@
-import { useAppStore } from "@/store/app-context";
-import classNames from "./top-bar.module.scss";
-import { MouseEvent, createRef, useMemo, useRef, useState } from "react";
-import IconSvg from "@/components/Controls/mtluc/icon/icon-svg";
+import { httpClient } from "@/base/httpClient";
 import { DropDown } from "@/components/Controls/mtluc/Dropdown/dropdown";
-import { Link, matchPath, useLocation } from "react-router-dom";
 import {
   handlerRequertException,
   setAppLoading,
 } from "@/components/Controls/mtluc/base/common";
-import { httpClient } from "@/base/httpClient";
+import IconSvg from "@/components/Controls/mtluc/icon/icon-svg";
 import { IAppRout, routers } from "@/pages/admin/router";
-const TopBar = () => {
+import { useAppStore } from "@/store/app-context";
+import {
+  Dispatch,
+  MouseEvent,
+  SetStateAction,
+  createRef,
+  useMemo,
+} from "react";
+import { matchPath, useLocation } from "react-router-dom";
+import classNames from "./top-bar.module.scss";
+const TopBar = ({
+  setShowNav,
+}: {
+  setShowNav: Dispatch<SetStateAction<boolean>>;
+}) => {
   const ctx = useAppStore();
   const btnUserRef = createRef<HTMLButtonElement>();
   const _location = useLocation();
@@ -34,7 +44,7 @@ const TopBar = () => {
     try {
       e.preventDefault();
       setAppLoading(true);
-      await httpClient.getJson(`/api/system/logout?v=${(new Date().toJSON())}`);
+      await httpClient.getJson(`/api/system/logout?v=${new Date().toJSON()}`);
       location.href = "/dang-nhap";
     } catch (error) {
       handlerRequertException(error);
@@ -52,6 +62,11 @@ const TopBar = () => {
     }
     return "";
   }, [breadCrumbItems]);
+
+  const onShowNav = () => {
+    setShowNav(true);
+  };
+
   return (
     <div className={classNames.wap}>
       <div className={classNames.page_title}>{title}</div>
@@ -85,6 +100,9 @@ const TopBar = () => {
           </div>
         </DropDown>
       </div>
+      <button className={classNames.btnShowNav} onClick={onShowNav}>
+        <IconSvg iconKeys="menu" />
+      </button>
     </div>
   );
 };

@@ -1,10 +1,38 @@
-import { buildClass } from "@/components/Controls/mtluc/base/common";
-import classNames from "./nav-bar.module.scss";
-import { useAppStore } from "@/store/app-context";
+import { httpClient } from "@/base/httpClient";
+import {
+  buildClass,
+  handlerRequertException,
+  setAppLoading,
+} from "@/components/Controls/mtluc/base/common";
 import IconSvg from "@/components/Controls/mtluc/icon/icon-svg";
+import { useAppStore } from "@/store/app-context";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
-const NavBar = () => {
+import classNames from "./nav-bar.module.scss";
+const NavBar = ({
+  setShowNav,
+}: {
+  setShowNav: Dispatch<SetStateAction<boolean>>;
+}) => {
   const ctx = useAppStore();
+
+  const onLogout = async (e: MouseEvent) => {
+    try {
+      e.preventDefault();
+      setAppLoading(true);
+      await httpClient.getJson(`/api/system/logout?v=${new Date().toJSON()}`);
+      location.href = "/dang-nhap";
+    } catch (error) {
+      handlerRequertException(error);
+    } finally {
+      setAppLoading(false);
+    }
+  };
+
+  const onHideNav = () => {
+    setShowNav(false);
+  };
+
   return (
     <div className={classNames.wap}>
       <div className={classNames.top}>
@@ -15,6 +43,9 @@ const NavBar = () => {
           <div className={classNames.title}>Xin chào</div>
           <div className={classNames.user_name}>{ctx.user?.FullName}</div>
         </div>
+        <button className={classNames.btn_close_nav} onClick={onHideNav}>
+          <IconSvg iconKeys="close" />
+        </button>
       </div>
       <div className={buildClass(["custom-scroll", classNames.main])}>
         <div className={classNames.group}>
@@ -26,6 +57,7 @@ const NavBar = () => {
               ]);
             }}
             to={"/admin"}
+            onClick={onHideNav}
           >
             <IconSvg iconKeys="home" />
             <span>Tổng quan</span>
@@ -38,6 +70,7 @@ const NavBar = () => {
           <NavLink
             className={classNames.nav_item}
             to={"/admin/thong-tin-thiep-cuoi"}
+            onClick={onHideNav}
           >
             <IconSvg iconKeys="invitation" />
             <span>Thông tin thiệp cưới</span>
@@ -46,12 +79,17 @@ const NavBar = () => {
           <NavLink
             className={classNames.nav_item}
             to={"/admin/danh-sach-khach-moi"}
+            onClick={onHideNav}
           >
             <IconSvg iconKeys="guestbook" />
             <span>Danh sách khách mời</span>
           </NavLink>
 
-          <NavLink className={classNames.nav_item} to={"/admin/xe-dua-don"}>
+          <NavLink
+            className={classNames.nav_item}
+            to={"/admin/xe-dua-don"}
+            onClick={onHideNav}
+          >
             <IconSvg iconKeys="bus" />
             <span>Xe đưa đón</span>
           </NavLink>
@@ -63,12 +101,17 @@ const NavBar = () => {
           <NavLink
             className={classNames.nav_item}
             to={"/admin/thong-tin-tai-khoan"}
+            onClick={onHideNav}
           >
             <IconSvg iconKeys="user" />
             <span>Thông tin tài khoản</span>
           </NavLink>
 
-          <NavLink className={classNames.nav_item} to={"/admin/doi-mat-khau"}>
+          <NavLink
+            className={classNames.nav_item}
+            to={"/admin/doi-mat-khau"}
+            onClick={onHideNav}
+          >
             <IconSvg iconKeys="change-password" />
             <span>Đổi mật khẩu</span>
           </NavLink>
@@ -81,12 +124,19 @@ const NavBar = () => {
             <NavLink
               className={classNames.nav_item}
               to={"/admin/danh-sach-nguoi-dung"}
+              onClick={onHideNav}
             >
               <IconSvg iconKeys="user-group" />
               <span>Danh sách người dùng</span>
             </NavLink>
           </div>
         ) : null}
+      </div>
+      <div className={classNames.bottom}>
+        <button onClick={onLogout}>
+          <IconSvg iconKeys="logout" />
+          <span>Đăng xuất</span>
+        </button>
       </div>
     </div>
   );

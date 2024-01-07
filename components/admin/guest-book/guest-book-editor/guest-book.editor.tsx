@@ -176,6 +176,18 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
+        <div className="mtl-control col-2">
+          <label
+            className={buildClass([classNames.label, "mtl-lable"])}
+            htmlFor="Sent"
+          >
+            Đã mời
+          </label>
+          <div className="flex-1">
+            <CheckBox name="Sent" />
+          </div>
+        </div>
+
         <div className="mtl-control col-4">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}

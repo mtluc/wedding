@@ -2,12 +2,13 @@ import {
   ChangeEvent,
   FocusEvent,
   KeyboardEvent,
+  MouseEvent,
   ReactElement,
   RefObject,
   createRef,
 } from "react";
 import Popup from "../../Popup/popup";
-import { buildClass } from "../../base/common";
+import { buildClass, fireMouseDown } from "../../base/common";
 import {
   BaseControl,
   IControlProps,
@@ -20,6 +21,7 @@ export interface IComboboxProps extends IControlProps {
   fieldId?: string;
   fieldName?: string;
   multipleSelect?: boolean;
+  unFreeText?: boolean;
   renderOptions?: (onClick: (row: any) => void) => ReactElement;
   renderItem?: (item: any, that: ComboBox) => ReactElement;
   onChange?: (
@@ -29,6 +31,8 @@ export interface IComboboxProps extends IControlProps {
     opt?: { value: any; row: any }
   ) => void;
   getDisplay?: (rows: any) => string;
+
+  onMouseDownPopup?: (e: MouseEvent) => void;
 }
 
 export interface IComboboxState extends IControlState<IComboboxProps> {
@@ -443,7 +447,7 @@ class ComboBox extends BaseControl<IComboboxProps, IComboboxState> {
             ])}
             placeholder={this.props.placeholder || "-- Chọn --"}
             style={this.props.style}
-            readOnly={this.state.readonly}
+            readOnly={this.state.readonly || this.props.unFreeText}
             disabled={this.state.disabled}
             autoComplete="off"
             //
@@ -461,9 +465,16 @@ class ComboBox extends BaseControl<IComboboxProps, IComboboxState> {
           <button
             className="btn-dropdown"
             type="button"
-            onClick={() => {
+            onClick={(e) => {
               this.setShowOptions(!this.state.showOptions);
               this.focus?.();
+              if (this.waperRef.current) {
+                fireMouseDown(this.waperRef.current);
+              }
+            }}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
             }}
             disabled={this.state.disabled || this.state.readonly}
           ></button>
@@ -476,7 +487,7 @@ class ComboBox extends BaseControl<IComboboxProps, IComboboxState> {
         !this.state.readonly ? (
           <Popup
             parentRef={this.waperRef}
-            showChange={this.onShowChange.bind(this)}
+            showChange={(e) => this.onShowChange(e)}
           >
             <>
               {this.props.renderOptions ? (
@@ -487,6 +498,9 @@ class ComboBox extends BaseControl<IComboboxProps, IComboboxState> {
                   className="custom-scroll options-wap"
                   style={{
                     width: this.waperRef?.current?.clientWidth,
+                  }}
+                  onMouseDown={(e) => {
+                    this.props.onMouseDownPopup?.(e);
                   }}
                 >
                   {this.state.source.map((row) => {

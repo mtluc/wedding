@@ -1,7 +1,14 @@
 export interface IColumn {
   Id: string;
 
-  Type?: "date" | "number" | "check" | "combobox" | "default";
+  Type?:
+    | "date"
+    | "number"
+    | "check"
+    | "combobox"
+    | "phone"
+    | "email"
+    | "default";
 
   Title?: string;
 

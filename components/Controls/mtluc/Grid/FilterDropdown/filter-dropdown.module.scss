@@ -1,0 +1,38 @@
+.wap {
+    background-color: $background-color;
+
+    box-shadow: $box-shadow;
+    padding: 0.8rem;
+    border: 1px solid $border-color;
+    border-radius: 0.4rem;
+
+    .list {
+        max-height: 400px;
+        table {
+            max-width: 100%;
+            td {
+                padding-top: 0.2rem;
+                padding-bottom: 0.2rem;
+            }
+
+            .col_lable {
+                padding-right: 1rem;
+            }
+
+            :global(.filter-op-col) {
+                padding-right: 0.4rem;
+                max-width: 8.2rem;
+            }
+        }
+    }
+
+    .task_bar{
+        border-top: 1px solid $border-color;
+        text-align: center;
+        margin-top: 0.4rem;
+        button{
+            min-width: 8rem;
+            margin: 0.8rem 0.4rem 0 0.4rem;
+        }
+    }
+}
