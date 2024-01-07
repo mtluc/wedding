@@ -7,4 +7,5 @@ export interface IToolbar {
   class?: string;
   iconCls?: string;
   iconKey?: IconKeys;
+  responsive?: boolean;
 }

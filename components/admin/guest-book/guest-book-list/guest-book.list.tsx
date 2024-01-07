@@ -8,6 +8,7 @@ import { IColumn } from "@/components/Controls/mtluc/Grid/Column/column";
 import { ReactElement } from "react";
 import GuestBookEditor from "../guest-book-editor/guest-book.editor";
 import GuestBookService from "../guest-book.service";
+import classNames from './guest-book-list.module.scss'
 
 interface IGuestBookListProps extends IDictBaseListProps {}
 
@@ -23,7 +24,8 @@ class GuestBookList extends DictBaseListing<
   override fieldId: string = "Id";
   override fieldName: string = "FullName";
   override service: DictBaseService = new GuestBookService();
-
+  override calssWap: string = classNames.wap;
+  
   override initColums(): IColumn[] {
     return [
       {

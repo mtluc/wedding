@@ -6,7 +6,12 @@ import {
   RefObject,
   createRef,
 } from "react";
+import CheckBox from "../../Form/Checkbox/checkbox";
+import TextBox from "../../Form/Textbox/textbox";
+import MyFormContext from "../../Form/form-context";
 import { IColumn } from "../../Grid/Column/column";
+import FilterDropDown from "../../Grid/FilterDropdown/filter-dropdown";
+import { IFilter } from "../../Grid/FilterDropdown/filter.interface";
 import Grid from "../../Grid/grid";
 import Loading from "../../Loading/loading";
 import { IActionResult } from "../../base/IActionResult";
@@ -20,16 +25,9 @@ import {
   pushDialog,
   pushNotification,
 } from "../../base/common";
+import IconSvg from "../../icon/icon-svg";
 import DictBaseEditor from "../Editor/dict-base-editor";
 import { DictBaseService } from "../Service/dict-base.service";
-import IconSvg from "../../icon/icon-svg";
-import TextBox from "../../Form/Textbox/textbox";
-import { DropDown } from "../../Dropdown/dropdown";
-import MyFormContext from "../../Form/form-context";
-import Form from "../../Form/form";
-import CheckBox from "../../Form/Checkbox/checkbox";
-import FilterDropDown from "../../Grid/FilterDropdown/filter-dropdown";
-import { IFilter } from "../../Grid/FilterDropdown/filter.interface";
 
 export interface IDictBaseListProps {
   children?: React.ReactNode;
@@ -38,11 +36,11 @@ export interface IDictBaseListState {
   isLoading: boolean;
   toolbars: IToolbar[];
   rowSelected:
-    | {
-        row: any;
-        idx: number;
-      }
-    | undefined;
+  | {
+    row: any;
+    idx: number;
+  }
+  | undefined;
   datas: any[];
   columns: IColumn[];
   singlePageInfo: {
@@ -69,6 +67,8 @@ abstract class DictBaseListing<
   searchBarPlaholder: string = "Tìm kiếm";
   btFilterRef!: RefObject<HTMLButtonElement>;
   formCtx = new MyFormContext();
+  responsiveGrid: boolean = true;
+  calssWap?: string;
 
   showTitle: boolean = true;
 
@@ -269,7 +269,7 @@ abstract class DictBaseListing<
         id: "FILTER",
         text: "Filter",
         disabled: false,
-        class: "btn btn-view",
+        class: "btn btn-filter",
         iconKey: "filter",
       },
       {
@@ -278,6 +278,7 @@ abstract class DictBaseListing<
         disabled: true,
         class: "btn btn-view",
         iconKey: "view",
+        responsive: true
       },
       {
         id: "ADD",
@@ -290,8 +291,9 @@ abstract class DictBaseListing<
         id: "DUPLICATE",
         text: "Sao",
         disabled: true,
-        class: "btn btn-add",
+        class: "btn btn-duplicate",
         iconKey: "duplicate",
+        responsive: true
       },
       {
         id: "EDIT",
@@ -299,6 +301,7 @@ abstract class DictBaseListing<
         disabled: true,
         class: "btn btn-edit",
         iconKey: "edit",
+        responsive: true
       },
       {
         id: "DELETE",
@@ -306,12 +309,13 @@ abstract class DictBaseListing<
         disabled: true,
         class: "btn btn-delete btn-danger",
         iconKey: "delete",
+        responsive: true
       },
       {
         id: "RELOAD",
         text: "Tải lại",
         disabled: false,
-        class: "btn",
+        class: "btn btn-reload",
         iconKey: "reload",
       },
     ];
@@ -393,9 +397,8 @@ abstract class DictBaseListing<
     try {
       if (this.rowSelected?.row) {
         const confirmResult = await pushDialog({
-          content: `Bạn muốn xóa ${this.title?.toLowerCase()} <strong>${
-            this.rowSelected?.row[this.fieldName]
-          }</strong>?`,
+          content: `Bạn muốn xóa ${this.title?.toLowerCase()} <strong>${this.rowSelected?.row[this.fieldName]
+            }</strong>?`,
           type: "question",
           title: "Xác nhận xóa",
         });
@@ -554,7 +557,7 @@ abstract class DictBaseListing<
           }
         }
       }
-    } catch (error) {}
+    } catch (error) { }
   }
 
   duplicate() {
@@ -579,10 +582,37 @@ abstract class DictBaseListing<
     }
   }
 
+  public MobileActions(row: any, rowIdx: number): React.ReactNode {
+    if (this.responsiveGrid) {
+      return this.state.toolbars.filter((x) => x.responsive).map((btn, idx) => {
+        return <button
+          key={idx}
+          className={buildClass([btn.class, btn.responsive ? 'btn-respon' : ''])}
+          type="button"
+          onClick={(e) => {
+            this.rowSelected = {
+              idx: rowIdx,
+              row: row,
+            };
+            setTimeout(() => {
+              this.handlerToolBarClick(e, btn);
+            }, 100);
+          }}
+        >
+          {btn.iconKey ? (
+            <IconSvg className={btn.iconCls} iconKeys={btn.iconKey} />
+          ) : null}
+          <span>{btn.text}</span>
+        </button>
+      })
+    }
+    return null;
+  }
+
   render() {
     return (
       <>
-        <div className="dict-base-list">
+        <div className={buildClass([this.calssWap || '', "dict-base-list", this.responsiveGrid ? 'res-mobile' : ''])}>
           {this.state.isLoading ? <Loading /> : null}
           {this.title && this.showTitle ? (
             <div className="title">
@@ -623,6 +653,7 @@ abstract class DictBaseListing<
                         "bt-filter",
                         btn.class,
                         this.state.filters?.length ? "active" : "",
+                        btn.responsive ? 'btn-respon' : ''
                       ])}
                       type="button"
                       ref={this.btFilterRef}
@@ -640,7 +671,7 @@ abstract class DictBaseListing<
                 return (
                   <button
                     key={idx}
-                    className={btn.class}
+                    className={buildClass([btn.class, btn.responsive ? 'btn-respon' : ''])}
                     type="button"
                     onClick={(e) => {
                       this.handlerToolBarClick(e, btn);
@@ -674,6 +705,8 @@ abstract class DictBaseListing<
               localSinglePageInfo={
                 this.showSinglePageInfo ? this.state.singlePageInfo : undefined
               }
+              responsive={this.responsiveGrid}
+              colMobileActions={this.MobileActions.bind(this)}
             />
           </div>
         </div>

@@ -1,0 +1,41 @@
+@media (max-width: 919.99px) {
+    .wap {
+        :global(.mtl-grid.grid-mobile) {
+            :global(.mtl-grid-body) {
+                :global(.mtl-grid-row-data-wap) {
+                    :global(.mtl-grid-row-data) {
+                        :global(.mtl-cell-data) {
+                            width: 50%;
+                        }
+                    }
+
+                    :global(.tool-bar-mobile) {
+                        display: flex;
+                        flex-wrap: wrap;
+                        max-width: 6rem;
+                    }
+                }
+            }
+
+
+        }
+    }
+
+}
+
+@media (max-width: 575.99px) {
+    .wap {
+        :global(.mtl-grid.grid-mobile) {
+            :global(.mtl-grid-body) {
+                :global(.mtl-grid-row-data-wap) {
+                    :global(.mtl-grid-row-data) {
+                        :global(.mtl-cell-data) {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

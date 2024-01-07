@@ -5,7 +5,6 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    //min-height: 12rem;
     box-sizing: border-box;
     height: 100%;
     position: relative;
@@ -96,6 +95,130 @@
 .mtl-grid-paper-index .invalid-msg {
     display: none;
 }
+
 .mtl-grid-paper input.page-size {
     width: 100%;
+}
+
+
+.mtl-grid {
+    .tool-bar-mobile {
+        display: none;
+    }
+}
+
+@media (min-width: 920px) {
+    .mtl-grid.grid-mobile {
+        .mtl-grid-body {
+            .mtl-grid-row-data-wap {
+                .mtl-grid-row-data {
+                    .mtl-cell-data {
+                        &::before {
+                            content: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+@media (max-width: 919.99px) {
+    .mtl-grid.grid-mobile {
+        border-width: 0px;
+        padding: 0 0.4rem;
+        overflow-x: hidden;
+
+        .mtl-grid-header {
+            display: none;
+        }
+
+        .mtl-grid-body {
+            overflow-y: auto;
+
+            &:has(.row-empty) {
+                border-top: 1px solid $border ;
+            }
+
+            .row-empty{
+                display: none;
+            }
+
+            .mtl-grid-row-data-wap {
+                border: 1px solid $border-color;
+                margin: 1rem 0;
+                border-radius: 0.4rem;
+                padding: 0.4rem;
+                overflow: hidden;
+                margin: 1rem 0;
+                display: flex;
+                align-items: flex-start;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                &:hover {
+                    background-color: #d6d6d6;
+                }
+
+                &:has(.row-selected) {
+                    background-color: #f7edc5;
+                }
+
+                .mtl-grid-row-data {
+                    flex-wrap: wrap;
+                    border-width: 0;
+                    flex: 1;
+
+
+                    .mtl-cell-data {
+                        border-width: 0;
+                        min-width: auto !important;
+                        max-width: none !important;
+                        flex: none !important;
+                        width: 100%;
+                        text-align: left;
+
+                        &::before {
+                            display: inline-block;
+                            vertical-align: middle;
+                            font-weight: $font-bold;
+                            margin-right: 0.8rem;
+                            color: #000;
+                        }
+
+                        &.col-index {
+                            display: none;
+                        }
+
+                        .mtl-cell-data-content {
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+
+                .tool-bar-mobile {
+                    display: block;
+                    margin-left: 1rem;
+
+                    .btn-respon {
+                        display: block;
+                        margin: 0.2rem;
+                        flex: 1;
+                    }
+                }
+            }
+
+
+        }
+    }
 }

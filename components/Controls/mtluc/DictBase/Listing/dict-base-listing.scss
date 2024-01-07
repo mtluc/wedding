@@ -72,3 +72,22 @@
 .filter-list {
     background-color: $background-color;
 }
+
+.dict-base-list.res-mobile {
+    .toolbar {
+        .btn-respon {
+            display: none;
+        }
+    }
+
+}
+
+@media (min-width: 920px) {
+    .dict-base-list.res-mobile {
+        .toolbar {
+            .btn-respon {
+                display: inline-block;
+            }
+        }
+    }
+}

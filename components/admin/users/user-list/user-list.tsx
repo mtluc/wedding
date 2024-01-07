@@ -8,10 +8,11 @@ import { IColumn } from "@/components/Controls/mtluc/Grid/Column/column";
 import { ReactElement } from "react";
 import UserService from "../user.service";
 import UserEditor from "../user-editor/user-editor";
+import classNames from './user-list.module.scss';
 
-interface IUserListProps extends IDictBaseListProps {}
+interface IUserListProps extends IDictBaseListProps { }
 
-interface IUserListState extends IDictBaseListState {}
+interface IUserListState extends IDictBaseListState { }
 
 class UserList extends DictBaseListing<IUserListProps, IUserListState, UserEditor> {
   override title: string = "Người dùng";
@@ -19,6 +20,7 @@ class UserList extends DictBaseListing<IUserListProps, IUserListState, UserEdito
   override fieldId: string = "UserName";
   override fieldName: string = "FullName";
   override service: DictBaseService = new UserService();
+  override calssWap: string = classNames.wap;
 
   override initColums(): IColumn[] {
     return [

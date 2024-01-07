@@ -34,9 +34,6 @@
             flex: 1;
             overflow: hidden;
             background-color: $background-color;
-            margin-top: 0.8rem;
-            margin-left: 0.4rem;
-            // border-radius: 0.4rem 0 0 0;
             box-shadow: $box-shadow;
             border-top: 2px $note-color solid;
         }
@@ -55,6 +52,11 @@
             right: auto;
             bottom: auto;
             left: auto;
+
+            .main_box {
+                margin-top: 0.8rem;
+                margin-left: 0.4rem;
+            }
         }
 
         .nav_wap {

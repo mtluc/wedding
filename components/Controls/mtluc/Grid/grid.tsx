@@ -40,6 +40,8 @@ interface IGridProps {
   onContextMenu?: (e: MouseEvent) => void | Promise<void>;
   paper?: IGridPaper;
   onFilterChange?: (paper: IGridPaper) => void;
+  responsive?: boolean
+  colMobileActions?: (row: any, rowIdx: number) => React.ReactNode
 }
 
 export interface IGridPaper {
@@ -68,6 +70,10 @@ class Grid extends PureComponent<IGridProps, IGridState> {
     this.setState({
       itemSelected: row,
     });
+  }
+
+  static defaultProps = {
+    responsive: true
   }
 
   constructor(props: IGridProps) {
@@ -129,18 +135,28 @@ class Grid extends PureComponent<IGridProps, IGridState> {
       this.props.showIndexCol === false
         ? undefined
         : ({
-            Id: "_INDEX_",
-            Title: "STT",
-            ClassName: "text-center",
-            MinWidth: 80,
-            MaxWidth: 80,
-            renderCell(row, Id, rowIdx) {
-              return rowIdx + 1;
-            },
-          } as IColumn);
+          Id: "_INDEX_",
+          Title: "STT",
+          ClassName: "text-center col-index",
+          MinWidth: 80,
+          MaxWidth: 80,
+          renderCell(row, Id, rowIdx) {
+            return rowIdx + 1;
+          },
+        } as IColumn);
 
     return (
-      <div className="mtl-grid">
+      <div className={buildClass(["mtl-grid", this.props.responsive ? 'grid-mobile' : ''])}>
+        {
+          this.props.responsive ? <style>
+            {
+              this.props.columns?.map((col, idx) => {
+                return `.mtl-grid.grid-mobile .mtl-cell-data:nth-of-type(${idx + (ColumnIdx ? 2 : 1)}):before { content: "${col.Title}:"; }`
+              })
+            }
+          </style> : null
+        }
+
         <div className="mtl-grid-header">
           <div className="mtl-grid-header-container" ref={this.headerRef}>
             <div className="mtl-header-row">
@@ -152,43 +168,52 @@ class Grid extends PureComponent<IGridProps, IGridState> {
           </div>
         </div>
         <div
-          className="mtl-grid-body"
+          className={"mtl-grid-body"}
           onScroll={this.handlerBodyScroll.bind(this)}
           onContextMenu={this.props.onContextMenu}
         >
           {this.props?.datas?.length ? (
             this.props?.datas?.map((row, idx) => {
               return (
-                <div
-                  key={idx}
-                  className={buildClass([
-                    "mtl-grid-row-data",
-                    idx === this.state.itemSelected?.idx ? "row-selected" : "",
-                  ])}
-                  onClick={(e) => this.handlerRowClick(e, row, idx)}
-                  onDoubleClick={(e) => {
-                    this.props.onRowDoubleClick?.(e, row, idx);
-                  }}
-                >
-                  {ColumnIdx ? (
-                    <Cell
-                      Column={ColumnIdx}
-                      Row={row}
-                      ColIdx={0}
-                      RowIdx={idx}
-                    />
-                  ) : null}
-                  {this.props.columns?.map((col, colIdx) => {
-                    return (
+                <div key={idx} className={"mtl-grid-row-data-wap"}>
+                  <div
+                    className={buildClass([
+                      "mtl-grid-row-data",
+                      idx === this.state.itemSelected?.idx ? "row-selected" : "",
+                    ])}
+                    onClick={(e) => this.handlerRowClick(e, row, idx)}
+                    onDoubleClick={(e) => {
+                      this.props.onRowDoubleClick?.(e, row, idx);
+                    }}
+                  >
+                    {ColumnIdx ? (
                       <Cell
-                        key={col.Id + "_" + idx}
-                        Column={col}
+                        Column={ColumnIdx}
                         Row={row}
-                        ColIdx={colIdx}
+                        ColIdx={0}
                         RowIdx={idx}
                       />
-                    );
-                  })}
+                    ) : null}
+                    {this.props.columns?.map((col, colIdx) => {
+                      return (
+                        <Cell
+                          key={col.Id + "_" + idx}
+                          Column={col}
+                          Row={row}
+                          ColIdx={colIdx}
+                          RowIdx={idx}
+                        />
+                      );
+                    })}
+                  </div>
+                  {
+                    this.props.responsive ? <div className="tool-bar-mobile">
+                      {
+                        this.props.colMobileActions?.(row, idx)
+                      }
+                    </div> : null
+                  }
+
                 </div>
               );
             })
@@ -311,13 +336,13 @@ class Grid extends PureComponent<IGridProps, IGridState> {
               Từ{" "}
               {formatNumber(
                 (this.state.paper.pageIndex - 1) * this.state.paper.pageSize +
-                  (this.props?.datas?.length ? 1 : 0),
+                (this.props?.datas?.length ? 1 : 0),
                 0
               )}{" "}
               đến{" "}
               {formatNumber(
                 (this.state.paper.pageIndex - 1) * this.state.paper.pageSize +
-                  (this.props?.datas?.length || 0),
+                (this.props?.datas?.length || 0),
                 0
               )}{" "}
               trên {formatNumber(this.state?.paper?.totalItemCount, 0)} dòng
