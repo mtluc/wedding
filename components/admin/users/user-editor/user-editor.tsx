@@ -1,3 +1,4 @@
+
 import DictBaseEditor, {
   IDictBaseEditorProps,
   IDictBaseEditorState,
@@ -50,7 +51,7 @@ class UserEditor extends DictBaseEditor<IUserEditorProps, IUserEditorState> {
   override renderControl(): ReactNode {
     return (
       <div className="row">
-        <div className="mtl-control col-md-12">
+        <div className="mtl-control col-12">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="UserName"
@@ -68,7 +69,7 @@ class UserEditor extends DictBaseEditor<IUserEditorProps, IUserEditorState> {
           </div>
         </div>
 
-        <div className="mtl-control col-md-12">
+        <div className="mtl-control col-12">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="FullName"
@@ -86,7 +87,7 @@ class UserEditor extends DictBaseEditor<IUserEditorProps, IUserEditorState> {
           </div>
         </div>
 
-        <div className="mtl-control col-md-12">
+        <div className="mtl-control col-12">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Password"
@@ -107,7 +108,7 @@ class UserEditor extends DictBaseEditor<IUserEditorProps, IUserEditorState> {
           </div>
         </div>
 
-        <div className="mtl-control col-md-12">
+        <div className="mtl-control col-12">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Actived"

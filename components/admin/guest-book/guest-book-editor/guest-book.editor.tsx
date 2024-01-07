@@ -89,7 +89,7 @@ class GuestBookEditor extends DictBaseEditor<
   override renderControl(): ReactNode {
     return (
       <div className="row">
-        <div className="mtl-control col-4">
+        <div className="mtl-control col-12 col-md-4">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="ShortName"
@@ -106,7 +106,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-8">
+        <div className="mtl-control col-12 col-md-8">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="FullName"
@@ -124,7 +124,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-4">
+        <div className="mtl-control col-12 col-md-4">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Phone"
@@ -140,7 +140,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-2">
+        <div className="mtl-control col-6 col-sm-3 col-md-2">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="IsConfirm"
@@ -152,7 +152,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-2">
+        <div className="mtl-control col-6 col-sm-3 col-md-2">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="IsConfirmBus"
@@ -164,7 +164,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-2">
+        <div className="mtl-control col-6 col-sm-3 col-md-2">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Agree"
@@ -176,7 +176,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-2">
+        <div className="mtl-control col-6 col-sm-3 col-md-2">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Sent"
@@ -188,7 +188,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-4">
+        <div className="mtl-control col-12 col-md-4">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Relationship"
@@ -207,7 +207,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-4">
+        <div className="mtl-control col-12 col-sm-6 col-md-4">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="GuestDate"
@@ -219,7 +219,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-4">
+        <div className="mtl-control col-12 col-sm-6 col-md-4">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Hours"
@@ -249,7 +249,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-4">
+        <div className="mtl-control col-12 col-md-4">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="BusId"
@@ -268,7 +268,7 @@ class GuestBookEditor extends DictBaseEditor<
           </div>
         </div>
 
-        <div className="mtl-control col-md-8">
+        <div className="mtl-control col-12 col-md-8">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Description"
