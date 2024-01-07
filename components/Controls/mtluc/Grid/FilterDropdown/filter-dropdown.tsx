@@ -109,7 +109,6 @@ const FilterDropDown = ({
           />
         );
     }
-    return null;
   };
   return (
     <DropDown parentRef={parentRef} isShow={isShow}>

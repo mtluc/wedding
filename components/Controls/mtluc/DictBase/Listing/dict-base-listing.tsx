@@ -173,13 +173,13 @@ abstract class DictBaseListing<
             if (col) {
               switch (col.Type) {
                 case "check":
-                  if (filter.Value && filter.Value !== "__all__") {
+                  if (filter.Value != undefined && filter.Value !== "__all__") {
                     if ((item[col.Id] ? true : false) != filter.Value) {
                       return false;
                     }
                   }
                 case "combobox":
-                  if (filter.Value && filter.Value !== "__all__") {
+                  if (filter.Value != undefined && filter.Value !== "__all__") {
                     if (item[col.Id] != filter.Value) {
                       return false;
                     }

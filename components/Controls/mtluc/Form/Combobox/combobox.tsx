@@ -62,7 +62,10 @@ class ComboBox extends BaseControl<IComboboxProps, IComboboxState> {
     prevState: IControlState<IComboboxProps>
   ) {
     const newState: any = {};
-    if (nextProps.value && nextProps.value !== prevState._props.value) {
+    if (
+      nextProps.value != undefined &&
+      nextProps.value !== prevState._props.value
+    ) {
       newState.value = nextProps.value;
     }
 

@@ -47,7 +47,7 @@ export abstract class BaseControl<
   initState(props: P) {
     return {
       _props: { ...props },
-      value: props.value || props.defaultValue || "",
+      value: props.value != undefined ? props.value : props.defaultValue || "",
       readonly: props.readonly || false,
       disabled: props.disabled || false,
       error: "",
@@ -160,7 +160,7 @@ export abstract class BaseControl<
   async onChange(e: ChangeEvent) {
     let _value = (e.target as any).value;
     let oldValue = this.value;
-    if (!_value && this.props.defaultValue) {
+    if (_value == undefined && this.props.defaultValue) {
       _value = this.props.defaultValue;
     }
 
