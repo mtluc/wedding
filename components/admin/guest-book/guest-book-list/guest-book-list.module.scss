@@ -36,6 +36,12 @@
                             width: 100%;
                         }
                     }
+
+                    :global(.tool-bar-mobile) {
+                        display: flex;
+                        flex-wrap: wrap;
+                        max-width: 4rem;
+                    }
                 }
             }
         }

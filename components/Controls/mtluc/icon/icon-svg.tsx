@@ -24,7 +24,10 @@ export type IconKeys =
   | "duplicate"
   | "menu"
   | "search"
-  | "filter";
+  | "filter"
+  | "share"
+  | "phone"
+  | "email";
 
 const IconSvg = ({
   iconKeys,
@@ -35,7 +38,7 @@ const IconSvg = ({
 }) => {
   return (
     <svg className={buildClass(["icon-svg", className])}>
-      <use xlinkHref={`/images/icon/sprite.svg?v=20240107112900#${iconKeys}`} />
+      <use xlinkHref={`/images/icon/sprite.svg?v=202401080851#${iconKeys}`} />
     </svg>
   );
 };

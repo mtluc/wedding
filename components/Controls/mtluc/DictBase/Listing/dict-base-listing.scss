@@ -79,7 +79,14 @@
             display: none;
         }
     }
-
+    .tool-bar-mobile{
+        .btn-respon {
+            padding: 0.4rem 0.6rem;
+            .icon-svg {
+                margin-right: 0;
+            }
+        }
+    }
 }
 
 @media (min-width: 920px) {

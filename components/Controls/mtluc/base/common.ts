@@ -340,10 +340,12 @@ export const handlerDocumentKeyDown = (fn: (e: KeyboardEvent) => void) => {
   };
 };
 
-export const fireMouseDown = (
-  el: HTMLElement | Document = document
-) => {
+export const fireMouseDown = (el: HTMLElement | Document = document) => {
   let event = document.createEvent("MouseEvent");
   event.initEvent("mousedown", true, true);
   el.dispatchEvent(event);
+};
+
+export const removeVietnameseTones = (text: string) => {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 };

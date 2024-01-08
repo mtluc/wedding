@@ -495,7 +495,7 @@ abstract class DictBaseListing<
               datas,
               singlePageInfo: {
                 countItem: _data.length as any,
-                totalItem: this.state.singlePageInfo.totalItem - 1 as any,
+                totalItem: (this.state.singlePageInfo.totalItem - 1) as any,
               },
             });
             break;
@@ -625,11 +625,11 @@ abstract class DictBaseListing<
                   this.handlerToolBarClick(e, btn);
                 }, 100);
               }}
+              title={btn.text}
             >
               {btn.iconKey ? (
                 <IconSvg className={btn.iconCls} iconKeys={btn.iconKey} />
               ) : null}
-              <span>{btn.text}</span>
             </button>
           );
         });

@@ -5,10 +5,17 @@ import DictBaseListing, {
 } from "@/components/Controls/mtluc/DictBase/Listing/dict-base-listing";
 import { DictBaseService } from "@/components/Controls/mtluc/DictBase/Service/dict-base.service";
 import { IColumn } from "@/components/Controls/mtluc/Grid/Column/column";
-import { ReactElement } from "react";
+import { MouseEvent, ReactElement } from "react";
 import GuestBookEditor from "../guest-book-editor/guest-book.editor";
 import GuestBookService from "../guest-book.service";
-import classNames from './guest-book-list.module.scss'
+import classNames from "./guest-book-list.module.scss";
+import { IToolbar } from "@/components/Controls/mtluc/base/Itoolbar";
+import { TRUE } from "sass";
+import {
+  handlerRequertException,
+  pushNotification,
+  removeVietnameseTones,
+} from "@/components/Controls/mtluc/base/common";
 
 interface IGuestBookListProps extends IDictBaseListProps {}
 
@@ -25,7 +32,102 @@ class GuestBookList extends DictBaseListing<
   override fieldName: string = "FullName";
   override service: DictBaseService = new GuestBookService();
   override calssWap: string = classNames.wap;
-  
+  override initToolbar(): IToolbar[] {
+    return [
+      ...super.initToolbar(),
+      {
+        id: "PHONE",
+        text: "Gọi",
+        disabled: true,
+        class: "btn btn-phone",
+        iconKey: "phone",
+        responsive: true,
+      },
+      {
+        id: "SHARE",
+        text: "Share",
+        disabled: true,
+        class: "btn btn-share",
+        iconKey: "share",
+        responsive: true,
+      },
+    ];
+  }
+
+  override enableToolBar(currentRow: any) {
+    const toolbars = this.state.toolbars;
+    toolbars.forEach((button) => {
+      switch (button.id) {
+        case "VIEW":
+        case "EDIT":
+        case "DELETE":
+        case "DUPLICATE":
+        case "PHONE":
+        case "SHARE":
+          button.disabled = !currentRow;
+          break;
+      }
+    });
+    this.setState({ toolbars });
+  }
+
+  shareClick = (row: any) => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}`,
+          text: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}!`,
+          url: `https://mtluc.id.vn/thiep-moi-demo/${row.Id}/${removeVietnameseTones(
+            `${row.Relationship} ${row.ShortName}`
+          )
+            .toLowerCase()
+            .replace(/ /gi, "-")}`,
+        })
+        .then(() => {
+          pushNotification({
+            message: "Share thành công!",
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          pushNotification({
+            message: "Share thất bại!",
+            type: "danger",
+          });
+          console.log("Error sharing", error);
+        });
+    } else {
+      console.log("Share not supported on this browser, do it the old way.");
+    }
+  };
+
+  override async handlerToolBarClick(e: MouseEvent, btn: IToolbar) {
+    try {
+      switch (btn.id) {
+        case "PHONE":
+          if (this.state.rowSelected && this.state.rowSelected.row.Phone) {
+            let aTag: HTMLLinkElement | undefined = document.createElement(
+              "a"
+            ) as any as HTMLLinkElement;
+            aTag.href = `tel:${this.state.rowSelected.row.Phone}`;
+            aTag.click();
+            aTag = undefined;
+          }
+          break;
+        case "SHARE":
+          if (this.state.rowSelected && this.state.rowSelected.row) {
+            this.shareClick(this.state.rowSelected.row);
+          }
+          break;
+        default:
+          await super.handlerToolBarClick(e, btn);
+          break;
+      }
+    } catch (error) {
+      handlerRequertException(error);
+    }
+  }
+
   override initColums(): IColumn[] {
     return [
       {
