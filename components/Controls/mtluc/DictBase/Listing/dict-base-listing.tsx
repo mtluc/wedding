@@ -36,11 +36,11 @@ export interface IDictBaseListState {
   isLoading: boolean;
   toolbars: IToolbar[];
   rowSelected:
-  | {
-    row: any;
-    idx: number;
-  }
-  | undefined;
+    | {
+        row: any;
+        idx: number;
+      }
+    | undefined;
   datas: any[];
   columns: IColumn[];
   singlePageInfo: {
@@ -278,7 +278,7 @@ abstract class DictBaseListing<
         disabled: true,
         class: "btn btn-view",
         iconKey: "view",
-        responsive: true
+        responsive: true,
       },
       {
         id: "ADD",
@@ -293,7 +293,7 @@ abstract class DictBaseListing<
         disabled: true,
         class: "btn btn-duplicate",
         iconKey: "duplicate",
-        responsive: true
+        responsive: true,
       },
       {
         id: "EDIT",
@@ -301,7 +301,7 @@ abstract class DictBaseListing<
         disabled: true,
         class: "btn btn-edit",
         iconKey: "edit",
-        responsive: true
+        responsive: true,
       },
       {
         id: "DELETE",
@@ -309,7 +309,7 @@ abstract class DictBaseListing<
         disabled: true,
         class: "btn btn-delete btn-danger",
         iconKey: "delete",
-        responsive: true
+        responsive: true,
       },
       {
         id: "RELOAD",
@@ -397,8 +397,9 @@ abstract class DictBaseListing<
     try {
       if (this.rowSelected?.row) {
         const confirmResult = await pushDialog({
-          content: `Bạn muốn xóa ${this.title?.toLowerCase()} <strong>${this.rowSelected?.row[this.fieldName]
-            }</strong>?`,
+          content: `Bạn muốn xóa ${this.title?.toLowerCase()} <strong>${
+            this.rowSelected?.row[this.fieldName]
+          }</strong>?`,
           type: "question",
           title: "Xác nhận xóa",
         });
@@ -434,10 +435,16 @@ abstract class DictBaseListing<
         const idx = datas.findIndex(
           (x: any) => x[this.fieldId] === actionResult.record[this.fieldId]
         );
+        let _data;
         switch (actionResult.mode) {
           case "ADD":
+            _data = this.localFilter([...datas, actionResult.record]);
             this.setState({
               datas: [...datas, actionResult.record],
+              singlePageInfo: {
+                countItem: _data.length as any,
+                totalItem: (this.state.singlePageInfo.totalItem + 1) as any,
+              },
             });
             this.rowSelected = {
               row: actionResult.record,
@@ -452,10 +459,18 @@ abstract class DictBaseListing<
               };
             }
             datas[idx] = actionResult.record;
-            this.setState({ datas });
+            _data = this.localFilter([...datas]);
+            this.setState({
+              datas,
+              singlePageInfo: {
+                countItem: _data.length as any,
+                totalItem: this.state.singlePageInfo.totalItem,
+              },
+            });
             break;
           case "DELETE":
             datas.splice(idx, 1);
+            _data = this.localFilter([...datas]);
             if (datas.length && idx >= 0) {
               if (idx == 0) {
                 this.rowSelected = {
@@ -476,7 +491,13 @@ abstract class DictBaseListing<
             } else {
               this.rowSelected = undefined;
             }
-            this.setState({ datas });
+            this.setState({
+              datas,
+              singlePageInfo: {
+                countItem: _data.length as any,
+                totalItem: this.state.singlePageInfo.totalItem - 1 as any,
+              },
+            });
             break;
         }
       }
@@ -557,7 +578,7 @@ abstract class DictBaseListing<
           }
         }
       }
-    } catch (error) { }
+    } catch (error) {}
   }
 
   duplicate() {
@@ -584,27 +605,34 @@ abstract class DictBaseListing<
 
   public MobileActions(row: any, rowIdx: number): React.ReactNode {
     if (this.responsiveGrid) {
-      return this.state.toolbars.filter((x) => x.responsive).map((btn, idx) => {
-        return <button
-          key={idx}
-          className={buildClass([btn.class, btn.responsive ? 'btn-respon' : ''])}
-          type="button"
-          onClick={(e) => {
-            this.rowSelected = {
-              idx: rowIdx,
-              row: row,
-            };
-            setTimeout(() => {
-              this.handlerToolBarClick(e, btn);
-            }, 100);
-          }}
-        >
-          {btn.iconKey ? (
-            <IconSvg className={btn.iconCls} iconKeys={btn.iconKey} />
-          ) : null}
-          <span>{btn.text}</span>
-        </button>
-      })
+      return this.state.toolbars
+        .filter((x) => x.responsive)
+        .map((btn, idx) => {
+          return (
+            <button
+              key={idx}
+              className={buildClass([
+                btn.class,
+                btn.responsive ? "btn-respon" : "",
+              ])}
+              type="button"
+              onClick={(e) => {
+                this.rowSelected = {
+                  idx: rowIdx,
+                  row: row,
+                };
+                setTimeout(() => {
+                  this.handlerToolBarClick(e, btn);
+                }, 100);
+              }}
+            >
+              {btn.iconKey ? (
+                <IconSvg className={btn.iconCls} iconKeys={btn.iconKey} />
+              ) : null}
+              <span>{btn.text}</span>
+            </button>
+          );
+        });
     }
     return null;
   }
@@ -612,7 +640,13 @@ abstract class DictBaseListing<
   render() {
     return (
       <>
-        <div className={buildClass([this.calssWap || '', "dict-base-list", this.responsiveGrid ? 'res-mobile' : ''])}>
+        <div
+          className={buildClass([
+            this.calssWap || "",
+            "dict-base-list",
+            this.responsiveGrid ? "res-mobile" : "",
+          ])}
+        >
           {this.state.isLoading ? <Loading /> : null}
           {this.title && this.showTitle ? (
             <div className="title">
@@ -653,7 +687,7 @@ abstract class DictBaseListing<
                         "bt-filter",
                         btn.class,
                         this.state.filters?.length ? "active" : "",
-                        btn.responsive ? 'btn-respon' : ''
+                        btn.responsive ? "btn-respon" : "",
                       ])}
                       type="button"
                       ref={this.btFilterRef}
@@ -671,7 +705,10 @@ abstract class DictBaseListing<
                 return (
                   <button
                     key={idx}
-                    className={buildClass([btn.class, btn.responsive ? 'btn-respon' : ''])}
+                    className={buildClass([
+                      btn.class,
+                      btn.responsive ? "btn-respon" : "",
+                    ])}
                     type="button"
                     onClick={(e) => {
                       this.handlerToolBarClick(e, btn);
