@@ -113,6 +113,7 @@ class TextBox extends BaseControl<ITextBoxProps, IControlState<ITextBoxProps>> {
           onKeyUp={this.onKeyUp.bind(this)}
           onKeyPress={this.onKeyPress.bind(this)}
           autoComplete={this.props.autoComplete || "on"}
+          onMouseDown={this.props.onMouseDown}
         />
         {<span className="invalid-msg">{this.state.error}</span>}
       </>

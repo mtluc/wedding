@@ -78,6 +78,9 @@ const FilterDefaultColumn = ({
               Value: v,
             });
           }}
+          onMouseDown={(e) => {
+            e.stopPropagation();
+          }}
         />
       </td>
     </React.Fragment>

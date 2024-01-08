@@ -397,6 +397,8 @@ export interface IControlProps {
    * @returns
    */
   onValidate?: (value: any) => string;
+
+  onMouseDown?: (e: MouseEvent) => void;
 }
 
 /**

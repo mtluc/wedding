@@ -100,7 +100,6 @@
     width: 100%;
 }
 
-
 .mtl-grid {
     .tool-bar-mobile {
         display: none;
@@ -123,9 +122,6 @@
     }
 }
 
-
-
-
 @media (max-width: 919.99px) {
     .mtl-grid.grid-mobile {
         border-width: 0px;
@@ -139,11 +135,11 @@
         .mtl-grid-body {
             overflow-y: auto;
 
-            &:has(.row-empty) {
-                border-top: 1px solid $border ;
+            &.grid-row-empty {
+                border-top: 1px solid $border;
             }
 
-            .row-empty{
+            .row-empty {
                 display: none;
             }
 
@@ -169,7 +165,7 @@
                     background-color: #d6d6d6;
                 }
 
-                &:has(.row-selected) {
+                &.row-selected {
                     background-color: #f7edc5;
                 }
 
@@ -177,7 +173,6 @@
                     flex-wrap: wrap;
                     border-width: 0;
                     flex: 1;
-
 
                     .mtl-cell-data {
                         border-width: 0;
@@ -217,8 +212,6 @@
                     }
                 }
             }
-
-
         }
     }
 }
