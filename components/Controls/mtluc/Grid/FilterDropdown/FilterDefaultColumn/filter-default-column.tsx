@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import ComboBox from "../../../Form/Combobox/combobox";
 import TextBox from "../../../Form/Textbox/textbox";
 import { IColumn } from "../../Column/column";
 import { IFilter } from "../filter.interface";
+import { fireMouseDown } from "../../../base/common";
 
 export interface IFilterDefaultColumn {
   col: IColumn;
   value?: IFilter;
   onChange?: (v: IFilter) => void;
+  onMouseDown?: (e: MouseEvent) => void;
 }
 
 const operator = [
@@ -33,6 +35,7 @@ const FilterDefaultColumn = ({
   col,
   value,
   onChange,
+  onMouseDown,
 }: IFilterDefaultColumn) => {
   const [filter, setFilter] = useState(value || ({} as IFilter));
   return (
@@ -78,9 +81,7 @@ const FilterDefaultColumn = ({
               Value: v,
             });
           }}
-          onMouseDown={(e) => {
-            e.stopPropagation();
-          }}
+          onMouseDown={onMouseDown}
         />
       </td>
     </React.Fragment>

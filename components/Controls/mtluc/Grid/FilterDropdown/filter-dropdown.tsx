@@ -106,12 +106,20 @@ const FilterDropDown = ({
                 setFilters([...filters]);
               }
             }}
+            onMouseDown={(e) => {
+              e.stopPropagation();
+              fireMouseDown(parentRef.current);
+            }}
           />
         );
     }
   };
   return (
-    <DropDown parentRef={parentRef} isShow={isShow}>
+    <DropDown
+      parentRef={parentRef}
+      isShow={isShow}
+      hideWhenResizeWindow={false}
+    >
       <div className={classNames.wap}>
         <div className={buildClass(["custom-scroll", classNames.list])}>
           <table>
@@ -149,8 +157,8 @@ const FilterDropDown = ({
               fireMouseDown();
             }}
           >
-            <IconSvg iconKeys="close" />
-            <span>Hủy lọc</span>
+            <IconSvg iconKeys="delete" />
+            <span>Xóa bộ lọc</span>
           </button>
         </div>
       </div>

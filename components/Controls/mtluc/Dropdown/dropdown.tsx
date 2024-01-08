@@ -14,6 +14,7 @@ interface DropDownProps {
   isShow: boolean;
   showChange?: (isShow: boolean) => void;
   children?: React.ReactNode;
+  hideWhenResizeWindow?: boolean;
 }
 
 export const DropDown = (props: DropDownProps) => {
@@ -70,15 +71,18 @@ export const DropDown = (props: DropDownProps) => {
         calcCss();
       });
     }
-
+    
     async function _handleWindowScroll(event: Event) {
       if (isShow) {
         await setIsShow(false);
         props.showChange?.(false);
       }
     }
-    document.addEventListener("scroll", _handleWindowScroll);
-    window.addEventListener("resize", _handleWindowScroll);
+    if (props.hideWhenResizeWindow) {
+      document.addEventListener("scroll", _handleWindowScroll);
+      window.addEventListener("resize", _handleWindowScroll);
+    }
+
     return () => {
       document.removeEventListener("scroll", _handleWindowScroll);
       window.removeEventListener("resize", _handleWindowScroll);
@@ -160,4 +164,5 @@ export const DropDown = (props: DropDownProps) => {
 DropDown.defaultProps = {
   isShow: false,
   autoShow: true,
+  hideWhenResizeWindow: true,
 };

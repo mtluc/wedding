@@ -77,23 +77,16 @@ class GuestBookList extends DictBaseListing<
         .share({
           title: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}`,
           text: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}!`,
-          url: `https://mtluc.id.vn/thiep-moi-demo/${row.Id}/${removeVietnameseTones(
-            `${row.Relationship} ${row.ShortName}`
-          )
+          url: `https://mtluc.id.vn/thiep-moi-demo/${
+            row.Id
+          }/${removeVietnameseTones(`${row.Relationship} ${row.ShortName}`)
             .toLowerCase()
             .replace(/ /gi, "-")}`,
         })
         .then(() => {
-          pushNotification({
-            message: "Share thành công!",
-            type: "success",
-          });
+          console.log("Share thành công!");
         })
         .catch((error) => {
-          pushNotification({
-            message: "Share thất bại!",
-            type: "danger",
-          });
           console.log("Error sharing", error);
         });
     } else {
