@@ -1,0 +1,363 @@
+.wap {
+    color: #000;
+    font-family: 'Roboto';
+    line-height: 1.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/background/bg-min.jpg');
+    background-size: cover;
+    background-position: center;
+    --height: 400px;
+    --box-shadow-bottom: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+    --pri-color: #EDAC03;
+    font-size: 1.2rem;
+    overflow: auto;
+
+    &::before {
+        content: "";
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.6);
+        z-index: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+        z-index: 1;
+        position: relative;
+        padding: 2rem 0;
+
+
+        .main {
+            background-color: #fff;
+
+            .box_1 {
+                text-align: center;
+                box-shadow: var(--box-shadow-bottom);
+                height: calc(var(--height) * 80 / 100);
+                position: relative;
+                overflow: hidden;
+                background-image: url('/images/background/bg.jpg');
+                background-size: cover;
+
+                .main_box {
+                    position: absolute;
+                    bottom: 2.5rem;
+                    right: 0;
+                    left: 0;
+
+                    .heading {
+                        font-family: 'Fleur De Leah';
+                        font-size: 4rem;
+                        font-weight: 500;
+                    }
+
+                    .title {
+                        font-size: 1.5rem;
+                        font-family: "WindSong";
+                    }
+
+                    .date {
+                        font-weight: bold;
+                        font-size: 1.2rem;
+                    }
+                }
+
+
+
+            }
+
+            .box_2 {
+                height: calc(var(--height) * 80 / 100);
+                position: relative;
+                overflow: hidden;
+                box-shadow: var(--box-shadow-bottom);
+                background-image: url(/images/background/bca.jpg);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: right bottom;
+
+                .main_box {
+                    position: absolute;
+                    top: 60%;
+                    left: 4rem;
+                    transform: rotateZ(-7deg) translateY(-50%);
+
+
+                    .name1 {
+                        font-family: "WindSong";
+                        font-size: 4.5rem;
+
+                    }
+
+                    .and {
+                        font-family: "WindSong";
+                        font-weight: bold;
+                        font-size: 1.5rem;
+                        margin-left: 16rem;
+                    }
+
+                    .name2 {
+                        font-family: "WindSong";
+                        font-size: 4.5rem;
+                        margin-left: 15rem;
+                    }
+                }
+            }
+
+            .box_3 {
+                position: relative;
+                padding: 2rem;
+                box-shadow: var(--box-shadow-bottom);
+                height: var(--height);
+                overflow: hidden;
+
+                .main_box {
+                    border: 1px solid #dbbc95;
+                    border-radius: 0.6rem;
+                    height: 100%;
+                    padding: 1rem;
+
+                    .lable1 {
+                        font-weight: 600;
+                        text-align: center;
+                        text-transform: uppercase;
+                        margin: 0.4rem 0;
+                    }
+
+                    .customer_name {
+                        margin: 0.4rem auto;
+                        width: 50%;
+                        text-align: center;
+                        border-bottom: 1px dashed #000;
+                        font-family: "Dancing Script";
+                        color: $note-color;
+                        font-weight: bold;
+                        font-size: 1.3rem;
+                    }
+
+                    .lable2 {
+                        text-align: center;
+                        text-transform: uppercase;
+                        font-size: 1rem;
+                        margin: 0.4rem 0;
+                    }
+
+                    .user_main {
+                        text-align: center;
+                        font-family: "Pinyon Script";
+                        color: var(--pri-color);
+
+                        .name {
+                            font-size: 3.2rem;
+                        }
+
+                        .and {
+                            margin: auto 2rem;
+
+                            :global(.icon-svg) {
+                                fill: var(--pri-color);
+                                width: 1.8rem;
+                                height: 1.8rem;
+                            }
+                        }
+                    }
+
+                    .title_at_time {
+                        text-transform: uppercase;
+                        font-size: 1.1rem;
+                        text-align: center;
+                    }
+
+                    .at_time {
+                        text-align: center;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        font-size: 1.1rem;
+                    }
+
+                    .date {
+                        text-align: center;
+                        text-transform: uppercase;
+                        font-weight: bold;
+
+                        span {
+                            vertical-align: middle;
+                        }
+
+                        .day {
+                            font-size: 2.5rem;
+                            padding: 0 0.8rem;
+                            display: inline-block;
+                            border: 0px solid #000;
+                            border-width: 0 1px;
+                            margin: 0 0.8rem;
+                            line-height: 1;
+                            color: var(--pri-color);
+                        }
+                    }
+
+                    .lunar_calendar {
+                        text-align: center;
+                        font-weight: bold;
+                        font-style: italic;
+                    }
+
+                    .address {
+                        width: 65%;
+                        border: 0 dashed #000;
+                        border-width: 1px 0;
+                        margin: auto;
+                        text-align: center;
+                        margin-top: 0.4rem;
+                        padding: 0.4rem 0;
+
+                        .at {
+                            font-weight: bold;
+                            text-transform: uppercase;
+                        }
+
+                        .detail {
+                            font-size: 1.1rem;
+                        }
+                    }
+                }
+            }
+
+            .box_4 {
+                position: relative;
+                padding: 2rem;
+                box-shadow: var(--box-shadow-bottom);
+                height: var(--height);
+                overflow: hidden;
+                background-image: url('/images/background/bca.png');
+                background-repeat: no-repeat;
+                background-position: 3rem 0;
+                background-size: auto 100%;
+
+                .main_box {
+                    border-radius: 0.6rem;
+                    height: 100%;
+                    margin-left: 15%;
+                    text-align: center;
+
+                    .title {
+                        font-family: "Pinyon Script";
+                        color: var(--pri-color);
+                        font-size: 3.2rem;
+                        line-height: 1;
+                    }
+
+                    .at_time {
+                        margin: 1.5rem 0 0.4rem 0;
+                    }
+
+                    .day_of_week {
+                        font-weight: bold;
+                        text-transform: uppercase;
+                    }
+
+                    .date {
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        font-size: 1.6rem;
+                    }
+
+                    .lunar_calendar {
+                        font-weight: bold;
+                        font-style: italic;
+                    }
+
+                    .address {
+                        width: 80%;
+                        border: 0 dashed #000;
+                        border-width: 1px 0;
+                        margin: auto;
+                        text-align: center;
+                        margin-top: 0.4rem;
+                        padding: 0.4rem 0;
+
+                        .at {
+                            font-weight: bold;
+                            text-transform: uppercase;
+                        }
+
+                        .detail {
+                            font-size: 1.1rem;
+                        }
+                    }
+
+                    .thanks {
+                        font-family: "Pinyon Script";
+                        font-size: 2rem;
+                        margin-top: 0.4rem;
+                        font-weight: 500;
+                    }
+
+                    .flex {
+                        display: flex;
+                        margin-top: -1rem;
+
+                        .flex_1 {
+                            flex: 1;
+                        }
+
+                        .group {
+                            margin: 0 6rem;
+                            font-size: 1rem;
+
+                            .group_title {
+                                font-weight: bold;
+                            }
+
+                            .father,
+                            .mother {
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .box_5 {
+                background-color: #fdeeee;
+                height: var(--height);
+                position: relative;
+                overflow: hidden;
+                box-shadow: var(--box-shadow-bottom);
+
+                .main_box {
+                    position: absolute;
+                    bottom: 2rem;
+                    text-align: center;
+                    width: 100%;
+
+                    .title {
+                        text-transform: uppercase;
+                        font-size: 1.1rem;
+                    }
+
+                    .customer_name {
+                        border-bottom: 1px dashed #000;
+                        width: 40%;
+                        margin: auto;
+                        font-family: "Dancing Script";
+                        color: $note-color;
+                        font-weight: bold;
+                        font-size: 1.4rem;
+                        line-height: 1.1;
+                        font-style: italic;
+                        margin-top: 0.4rem;
+                    }
+                }
+            }
+        }
+    }
+}

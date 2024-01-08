@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/google-font-display */
+import { fonts } from "@/components/invitation/font";
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
@@ -13,6 +14,16 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto"
         />
+        {
+          fonts.map((font) => {
+            return <link
+              key={font}
+              rel="stylesheet"
+              href={`https://fonts.googleapis.com/css?family=${font}`}
+            />
+          })
+        }
+
       </Head>
       <body>
         <Main />
