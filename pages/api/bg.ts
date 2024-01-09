@@ -1645,7 +1645,7 @@ export default async function handler(
   // res.setHeader("Content-Length", svg.length);
   // res.status(200).send(svg);
 
-  res.setHeader("Content-Type", "image/png");
-  const image = await svgToImg.from(svg).toPng();
+  res.setHeader("Content-Type", "image/jpeg");
+  const image = await svgToImg.from(svg).toJpeg();
   res.status(200).send(image);
 }
