@@ -39,11 +39,15 @@ export default function Home({ query }: { query: { name: string } }) {
         <meta name="description" content={obj.description} />
         <meta property="og:description" content={obj.description} />
 
+        <meta property="og:url" content="https://mtluc.id.vn" />
+        <link rel="canonical" href={`https://mtluc.id.vn`} />
+
+        <meta property="og:image" content={`/wedding-thumbai/${encodeURIComponent(query.name || "")}`} itemProp="thumbnailUrl"/>
         <meta
+          property="og:image:secure_url"
           content={`/wedding-thumbai/${encodeURIComponent(query.name || "")}`}
-          property="og:image"
-          itemProp="thumbnailUrl"
         />
+        <meta property="og:image:type" content="image/png" />
 
         <meta name="keywords" content="wedding|wedding online" />
       </Head>
