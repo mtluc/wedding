@@ -24,6 +24,8 @@ const nextConfig = {
     cecretCookiePassword: process.env.SECRET_COOKIE_PASSWORD,
     useSessionProxy: process.env.USE_SESSION_PROXY,
     sessionTimeout: process.env.SESSION_TIME_OUT,
+    privateKey: process.env.PRIVATE_KEY,
+    publicKey: process.env.PUBLIC_KEY,
   },
   publicRuntimeConfig: {},
   compress: true,

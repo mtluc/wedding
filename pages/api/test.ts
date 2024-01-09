@@ -4,6 +4,7 @@ import { User } from "@/model/User/User";
 import { UserBl } from "@/model/User/User.Bl";
 import { NextApiRequest, NextApiResponse } from "next";
 import getConfig from "next/config";
+import { decrypt, encrypt } from "@/base/encrypt";
 const { serverRuntimeConfig } = getConfig();
 
 class Api extends BaseApi<UserBl> {
@@ -43,6 +44,14 @@ class Api extends BaseApi<UserBl> {
     } catch (error) {
       this.processError(error);
     }
+  }
+
+  async encrypt() {
+    this.res.status(200).send(encrypt('MTLUC'));
+  }
+
+  async decrypt() {
+    this.res.status(200).send(decrypt('677221eb1ca1ac5aa3d265a1df75210d'));
   }
 }
 
