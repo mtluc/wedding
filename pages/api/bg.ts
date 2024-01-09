@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-const svgToImg = require("svg-to-img");
 const svg2img = require("svg2img");
+const path = require("path");
 
 export default async function handler(
   req: NextApiRequest,
@@ -1645,15 +1645,42 @@ export default async function handler(
     )}</text>
     <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="500" y1="472" x2="780" y2="472" stroke-dasharray="2,5"/>
 </svg>`;
-  // res.setHeader("Content-Type", "image/svg+xml");
-  // res.setHeader("Content-Length", svg.length);
-  // res.status(200).send(svg);
 
-  
-  //   const image = await svgToImg.from(svg).toPng();
-  svg2img(svg, function (error: any, buffer: any) {
-    res.setHeader("Content-Type", "image/png");
-    //returns a Buffer
-    res.status(200).send(buffer);
-  });
+  const fontsPath = `${path.resolve(__dirname).split(".next")[0]}/public/fonts`;
+
+  svg2img(
+    svg,
+    {
+      resvg: {
+        font: {
+          fontFiles: [
+            `${fontsPath}/roboto/Roboto-Black.ttf`,
+            `${fontsPath}/roboto/Roboto-BlackItalic.ttf`,
+            `${fontsPath}/roboto/Roboto-Bold.ttf`,
+            `${fontsPath}/roboto/Roboto-BoldItalic.ttf`,
+            `${fontsPath}/roboto/Roboto-Italic.ttf`,
+            `${fontsPath}/roboto/Roboto-Light.ttf`,
+            `${fontsPath}/roboto/Roboto-LightItalic.ttf`,
+            `${fontsPath}/roboto/Roboto-Medium.ttf`,
+            `${fontsPath}/roboto/Roboto-MediumItalic.ttf`,
+            `${fontsPath}/roboto/Roboto-Regular.ttf`,
+            `${fontsPath}/roboto/Roboto-Thin.ttf`,
+            `${fontsPath}/roboto/Roboto-ThinItalic.ttf`,
+            `${fontsPath}/dancing-script/DancingScript-Bold.ttf`,
+            `${fontsPath}/dancing-script/DancingScript-Medium.ttf`,
+            `${fontsPath}/dancing-script/DancingScript-Regular.ttf`,
+            `${fontsPath}/dancing-script/DancingScript-SemiBold.ttf`,
+          ],
+        },
+      },
+    },
+    function (error: any, buffer: any) {
+      if (error) {
+        res.status(400).send(error);
+      } else {
+        res.setHeader("Content-Type", "image/png");
+        res.status(200).send(buffer);
+      }
+    }
+  );
 }
