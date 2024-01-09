@@ -1638,11 +1638,11 @@ export default async function  handler(req: NextApiRequest, res: NextApiResponse
     }</text>
     <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="500" y1="472" x2="780" y2="472" stroke-dasharray="2,5"/>
 </svg>`;
-  //   res.setHeader("Content-Type", "image/svg+xml");
-  //   res.setHeader("Content-Length", svg.length);
-  //   res.status(200).send(svg);
+    res.setHeader("Content-Type", "image/svg+xml");
+    res.setHeader("Content-Length", svg.length);
+    res.status(200).send(svg);
 
-  res.setHeader("Content-Type", "image/png");
-  const image = await svgToImg.from(svg).toPng();
-  res.status(200).send(image);
+//   res.setHeader("Content-Type", "image/png");
+//   const image = await svgToImg.from(svg).toPng();
+//   res.status(200).send(image);
 }
