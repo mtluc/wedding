@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="533">
+  const svg = `<svg version="1.1" width="1280" height="533">
     <text style="font-size: 13pt" x="50%" y="420" fill="#000000" ominant-baseline="middle" text-anchor="middle">TRÂN TRỌNG KÍNH MỜI</text>
     <text style="font-size: 16pt;font-weight:bold;" x="50%" y="466" fill="red" ominant-baseline="middle" text-anchor="middle">${decodeURIComponent(
       req?.query?.name || ("" as any)
