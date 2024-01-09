@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 const svgToImg = require("svg-to-img");
+const { convert } = require('convert-svg-to-jpeg');
 
 export default async function handler(
   req: NextApiRequest,
@@ -1646,6 +1647,6 @@ export default async function handler(
   // res.status(200).send(svg);
 
   res.setHeader("Content-Type", "image/jpeg");
-  const image = await svgToImg.from(svg).toJpeg();
-  res.status(200).send(image);
+ // const image = await svgToImg.from(svg).toJpeg();
+  res.status(200).send(await convert(svg));
 }
