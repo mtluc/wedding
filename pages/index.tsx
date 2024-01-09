@@ -20,7 +20,7 @@ export default function Home({ query }: { query: { name: string } }) {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>{obj.title}</title>
 
         <meta
           name="viewport"
