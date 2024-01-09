@@ -67,6 +67,10 @@ const nextConfig = {
         destination: "/admin",
       },
       {
+        source: "/wedding-thumbai/:name",
+        destination: "/api/bg?name=:name",
+      },
+      {
         source: "/api/:controler/:action",
         destination: "/api/:controler?action=:action",
       },

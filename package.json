@@ -19,6 +19,7 @@
     "react-dom": "^18",
     "sass": "^1.69.7",
     "sqlite3": "^5.1.7-rc.0",
+    "svg-to-img": "^2.0.9",
     "swr": "^2.0.0"
   },
   "devDependencies": {
