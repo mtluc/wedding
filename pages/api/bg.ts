@@ -1634,7 +1634,7 @@ export default async function  handler(req: NextApiRequest, res: NextApiResponse
     <path d="M0 0 C1.98 0 3.96 0 6 0 C6.66 1.65 7.32 3.3 8 5 C4.63 4.45 2.92 3.95 0 2 C0 1.34 0 0.68 0 0 Z " fill="#F5BCC4" transform="translate(72,0)"/>
     <text style="font-size: 13pt" x="50%" y="420" fill="#000000" ominant-baseline="middle" text-anchor="middle">TRÂN TRỌNG KÍNH MỜI</text>
     <text style="font-size: 16pt;font-weight:bold;" x="50%" y="466" fill="red" ominant-baseline="middle" text-anchor="middle">${
-      req?.query?.name || ""
+        decodeURIComponent(req?.query?.name || "" as any)
     }</text>
     <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="500" y1="472" x2="780" y2="472" stroke-dasharray="2,5"/>
 </svg>`;

@@ -25,7 +25,7 @@ export default function Document() {
         <meta property="og:description" content="wedding" />
 
         <meta
-          content={`/wedding-thumbai/${encodeURIComponent('Bạn Linh 1')}`}
+          content={`/wedding-thumbai/${encodeURIComponent('Lực 123')}`}
           property="og:image"
           itemProp="thumbnailUrl"
         />
