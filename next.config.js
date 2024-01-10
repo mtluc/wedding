@@ -75,14 +75,6 @@ const nextConfig = {
         destination: "/",
       },
       {
-        source: "/api/wedding-thumbai/:name",
-        destination: "/api/bg",
-      },
-      {
-        source: "/wedding-thumbai/:any*",
-        destination: "/api/bg",
-      },
-      {
         source: "/wedding-thumbai/:name",
         destination: "/api/bg",
       },
