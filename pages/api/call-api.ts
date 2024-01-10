@@ -38,7 +38,7 @@ export default async function handler(
     if (resClient.ok) {
       const bold = Buffer.from(await resClient.arrayBuffer());
       Array.from(resClient.headers.keys()).forEach((key) => {
-        if(key == 'Content-Length'){
+        if(key.toLowerCase() == 'content-length'){
             res.setHeader(key, bold.length);
         }else{
             res.setHeader(key, resClient.headers.get(key) || "");
