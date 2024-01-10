@@ -57,6 +57,8 @@ export abstract class BaseApi<T extends BaseBl<any>> {
     } else {
       this.res.status(400).json(error);
     }
+
+    console.log(error);
   }
 
   processMethodNotAllowed() {
