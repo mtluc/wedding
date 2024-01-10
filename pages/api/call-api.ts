@@ -22,6 +22,7 @@ export default async function handler(
     };
 
     httpOption.headers = { ...req.headers };
+    delete httpOption.headers["content-length"];
 
     if ((req.body && req.method == "POST") || req.method == "PUT") {
       if (req.headers["content-type"]?.toLowerCase() == "application/json") {
