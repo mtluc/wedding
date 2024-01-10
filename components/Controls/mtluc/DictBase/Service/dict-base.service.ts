@@ -7,7 +7,7 @@ export abstract class DictBaseService {
    * Lấy danh sách item
    */
   public getDatas() {
-    return httpClient.getJson<any[]>(this.url);
+    return httpClient.getJson<any[]>(httpClient.getUri(this.url));
   }
 
   /**
@@ -16,7 +16,7 @@ export abstract class DictBaseService {
    * @returns
    */
   public addItem(param: any) {
-    return httpClient.postJson<any>(this.url, param);
+    return httpClient.postJson<any>(httpClient.getUri(this.url), param);
   }
 
   /**
@@ -25,7 +25,7 @@ export abstract class DictBaseService {
    * @returns
    */
   public updateItem(param: any) {
-    return httpClient.putJson<any>(this.url, param);
+    return httpClient.putJson<any>(httpClient.getUri(this.url), param);
   }
 
   /**
@@ -34,6 +34,6 @@ export abstract class DictBaseService {
    * @returns
    */
   public deleteItem(id: string) {
-    return httpClient.deleteJson<any>(this.url, { id });
+    return httpClient.deleteJson<any>(httpClient.getUri(this.url), { id });
   }
 }

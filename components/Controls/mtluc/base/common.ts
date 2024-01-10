@@ -1,3 +1,4 @@
+import { IAuth } from "@/base/api/auth";
 import { KeyboardEvent, MutableRefObject, useEffect } from "react";
 
 /**
@@ -197,13 +198,10 @@ export const handlerRequertException = async (ex: any) => {
 
   if (result == "cancel" || result == "close") {
     if (ex.statusCode == 401) {
-      if (location.pathname.indexOf("/admin/") === 0) {
-        location.href = "/admin/login";
-      } else {
-        location.href =
-          "/khach-hang/dang-nhap?forward=" +
-          encodeURIComponent(location.href.replace(location.origin, ""));
-      }
+      localStorage.clear();
+      location.href =
+        "/dang-nhap?forward=" +
+        encodeURIComponent(location.href.replace(location.origin, ""));
     }
   }
   return result;
@@ -348,4 +346,25 @@ export const fireMouseDown = (el: HTMLElement | Document = document) => {
 
 export const removeVietnameseTones = (text: string) => {
   return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+};
+
+export const getQueryUrl = () => {
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  return Object.fromEntries(urlSearchParams.entries());
+};
+
+export const getLocalAuth = () => {
+  try {
+    const authKey = localStorage?.getItem("APP_KEY");
+    if (authKey) {
+      return JSON.parse(decodeURIComponent(atob(authKey))) as IAuth;
+    }
+  } catch (error) {}
+  return undefined;
+};
+
+export const devLog = (msg: any) => {
+  if (process.env.NODE_ENV == "development") {
+    console.log(msg);
+  }
 };

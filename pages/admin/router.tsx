@@ -136,14 +136,17 @@ const ProtectedAuth = ({
   checkAd?: boolean;
 }) => {
   const ctx = useAppStore();
+  console.log(ctx);
   if (
-    !ctx.isSession ||
-    !ctx?.user?.UserName ||
-    (checkAd && ctx?.user?.UserName != "MTLUC")
+    !ctx.auth ||
+    !ctx.auth.expiredAt ||
+    ctx.auth.expiredAt < new Date().getTime() ||
+    !ctx.auth.user?.UserName ||
+    (checkAd && ctx?.auth?.role != "ADMIN")
   ) {
-    location.href =
-      "/dang-nhap?forward=" +
-      encodeURIComponent(location.href.replace(location.origin, ""));
+    // location.href =
+    //   "/dang-nhap?forward=" +
+    //   encodeURIComponent(location.href.replace(location.origin, ""));
     return <></>;
   }
   return <>{children}</>;

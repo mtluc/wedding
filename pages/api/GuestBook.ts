@@ -1,8 +1,6 @@
 import { DictBaseApi } from "@/base/api/dict-base-api";
-import { getIronOptions } from "@/base/session";
 import { GuestBook } from "@/model/GuestBook/GuestBook";
 import { GuestBookBl } from "@/model/GuestBook/GuestBook.Bl";
-import { withIronSessionApiRoute } from "iron-session/next";
 import { NextApiRequest, NextApiResponse } from "next";
 
 class Api extends DictBaseApi<GuestBookBl> {
@@ -11,9 +9,6 @@ class Api extends DictBaseApi<GuestBookBl> {
   }
 }
 
-export default withIronSessionApiRoute(
-  async (req: NextApiRequest, res: NextApiResponse) => {
-    new Api(req, res).run();
-  },
-  getIronOptions()
-);
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  new Api(req, res).run();
+}

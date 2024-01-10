@@ -1,14 +1,12 @@
-import { User } from "@/model/User/User";
+import { IAuth } from "@/base/api/auth";
 import { Dispatch, SetStateAction, createContext, useContext } from "react";
 
 export interface IAppContext {
-  user?: User;
-  setUser?: Dispatch<SetStateAction<User>>;
-  isSession: Boolean;
+  auth?: IAuth;
+  setAuth?: Dispatch<SetStateAction<IAuth>>;
 }
 const AppContext = createContext({
-  user: undefined,
-  isSession: false,
+  auth: undefined,
 } as IAppContext);
 export default AppContext;
 

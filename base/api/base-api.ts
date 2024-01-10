@@ -1,12 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { BaseBl } from "../Bl/base-bl";
 import { ISession } from "../session";
+import { Auth, IAuth } from "./auth";
 
 export abstract class BaseApi<T extends BaseBl<any>> {
   query: any;
   body: any;
   action?: string;
   session?: ISession;
+  auth!: IAuth;
 
   constructor(
     public req: NextApiRequest,
@@ -17,16 +19,20 @@ export abstract class BaseApi<T extends BaseBl<any>> {
     this.body = req.body;
     this.action = (req.query?.action as string)?.toLowerCase();
     this.session = this.req?.session as any as ISession;
-    _bl.session = this.session;
   }
 
-  protected checkAuth() {
+  protected checkAuthSession() {
     if (!this.session?.user?.FullName) {
       throw {
         code: "unauth",
         message: "Phiên làm việc hết hạn",
       };
     }
+  }
+
+  protected checkAuth() {
+    this.auth = Auth.getToken(this.req.headers.authorization || "");
+    this._bl.auth = this.auth;
   }
 
   async get() {

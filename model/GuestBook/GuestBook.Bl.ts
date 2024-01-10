@@ -8,14 +8,14 @@ export class GuestBookBl extends BaseBl<GuestBook> {
   async getById(id: any) {
     return await this.dbContext.get<GuestBook>(
       `SELECT * FROM ${this._tableName} WHERE ${this._idField} = ? AND UserName = ?;`,
-      [id, this.session?.user?.UserName]
+      [id, this.auth?.user?.UserName]
     );
   }
 
   async getAll() {
     return await this.dbContext.getAll<GuestBook>(
       `SELECT * FROM ${this._tableName} WHERE UserName = ?;`,
-      [this.session?.user?.UserName]
+      [this.auth?.user?.UserName]
     );
   }
 
@@ -35,7 +35,7 @@ export class GuestBookBl extends BaseBl<GuestBook> {
       case "UPDATE":
         break;
     }
-    obj.UserName = this.session?.user?.UserName || obj.UserName;
+    obj.UserName = this.auth?.user?.UserName || obj.UserName;
     if (obj.GuestDate) {
       obj.GuestDate = new Date(Date.parse(obj.GuestDate?.toString()));
     }

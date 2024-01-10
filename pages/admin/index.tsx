@@ -1,23 +1,13 @@
-import { ISession, withSessionSsr } from "@/base/session";
-import { User } from "@/model/User/User";
+import { IAuth } from "@/base/api/auth";
+import { getLocalAuth } from "@/components/Controls/mtluc/base/common";
 import AppContext from "@/store/app-context";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes } from "react-router-dom";
 import { genRouter, routers } from "./router";
 
-export const getServerSideProps = withSessionSsr(async ({ req, res }) => {
-  const session = req.session as any as ISession;
-
-  return {
-    props: {
-      session: session,
-    },
-  };
-});
-
-const AdminPage: NextPage = (props: { session?: ISession }) => {
-  const [user, setUser] = useState(props.session?.user as User);
+const AdminPage: NextPage = () => {
+  const [auth, setAuthen] = useState(getLocalAuth() || ({} as IAuth));
   const [isRender, setIsRender] = useState(false);
   useEffect(() => {
     setIsRender(true);
@@ -25,9 +15,8 @@ const AdminPage: NextPage = (props: { session?: ISession }) => {
   return (
     <AppContext.Provider
       value={{
-        user: user,
-        setUser: setUser,
-        isSession: user?.UserName ? true : false,
+        auth: auth,
+        setAuth: setAuthen,
       }}
     >
       {isRender ? (

@@ -1,4 +1,3 @@
-import { httpClient } from "@/base/httpClient";
 import {
   buildClass,
   handlerRequertException,
@@ -20,7 +19,7 @@ const NavBar = ({
     try {
       e.preventDefault();
       setAppLoading(true);
-      await httpClient.getJson(`/api/system/logout?v=${new Date().toJSON()}`);
+      localStorage.clear();
       location.href = "/dang-nhap";
     } catch (error) {
       handlerRequertException(error);
@@ -41,7 +40,7 @@ const NavBar = ({
         </div>
         <div className={classNames.user_info}>
           <div className={classNames.title}>Xin chào</div>
-          <div className={classNames.user_name}>{ctx.user?.FullName}</div>
+          <div className={classNames.user_name}>{ctx.auth?.user?.FullName}</div>
         </div>
         <button className={classNames.btn_close_nav} onClick={onHideNav}>
           <IconSvg iconKeys="close" />
@@ -117,7 +116,7 @@ const NavBar = ({
           </NavLink>
         </div>
 
-        {ctx.user?.UserName == "MTLUC" ? (
+        {ctx.auth?.role == "ADMIN" ? (
           <div className={classNames.group}>
             <div className={classNames.group_name}>Hệ thống</div>
 

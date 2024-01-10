@@ -25,9 +25,11 @@ const nextConfig = {
     useSessionProxy: process.env.USE_SESSION_PROXY,
     sessionTimeout: process.env.SESSION_TIME_OUT,
     privateKey: process.env.PRIVATE_KEY,
-    publicKey: process.env.PUBLIC_KEY,
+    tokenExpire: process.env.TOKEN_EXPIRE,
   },
-  publicRuntimeConfig: {},
+  publicRuntimeConfig: {
+    rootApi: process.env.ROOT_API,
+  },
   compress: true,
   reactStrictMode: false,
   swcMinify: true,
@@ -74,11 +76,19 @@ const nextConfig = {
       },
       {
         source: "/wedding-thumbai/:name",
-        destination: "/api/bg?name=:name",
+        destination: "/api/bg",
       },
       {
         source: "/wedding-thumbai/:any*",
         destination: "/api/bg",
+      },
+      {
+        source: "/service/:url*",
+        destination: "/api/call-api",
+      },
+      {
+        source: "/service1/:url*",
+        destination: "/api/file/route",
       },
       {
         source: "/api/:controler/:action",

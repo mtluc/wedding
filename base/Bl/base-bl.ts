@@ -1,10 +1,9 @@
+import { IAuthData } from "../api/auth";
 import { DbContext } from "../model/dbcontext/dbcontext";
-import { ISession } from "../session";
 
 export abstract class BaseBl<T extends object> {
   dbContext!: DbContext;
-
-  session?: ISession;
+  auth?: IAuthData;
   abstract _tableName: string;
   abstract _idField: string;
   protected activator: () => T;

@@ -47,11 +47,13 @@ class Api extends BaseApi<UserBl> {
   }
 
   async encrypt() {
-    this.res.status(200).send(encrypt('MTLUC'));
+    this.res.status(200).send(encrypt(this.query.text));
   }
 
   async decrypt() {
-    this.res.status(200).send(decrypt('677221eb1ca1ac5aa3d265a1df75210d'));
+    this.res.status(200).json({
+      value: decrypt(this.query.text),
+    });
   }
 }
 

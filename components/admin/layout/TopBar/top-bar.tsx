@@ -44,7 +44,7 @@ const TopBar = ({
     try {
       e.preventDefault();
       setAppLoading(true);
-      await httpClient.getJson(`/api/system/logout?v=${new Date().toJSON()}`);
+      localStorage.clear();
       location.href = "/dang-nhap";
     } catch (error) {
       handlerRequertException(error);
@@ -74,7 +74,7 @@ const TopBar = ({
         <button ref={btnUserRef} className={classNames.btn_user} type="button">
           <IconSvg className={classNames.icon_user} iconKeys="user" />
           <span className={classNames.user_name}>
-            {ctx?.user?.FullName || "User name"}
+            {ctx?.auth?.user?.FullName || "User name"}
           </span>
         </button>
         <DropDown parentRef={btnUserRef}>

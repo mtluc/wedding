@@ -1,6 +1,36 @@
-import { parseObjectToQueryString } from "@/components/Controls/mtluc/base/common";
+import {
+  getLocalAuth,
+  parseObjectToQueryString,
+} from "@/components/Controls/mtluc/base/common";
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
+
+const setAuth = (httpOption: any) => {
+  if (window && httpOption) {
+    const auth = getLocalAuth();
+    if (
+      auth &&
+      auth.token &&
+      auth.expiredAt &&
+      auth.expiredAt > new Date().getTime()
+    ) {
+      httpOption.headers.Authorization = `${auth.tokenType} ${auth?.token}`;
+    }
+  }
+};
 
 export const httpClient = {
+  getUri: (url: string) => {
+    console.log(location.origin, publicRuntimeConfig.rootApi);
+    if (location.host != publicRuntimeConfig.rootApi) {
+      return `${publicRuntimeConfig.rootApi}/service${url.replace(
+        /^\/api/,
+        ""
+      )}`;
+    }
+    return url;
+  },
+
   getJson: async <T>(url: string, param?: any, headers?: any) => {
     let uri = url;
     if (param) {
@@ -26,6 +56,8 @@ export const httpClient = {
         ...headers,
       };
     }
+
+    setAuth(httpOption);
 
     const res = await fetch(uri, httpOption);
     if (res.ok) {
@@ -61,7 +93,7 @@ export const httpClient = {
         ...headers,
       };
     }
-
+    setAuth(httpOption);
     const res = await fetch(uri, httpOption);
     if (res.ok) {
       return {
@@ -97,6 +129,7 @@ export const httpClient = {
       };
     }
 
+    setAuth(httpOption);
     const res = await fetch(uri, httpOption);
     if (res.ok) {
       return {
@@ -133,6 +166,7 @@ export const httpClient = {
       };
     }
 
+    setAuth(httpOption);
     const res = await fetch(uri, httpOption);
     if (res.ok) {
       return {

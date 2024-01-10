@@ -1,46 +1,61 @@
-import { NextPage } from "next";
-import Head from "next/head";
-import classNames from "./index.module.scss";
-import Form from "@/components/Controls/mtluc/Form/form";
+import { IAuth } from "@/base/api/auth";
+import { httpClient } from "@/base/httpClient";
 import TextBox from "@/components/Controls/mtluc/Form/Textbox/textbox";
-import { FormEvent, useEffect, useState } from "react";
+import Form from "@/components/Controls/mtluc/Form/form";
 import {
+  getLocalAuth,
+  getQueryUrl,
   handlerRequertException,
   setAppLoading,
 } from "@/components/Controls/mtluc/base/common";
-import { httpClient } from "@/base/httpClient";
-import { User } from "@/model/User/User";
-import { ISession, withSessionSsr } from "@/base/session";
+import { NextPage } from "next";
+import Head from "next/head";
+import { FormEvent, useEffect, useState } from "react";
+import classNames from "./index.module.scss";
 
-export const getServerSideProps = withSessionSsr(
-  async ({ req, res, query }) => {
-    const session = req.session as any as ISession;
-    return {
-      props: {
-        session: session || null,
-        query: query || null,
-      },
-    };
-  }
-);
-const LoginPage: NextPage = (props: { session?: ISession; query?: any }) => {
+const LoginPage: NextPage = () => {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    if (props.session?.user?.UserName) {
-      location.href = props.query?.forward || "/admin";
+    const auth = getLocalAuth();
+    const { forward } = getQueryUrl();
+    if (
+      auth?.expiredAt &&
+      auth?.token &&
+      auth.expiredAt > new Date().getTime()
+    ) {
+      location.href = forward || "/admin";
     } else {
       setShow(true);
     }
-  }, [props?.query, props.session?.user?.UserName]);
+  }, []);
 
   const handlerSubmit = async (e: FormEvent, value: any) => {
     e.preventDefault();
     try {
       setAppLoading(true);
-      const res = await httpClient.postJson<User>("/api/system/login", {
-        ...value,
-      });
-      location.href = props.query?.forward || "/admin";
+      const { forward } = getQueryUrl();
+      const res = await httpClient.postJson<IAuth>(
+        httpClient.getUri("/api/system/login"),
+        {
+          ...value,
+        }
+      );
+      localStorage.setItem(
+        "APP_KEY",
+        btoa(encodeURIComponent(JSON.stringify(res?.data)))
+      );
+      localStorage.setItem(
+        "TOKEN",
+        btoa(
+          JSON.stringify(
+            res?.data.token
+              ?.split(".")?.[1]
+              ?.replace(/a/gi, "f")
+              .replace(/g/gi, "k")
+          )
+        )
+      );
+      location.href = forward || "/admin";
     } catch (error: any) {
       handlerRequertException(error);
     } finally {

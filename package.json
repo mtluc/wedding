@@ -10,8 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/crypto-js": "^4.2.1",
     "@vercel/postgres": "^0.5.1",
     "crypto": "^1.0.1",
+    "crypto-js": "^4.2.0",
     "iron-session": "^6.3.1",
     "loader-utils": "^3.2.1",
     "md5": "^2.3.0",
