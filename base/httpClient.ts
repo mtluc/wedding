@@ -21,8 +21,7 @@ const setAuth = (httpOption: any) => {
 
 export const httpClient = {
   getUri: (url: string) => {
-    console.log(location.origin, publicRuntimeConfig.rootApi);
-    if (location.host != publicRuntimeConfig.rootApi) {
+    if (location.origin != publicRuntimeConfig.rootApi) {
       return `${publicRuntimeConfig.rootApi}/service${url.replace(
         /^\/api/,
         ""
