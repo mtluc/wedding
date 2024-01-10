@@ -36,10 +36,14 @@ export default async function handler(
     devLog(url);
 
     if (resClient.ok) {
-      Array.from(resClient.headers.keys()).forEach((key) => {
-        res.setHeader(key, resClient.headers.get(key) || "");
-      });
       const bold = Buffer.from(await resClient.arrayBuffer());
+      Array.from(resClient.headers.keys()).forEach((key) => {
+        if(key == 'Content-Length'){
+            res.setHeader(key, bold.length);
+        }else{
+            res.setHeader(key, resClient.headers.get(key) || "");
+        }
+      });
       res.status(200).send(bold);
     } else {
       console.error("error", url);
