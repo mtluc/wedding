@@ -144,9 +144,9 @@ const ProtectedAuth = ({
     !ctx.auth.user?.UserName ||
     (checkAd && ctx?.auth?.role != "ADMIN")
   ) {
-    // location.href =
-    //   "/dang-nhap?forward=" +
-    //   encodeURIComponent(location.href.replace(location.origin, ""));
+    location.href =
+      "/dang-nhap?forward=" +
+      encodeURIComponent(location.href.replace(location.origin, ""));
     return <></>;
   }
   return <>{children}</>;
