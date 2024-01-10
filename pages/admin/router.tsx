@@ -136,7 +136,6 @@ const ProtectedAuth = ({
   checkAd?: boolean;
 }) => {
   const ctx = useAppStore();
-  console.log(ctx);
   if (
     !ctx.auth ||
     !ctx.auth.expiredAt ||
