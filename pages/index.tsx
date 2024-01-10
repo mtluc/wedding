@@ -42,7 +42,7 @@ export default function Home({ query }: { query: { name: string } }) {
         <meta property="og:url" content="https://mtluc.id.vn" />
         <link rel="canonical" href={`https://mtluc.id.vn`} />
 
-        <meta property="og:image" content={`/wedding-thumbai/${encodeURIComponent(query.name || "")}`} itemProp="thumbnailUrl"/>
+        <meta property="og:image" content={`/service/wedding-thumbai/${encodeURIComponent(query.name || "")}`} itemProp="thumbnailUrl"/>
         <meta
           property="og:image:secure_url"
           content={`/wedding-thumbai/${encodeURIComponent(query.name || "")}`}
