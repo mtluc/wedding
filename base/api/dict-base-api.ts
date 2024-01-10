@@ -46,9 +46,27 @@ export abstract class DictBaseApi<T extends BaseBl<any>> extends BaseApi<T> {
     try {
       this.checkAuth();
       const data = await this._bl.getById(this.query.id);
-      this.res.status(200).json(data);
+      this.res.status(200).json(data || null);
     } catch (error) {
       this.processError(error);
     }
+  }
+
+  override run() {
+    if (this.action) {
+      console.log(this.query.id, this.action);
+      const actionName = [
+        ...Object.getOwnPropertyNames(DictBaseApi.prototype),
+      ].find(
+        (x) =>
+          typeof (this as any)[x] == "function" &&
+          x.toLowerCase() == this.action
+      );
+      if (actionName) {
+        (this as any)[actionName]();
+        return;
+      }
+    }
+    super.run();
   }
 }

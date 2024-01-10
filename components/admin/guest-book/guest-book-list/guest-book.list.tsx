@@ -5,17 +5,22 @@ import DictBaseListing, {
 } from "@/components/Controls/mtluc/DictBase/Listing/dict-base-listing";
 import { DictBaseService } from "@/components/Controls/mtluc/DictBase/Service/dict-base.service";
 import { IColumn } from "@/components/Controls/mtluc/Grid/Column/column";
-import { MouseEvent, ReactElement } from "react";
+import { IToolbar } from "@/components/Controls/mtluc/base/Itoolbar";
+import {
+  formatNumber,
+  handlerRequertException,
+  pushDialog,
+  removeVietnameseTones,
+} from "@/components/Controls/mtluc/base/common";
+import AppContext, { IAppContext } from "@/store/app-context";
+import { JSX, MouseEvent, ReactElement } from "react";
 import GuestBookEditor from "../guest-book-editor/guest-book.editor";
 import GuestBookService from "../guest-book.service";
 import classNames from "./guest-book-list.module.scss";
-import { IToolbar } from "@/components/Controls/mtluc/base/Itoolbar";
-import { TRUE } from "sass";
-import {
-  handlerRequertException,
-  pushNotification,
-  removeVietnameseTones,
-} from "@/components/Controls/mtluc/base/common";
+import WeddingService from "../../wedding/wedding.service";
+import { Wedding } from "@/model/Wedding/wedding";
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 
 interface IGuestBookListProps extends IDictBaseListProps {}
 
@@ -26,6 +31,12 @@ class GuestBookList extends DictBaseListing<
   IGuestBookListState,
   GuestBookEditor
 > {
+  static contextType = AppContext;
+
+  get ctx() {
+    return this.context as IAppContext;
+  }
+
   override title: string = "Khách mời";
   override showTitle: boolean = false;
   override fieldId: string = "Id";
@@ -45,7 +56,7 @@ class GuestBookList extends DictBaseListing<
       },
       {
         id: "SHARE",
-        text: "Share",
+        text: "Gửi",
         disabled: true,
         class: "btn btn-share",
         iconKey: "share",
@@ -71,26 +82,59 @@ class GuestBookList extends DictBaseListing<
     this.setState({ toolbars });
   }
 
-  shareClick = (row: any) => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}`,
-          text: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}!`,
-          url: `https://mtluc.id.vn/thiep-moi-demo/${
-            row.Id
-          }/${removeVietnameseTones(`${row.Relationship} ${row.ShortName}`)
-            .toLowerCase()
-            .replace(/ /gi, "-")}`,
-        })
-        .then(() => {
-          console.log("Share thành công!");
-        })
-        .catch((error) => {
-          console.log("Error sharing", error);
-        });
-    } else {
-      console.log("Share not supported on this browser, do it the old way.");
+  shareClick = async (row: any) => {
+    try {
+      if (navigator.share) {
+        this.setLoading(false);
+        const res = await new WeddingService().getById(
+          this.ctx.auth?.user?.UserName
+        );
+
+        if ((res?.data as any as Wedding)?.GroomName) {
+          navigator
+            .share({
+              title: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}`,
+              text: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}!`,
+              url: `${
+                publicRuntimeConfig.shareHost
+              }/thiep-moi/${removeVietnameseTones(
+                `${row.Relationship} ${row.ShortName}`
+              )
+                .toLowerCase()
+                .replace(/ /gi, "-")}/${btoa(
+                encodeURIComponent(
+                  JSON.stringify({
+                    id: row.Id,
+                    user: this.ctx.auth?.user?.UserName,
+                  })
+                )
+              )}`,
+            })
+            .then(() => {
+              console.log("Gửi thành công!");
+            })
+            .catch((error) => {
+              console.log("Error sharing", error);
+            });
+        } else {
+          pushDialog({
+            title: "Thông báo",
+            type: "question",
+            content:
+              "Bạn chưa câp nhật thông tin lễ cưới. Cập nhật ngay để gửi thiệp mời?",
+          }).then((x) => {
+            if (x == "accept") {
+              location.href = "/admin/thong-tin-le-cuoi";
+            }
+          });
+        }
+      } else {
+        console.log("Share not supported on this browser, do it the old way.");
+      }
+    } catch (error) {
+      handlerRequertException(error);
+    } finally {
+      this.setLoading(false);
     }
   };
 
@@ -202,6 +246,19 @@ class GuestBookList extends DictBaseListing<
         ref={this.detailRef}
         actionResult={this.handlerActionResult.bind(this)}
       />
+    );
+  }
+  override renderOtherHeader(): JSX.Element {
+    let amount = 0;
+    this.state?.datas?.forEach((x) => {
+      if (x.Amount) {
+        amount += x.Amount;
+      }
+    });
+    return (
+      <div className={classNames.total_amount}>
+        Tiền mừng: <strong>{formatNumber(amount, 0)}đ</strong>
+      </div>
     );
   }
 }

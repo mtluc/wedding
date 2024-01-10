@@ -11,6 +11,15 @@ export abstract class DictBaseService {
   }
 
   /**
+   * Lấy danh sách item
+   */
+  public getById(id: any) {
+    return httpClient.getJson<any[]>(httpClient.getUri(`${this.url}/getById`), {
+      id: id,
+    });
+  }
+
+  /**
    * Thêm mới 1 bản ghi
    * @param param
    * @returns

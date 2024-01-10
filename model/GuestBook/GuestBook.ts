@@ -12,4 +12,6 @@ export class GuestBook {
   IsConfirmBus: boolean = false;
   IsConfirm: boolean = false;
   UserName: string = "";
+  Amount: number = 0;
+  ConvertDay: string = "";
 }

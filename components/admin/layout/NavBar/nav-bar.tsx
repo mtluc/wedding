@@ -68,11 +68,11 @@ const NavBar = ({
 
           <NavLink
             className={classNames.nav_item}
-            to={"/admin/thong-tin-thiep-cuoi"}
+            to={"/admin/thong-tin-le-cuoi"}
             onClick={onHideNav}
           >
             <IconSvg iconKeys="invitation" />
-            <span>Thông tin thiệp cưới</span>
+            <span>Thông tin lễ cưới</span>
           </NavLink>
 
           <NavLink

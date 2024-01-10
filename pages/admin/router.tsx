@@ -16,9 +16,11 @@ export const routers: IAppRout[] = [
         element: <EmptyRow title="Trống" />,
       },
       {
-        path: "thong-tin-thiep-cuoi",
-        name: "Thông tin thiệp cưới",
-        element: <EmptyRow title="Trống" />,
+        path: "thong-tin-le-cuoi",
+        name: "Thông tin lễ cưới",
+        elementLazy: lazy(
+          () => import("./../../components/admin/wedding/wedding")
+        ),
       },
       {
         path: "danh-sach-khach-moi",

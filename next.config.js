@@ -29,6 +29,7 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     rootApi: process.env.ROOT_API,
+    shareHost: process.env.SHARE_HOST,
   },
   compress: true,
   reactStrictMode: false,
@@ -69,6 +70,10 @@ const nextConfig = {
       {
         source: "/admin/:any*",
         destination: "/admin",
+      },
+      {
+        source: "/thiep-moi/:name/:param",
+        destination: "/wedding?param=:param",
       },
       {
         source: "/template/:any*",

@@ -1,0 +1,93 @@
+.wap {
+    display: flex;
+    overflow: hidden;
+    height: 100%;
+
+    .from {
+        flex: 1;
+        min-width: 60rem;
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 100%;
+
+            .controls {
+                flex: 1;
+                height: 100%;
+                padding: 1rem;
+                margin: auto;
+
+                :global(.mtl-control) {
+                    label {
+                        width: 8rem;
+                    }
+
+                    .time {
+                        display: flex;
+                        align-items: center;
+                        position: relative;
+
+                        :global(.invalid-msg) {
+                            bottom: -0.8rem;
+                        }
+                    }
+                }
+
+                fieldset {
+                    margin: 1rem;
+                    padding: 0.6rem;
+                    display: block;
+                    border: 1px solid $border-color;
+                    border-radius: 0.4rem;
+                    position: relative;
+
+                    legend {
+                        display: block;
+                        background-color: $background-color;
+                        position: absolute;
+                        padding: 0.4rem 0.6rem;
+                        left: 0.6rem;
+                        top: 0;
+                        transform: translateY(-50%);
+                    }
+
+                    :global(.mtl-control) {
+                        label {
+                            width: 6.5rem;
+                        }
+                    }
+                }
+            }
+
+            .tool_bar {
+                text-align: center;
+                border-top: 1px solid $border-color;
+                button {
+                    min-width: 8rem;
+                    margin: 0.6rem;
+                }
+            }
+        }
+    }
+
+    .preview {
+        flex: 1;
+        height: 100%;
+        position: relative;
+        box-shadow: $box-shadow;
+        overflow-x: hidden;
+
+        .invitation {
+            position: relative;
+            width: 700px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.68);
+
+            &::before {
+                position: absolute;
+            }
+        }
+    }
+}

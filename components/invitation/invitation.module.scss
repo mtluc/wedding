@@ -1,18 +1,14 @@
 .wap {
     color: #000;
-    font-family: 'Roboto';
+    font-family: "Roboto";
     line-height: 1.5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/images/background/bg-min.jpg');
+
+    background-image: url("/images/background/bg-min.jpg");
     background-size: cover;
     background-position: center;
-    --height: 400px;
+    --height: auto;
     --box-shadow-bottom: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
-    --pri-color: #EDAC03;
+    --pri-color: #edac03;
     font-size: 1.2rem;
     overflow: auto;
 
@@ -23,6 +19,8 @@
         height: 100%;
         top: 0;
         left: 0;
+        right: 0;
+        bottom: 0;
         background-color: rgba(255, 255, 255, 0.6);
         z-index: 0;
     }
@@ -32,8 +30,6 @@
         margin: auto;
         z-index: 1;
         position: relative;
-        padding: 2rem 0;
-
 
         .main {
             background-color: #fff;
@@ -41,92 +37,99 @@
             .box_1 {
                 text-align: center;
                 box-shadow: var(--box-shadow-bottom);
-                height: calc(var(--height) * 80 / 100);
                 position: relative;
                 overflow: hidden;
-                background-image: url('/images/background/bg.jpg');
+                background-image: url("/images/background/bg.jpg");
                 background-size: cover;
+                background-position: center;
 
                 .main_box {
-                    position: absolute;
-                    bottom: 2.5rem;
-                    right: 0;
-                    left: 0;
+                    padding-top: 8rem;
+                    padding-bottom: 1.5rem;
 
                     .heading {
-                        font-family: 'Fleur De Leah';
-                        font-size: 4rem;
+                        font-family: "Fleur De Leah";
+                        font-size: 3.5rem;
                         font-weight: 500;
                     }
 
                     .title {
-                        font-size: 1.5rem;
+                        font-size: 1.1rem;
                         font-family: "WindSong";
+                        font-weight: $font-bold;
                     }
 
                     .date {
                         font-weight: bold;
-                        font-size: 1.2rem;
+                        font-size: 1.1rem;
                     }
                 }
-
-
-
             }
 
             .box_2 {
-                height: calc(var(--height) * 80 / 100);
                 position: relative;
                 overflow: hidden;
-                box-shadow: var(--box-shadow-bottom);
+                box-shadow: $box-shadow;
                 background-image: url(/images/background/bca.jpg);
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: right bottom;
+                margin: 0.2rem 0;
+
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba($color: $background-color, $alpha: 0.8);
+                }
 
                 .main_box {
-                    position: absolute;
-                    top: 60%;
-                    left: 4rem;
-                    transform: rotateZ(-7deg) translateY(-50%);
-
+                    padding: 2rem;
+                    position: relative;
+                    color: $note-color;
+                    z-index: 1;
+                    white-space: nowrap;
+                    margin: auto;
+                    max-width: 30rem;
 
                     .name1 {
                         font-family: "WindSong";
-                        font-size: 4.5rem;
-
+                        font-size: 3.5rem;
+                        text-align: left;
                     }
 
                     .and {
                         font-family: "WindSong";
                         font-weight: bold;
                         font-size: 1.5rem;
-                        margin-left: 16rem;
+                        text-align: center;
                     }
 
                     .name2 {
                         font-family: "WindSong";
-                        font-size: 4.5rem;
-                        margin-left: 15rem;
+                        font-size: 3.5rem;
+                        text-align: right;
                     }
                 }
             }
 
             .box_3 {
                 position: relative;
-                padding: 2rem;
+                padding: 2rem 1rem;
                 box-shadow: var(--box-shadow-bottom);
-                height: var(--height);
                 overflow: hidden;
 
                 .main_box {
                     border: 1px solid #dbbc95;
                     border-radius: 0.6rem;
-                    height: 100%;
                     padding: 1rem;
 
                     .lable1 {
-                        font-weight: 600;
+                        font-weight: $font-bold;
                         text-align: center;
                         text-transform: uppercase;
                         margin: 0.4rem 0;
@@ -147,25 +150,39 @@
                         text-align: center;
                         text-transform: uppercase;
                         font-size: 1rem;
-                        margin: 0.4rem 0;
+                        margin: 0.6rem 0;
                     }
 
                     .user_main {
                         text-align: center;
                         font-family: "Pinyon Script";
                         color: var(--pri-color);
+                        margin: auto;
+                        max-width: 30rem;
 
-                        .name {
-                            font-size: 3.2rem;
+                        .name,
+                        .name2 {
+                            font-size: 2.8rem;
+                            display: block;
+                            text-align: left;
+                            transform: translateX(10%);
+                        }
+
+                        .name2 {
+                            text-align: right;
+                            margin-right: 2rem;
+                            transform: translateX(-10%);
                         }
 
                         .and {
-                            margin: auto 2rem;
+                            display: block;
+                            margin: auto 1.5rem;
+                            text-align: center;
 
                             :global(.icon-svg) {
                                 fill: var(--pri-color);
-                                width: 1.8rem;
-                                height: 1.8rem;
+                                width: 1.2rem;
+                                height: 1.2rem;
                             }
                         }
                     }
@@ -174,26 +191,28 @@
                         text-transform: uppercase;
                         font-size: 1.1rem;
                         text-align: center;
+                        margin-top: 1rem;
                     }
 
                     .at_time {
                         text-align: center;
                         font-weight: bold;
                         text-transform: uppercase;
-                        font-size: 1.1rem;
+                        font-size: 1rem;
                     }
 
                     .date {
                         text-align: center;
                         text-transform: uppercase;
                         font-weight: bold;
+                        font-size: 1.1rem;
 
                         span {
                             vertical-align: middle;
                         }
 
                         .day {
-                            font-size: 2.5rem;
+                            font-size: 2rem;
                             padding: 0 0.8rem;
                             display: inline-block;
                             border: 0px solid #000;
@@ -208,10 +227,11 @@
                         text-align: center;
                         font-weight: bold;
                         font-style: italic;
+                        font-size: 1.1rem;
                     }
 
                     .address {
-                        width: 65%;
+                        width: 85%;
                         border: 0 dashed #000;
                         border-width: 1px 0;
                         margin: auto;
@@ -222,10 +242,11 @@
                         .at {
                             font-weight: bold;
                             text-transform: uppercase;
+                            font-size: 1.1rem;
                         }
 
                         .detail {
-                            font-size: 1.1rem;
+                            font-size: 1rem;
                         }
                     }
                 }
@@ -235,18 +256,28 @@
                 position: relative;
                 padding: 2rem;
                 box-shadow: var(--box-shadow-bottom);
-                height: var(--height);
                 overflow: hidden;
-                background-image: url('/images/background/bca.png');
+                background-image: url("/images/background/bca.png");
                 background-repeat: no-repeat;
                 background-position: 3rem 0;
                 background-size: auto 100%;
 
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba($color: $background-color, $alpha: 0.9);
+                }
+
                 .main_box {
-                    border-radius: 0.6rem;
                     height: 100%;
-                    margin-left: 15%;
                     text-align: center;
+                    z-index: 1;
+                    position: relative;
 
                     .title {
                         font-family: "Pinyon Script";
@@ -262,21 +293,23 @@
                     .day_of_week {
                         font-weight: bold;
                         text-transform: uppercase;
+                        font-size: 1.1rem;
                     }
 
                     .date {
                         font-weight: bold;
                         text-transform: uppercase;
-                        font-size: 1.6rem;
+                        font-size: 1.4rem;
                     }
 
                     .lunar_calendar {
                         font-weight: bold;
                         font-style: italic;
+                        font-size: 1.1rem;
                     }
 
                     .address {
-                        width: 80%;
+                        width: 89%;
                         border: 0 dashed #000;
                         border-width: 1px 0;
                         margin: auto;
@@ -287,31 +320,37 @@
                         .at {
                             font-weight: bold;
                             text-transform: uppercase;
+                            font-size: 1.1rem;
                         }
 
                         .detail {
-                            font-size: 1.1rem;
+                            font-size: 1rem;
                         }
                     }
 
                     .thanks {
                         font-family: "Pinyon Script";
                         font-size: 2rem;
-                        margin-top: 0.4rem;
+                        margin: 1rem 0;
                         font-weight: 500;
+                        color: $note-color;
                     }
 
                     .flex {
                         display: flex;
                         margin-top: -1rem;
+                        margin: auto;
+                        max-width: 30rem;
 
                         .flex_1 {
                             flex: 1;
                         }
 
                         .group {
-                            margin: 0 6rem;
+                            margin: 0;
+                            margin-top: 0.5rem;
                             font-size: 1rem;
+                            white-space: nowrap;
 
                             .group_title {
                                 font-weight: bold;
@@ -328,14 +367,12 @@
 
             .box_5 {
                 background-color: #fdeeee;
-                height: var(--height);
                 position: relative;
                 overflow: hidden;
                 box-shadow: var(--box-shadow-bottom);
 
                 .main_box {
-                    position: absolute;
-                    bottom: 2rem;
+                    padding: 2rem 0 2rem 0;
                     text-align: center;
                     width: 100%;
 
@@ -355,6 +392,251 @@
                         line-height: 1.1;
                         font-style: italic;
                         margin-top: 0.4rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 640px) {
+    .wap {
+        .container {
+            .main {
+                .box_2 {
+                    .main_box {
+                        margin: 0;
+                        margin-left: 10%;
+                    }
+                }
+
+                .box_3 {
+                    .main_box {
+                        .user_main {
+                            max-width: none;
+                            margin: 0;
+                            .name,
+                            .name2 {
+                                display: inline-block;
+                                text-align: left;
+                                transform: none;
+                            }
+
+                            .and{
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 920px) {
+    .wap {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        --height: 420px;
+
+        .container {
+            padding: 2rem 0;
+
+            .main {
+                .box_1 {
+                    height: calc(var(--height) * 80 / 100);
+
+                    .main_box {
+                        position: absolute;
+                        bottom: 2.5rem;
+                        right: 0;
+                        left: 0;
+                        padding: 0;
+
+                        .heading {
+                            font-size: 4rem;
+                        }
+
+                        .title {
+                            font-size: 1.5rem;
+                            font-weight: 500;
+                        }
+
+                        .date {
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+
+                .box_2 {
+                    height: calc(var(--height) * 80 / 100);
+                    box-shadow: var(--box-shadow-bottom);
+                    margin: 0;
+                    max-width: none;
+
+                    &::before {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: rgba($color: $background-color, $alpha: 0.6);
+                    }
+
+                    .main_box {
+                        position: absolute;
+                        padding: 0;
+                        top: 50%;
+                        left: 6rem;
+                        transform: rotateZ(-7deg) translateY(-50%);
+
+                        .name1 {
+                            font-size: 4.5rem;
+                        }
+
+                        .and {
+                            font-weight: bold;
+                            font-size: 1.5rem;
+                            margin-left: 16rem;
+                            text-align: left;
+                        }
+
+                        .name2 {
+                            font-size: 4.5rem;
+                            margin-left: 15rem;
+                            text-align: left;
+                        }
+                    }
+                }
+
+                .box_3 {
+                    padding: 2rem;
+                    box-shadow: var(--box-shadow-bottom);
+                    height: var(--height);
+
+                    .main_box {
+                        height: 100%;
+
+                        .user_main {
+                            text-align: center;
+                            font-family: "Pinyon Script";
+                            color: var(--pri-color);
+                            margin: 0;
+                            max-width: none;
+
+                            .name,
+                            .name2 {
+                                text-align: center;
+                                transform: none;
+                            }
+
+                            .and {
+                                margin: auto 2rem;
+
+                                :global(.icon-svg) {
+                                    width: 1.8rem;
+                                    height: 1.8rem;
+                                }
+                            }
+                        }
+
+                        .title_at_time {
+                            margin-top: 0;
+                        }
+
+                        .at_time {
+                            font-size: 1.1rem;
+                        }
+
+                        .date {
+                            font-size: 1.2rem;
+                            .day {
+                                font-size: 2.5rem;
+                            }
+                        }
+
+                        .lunar_calendar {
+                            font-size: 1.2rem;
+                        }
+
+                        .address {
+                            width: 65%;
+
+                            .at {
+                                font-size: 1.2rem;
+                            }
+
+                            .detail {
+                                font-size: 1.1rem;
+                            }
+                        }
+                    }
+                }
+
+                .box_4 {
+                    height: var(--height);
+
+                    .main_box {
+                        margin-left: 12%;
+
+                        .day_of_week {
+                            font-size: 1.2rem;
+                        }
+
+                        .date {
+                            font-size: 1.6rem;
+                        }
+
+                        .lunar_calendar {
+                            font-size: 1.2rem;
+                        }
+
+                        .address {
+                            width: 80%;
+
+                            .at {
+                                font-size: 1.2em;
+                            }
+
+                            .detail {
+                                font-size: 1.1rem;
+                            }
+                        }
+
+                        .thanks {
+                            margin: 0.6rem 0;
+                        }
+
+                        .flex {
+                            display: flex;
+                            margin-top: -1rem;
+                            margin: 0;
+                            max-width: none;
+
+                            .flex_1 {
+                                flex: 1;
+                            }
+
+                            .group {
+                                margin-top: 0;
+                                margin: 0 6rem;
+                            }
+                        }
+                    }
+                }
+
+                .box_5 {
+                    height: var(--height);
+
+                    .main_box {
+                        padding: 0;
+                        position: absolute;
+                        bottom: 2rem;
                     }
                 }
             }

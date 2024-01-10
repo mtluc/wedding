@@ -23,7 +23,7 @@ export default async function handler(
     httpOption.headers = { ...req.headers };
     delete httpOption.headers["content-length"];
 
-    if ((req.body && req.method == "POST") || req.method == "PUT") {
+    if (req.body && (req.method == "POST" || req.method == "PUT")) {
       if (req.headers["content-type"]?.toLowerCase() == "application/json") {
         httpOption.body = JSON.stringify(req.body);
       } else {
@@ -38,7 +38,7 @@ export default async function handler(
     if (resClient.ok) {
       const contentType = resClient.headers.get("content-type") || "";
       if (contentType.indexOf("application/json") >= 0) {
-        res.status(200).json(await resClient.json());
+        res.status(200).json(await resClient.json() || null);
       } else {
         const bold = Buffer.from(await resClient.arrayBuffer());
         Array.from(resClient.headers.keys()).forEach((key) => {

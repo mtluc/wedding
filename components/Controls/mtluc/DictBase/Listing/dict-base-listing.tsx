@@ -637,6 +637,10 @@ abstract class DictBaseListing<
     return null;
   }
 
+  renderOtherHeader() {
+    return <></>;
+  }
+
   render() {
     return (
       <>
@@ -653,6 +657,7 @@ abstract class DictBaseListing<
               <div className="title-content">{this.title}</div>
             </div>
           ) : null}
+          {this.renderOtherHeader()}
           {this.showSearchBar ? (
             <div className="search-bar">
               <TextBox

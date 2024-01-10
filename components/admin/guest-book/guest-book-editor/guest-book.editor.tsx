@@ -271,6 +271,41 @@ class GuestBookEditor extends DictBaseEditor<
         <div className="mtl-control col-12 col-md-8">
           <label
             className={buildClass([classNames.label, "mtl-lable"])}
+            htmlFor="ConvertDay"
+          >
+            Ngày âm lịch
+          </label>
+          <div className="flex-1">
+            <TextBox
+              className="col-12"
+              name="ConvertDay"
+              placeholder="ngày 10 tháng 12 năm Quý Mão"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="mtl-control col-12 col-md-4">
+          <label
+            className={buildClass([classNames.label, "mtl-lable"])}
+            htmlFor="Amount"
+          >
+            Tiền mừng
+          </label>
+          <div className="flex-1">
+            <Numeric
+              className="col-12"
+              name="Amount"
+              format="0"
+              creaseButton="none"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="mtl-control col-12 col-md-8">
+          <label
+            className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Description"
           >
             Ghi chú

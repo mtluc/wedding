@@ -17,5 +17,34 @@ CREATE TABLE GuestBook (
     BusId NUMERIC,
     IsConfirmBus BOOLEAN DEFAULT (false) NOT NULL,
     IsConfirm BOOLEAN DEFAULT (false) NOT NULL,
-    UserName TEXT (20) NOT NULL
+    UserName TEXT (20) NOT NULL,
+    Amount DECIMAL,
+    ConvertDay   TEXT (128),
+);
+
+CREATE TABLE Wedding (
+    UserName       TEXT (20)  PRIMARY KEY,
+    IsGroom        BOOLEAN    DEFAULT (false),
+    GroomName      TEXT (25),
+    GroomFullName  TEXT (128),
+    GroomFather    TEXT (128),
+    GroomMother    TEXT (128),
+    GroomAddress   TEXT (128),
+    BrideName      TEXT (25),
+    BrideFullName  TEXT (128),
+    BrideFather    TEXT (128),
+    BrideMother    TEXT (128),
+    BrideAddress   TEXT (128),
+    PartyDate      DATETIME,
+    PartyAt        TEXT (128),
+    ParttyAddress  TEXT (128),
+    WeddingDate    DATETIME,
+    WeddingAt      TEXT (128),
+    WeddingAddress TEXT (128),
+    Phone          TEXT (11),
+    BankId         TEXT (25),
+    BankAccountNo  TEXT (25),
+    GoogleMapLink  TEXT (256),
+    PartyConvertDay   TEXT (128),
+    WeddingConvertDay TEXT (128) 
 );

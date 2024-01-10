@@ -1,3 +1,9 @@
+.total_amount{
+    position: absolute;
+    z-index: 10;
+    top: 4rem;
+    right: 1rem;
+}
 @media (max-width: 919.99px) {
     .wap {
         :global(.mtl-grid.grid-mobile) {
@@ -45,6 +51,12 @@
                 }
             }
         }
+    }
+
+    .total_amount{
+        position: static;
+        text-align: center;
+        margin: 0.6rem;
     }
 
 }

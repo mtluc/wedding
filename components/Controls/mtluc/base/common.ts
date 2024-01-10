@@ -159,7 +159,7 @@ export const pushNotification = ({
 };
 
 export const roundNumber = (x: number, digit: number) => {
-  return Number.parseFloat(x.toFixed(digit));
+  return Number.parseFloat(x?.toFixed?.(digit) || "0");
 };
 
 export const pushDialog = ({
@@ -367,4 +367,20 @@ export const devLog = (msg: any) => {
   if (process.env.NODE_ENV == "development") {
     console.log(msg);
   }
+};
+
+export const getDisplayDayOfWeek = (date: Date) => {
+  if (!date) {
+    return "";
+  }
+  const datas = [
+    "Chủ nhật",
+    "Thứ hai",
+    "Thứ ba",
+    "Thứ tư",
+    "Thứ năm",
+    "Thứ sáu",
+    "Thứ bảy",
+  ];
+  return datas[date.getDay()];
 };

@@ -6,7 +6,7 @@ import getConfig from "next/config";
 const { publicRuntimeConfig } = getConfig();
 
 const setAuth = (httpOption: any) => {
-  if (window && httpOption) {
+  if (typeof window !== 'undefined' && httpOption) {
     const auth = getLocalAuth();
     if (
       auth &&
