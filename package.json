@@ -21,6 +21,7 @@
     "puppeteer": "^21.7.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-snowfall": "^1.2.1",
     "sass": "^1.69.7",
     "sqlite3": "^5.1.7-rc.0",
     "svg2img": "^1.0.0-beta.2",

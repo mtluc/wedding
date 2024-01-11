@@ -14,8 +14,8 @@ export class GuestBookBl extends BaseBl<GuestBook> {
 
   async getById(id: any) {
     return await this.dbContext.get<GuestBook>(
-      `SELECT * FROM ${this._tableName} WHERE ${this._idField} = ? AND UserName = ?;`,
-      [id, this.auth?.user?.UserName]
+      `SELECT * FROM ${this._tableName} WHERE ${this._idField} = ?;`,
+      [id]
     );
   }
 

@@ -6,7 +6,7 @@
     background-image: url("/images/background/bg-min.jpg");
     background-size: cover;
     background-position: center;
-    --height: auto;
+    --height: 488px;
     --box-shadow-bottom: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
     --pri-color: #edac03;
     font-size: 1.2rem;
@@ -32,20 +32,25 @@
         position: relative;
 
         .main {
-            background-color: #fff;
+            transition: transform linear 0s;
+            transform: scaleY(0.8) translateY(-25%);
 
             .box_1 {
                 text-align: center;
-                box-shadow: var(--box-shadow-bottom);
                 position: relative;
+                box-shadow: var(--box-shadow-bottom);
                 overflow: hidden;
                 background-image: url("/images/background/bg.jpg");
                 background-size: cover;
                 background-position: center;
+                height: 100%;
+                transform: translateX(-180deg);
+                z-index: 1;
 
                 .main_box {
-                    padding-top: 8rem;
-                    padding-bottom: 1.5rem;
+                    position: absolute;
+                    width: 100%;
+                    bottom: 2rem;
 
                     .heading {
                         font-family: "Fleur De Leah";
@@ -67,15 +72,14 @@
             }
 
             .box_2 {
-                position: relative;
                 overflow: hidden;
                 box-shadow: $box-shadow;
                 background-image: url(/images/background/bca.jpg);
-                background-size: contain;
+                background-size: cover;
                 background-repeat: no-repeat;
                 background-position: right bottom;
                 margin: 0.2rem 0;
-
+                height: 100%;
                 &::before {
                     content: "";
                     display: block;
@@ -95,6 +99,8 @@
                     white-space: nowrap;
                     margin: auto;
                     max-width: 30rem;
+                    top: 50%;
+                    transform: translateY(-50%);
 
                     .name1 {
                         font-family: "WindSong";
@@ -117,16 +123,71 @@
                 }
             }
 
+            .page {
+                height: var(--height);
+                position: relative;
+                transition:
+                    transform 0s,
+                    rotate 0s ease-in;
+                rotate: 1 0 0 0deg;
+                display: flex;
+                pointer-events: all;
+                user-select: none;
+                transform-style: preserve-3d;
+
+                &.page1 {
+                    height: calc(var(--height) * 82 / 100);
+                    z-index: 30;
+                    transform-origin: left bottom;
+                    rotate: 1 0 0 -180deg;
+                    z-index: 10;
+                }
+
+                &.page3 {
+                    z-index: 30;
+                    transform-origin: left top;
+                    rotate: 1 0 0 -180deg;
+                    z-index: 1;
+                }
+
+                .front,
+                .back {
+                    flex: none;
+                    width: 100%;
+                    backface-visibility: hidden;
+                    background-color: #fff;
+                    transform-style: preserve-3d;
+                    translate: 0 0;
+                    height: 100%;
+                }
+
+                .back {
+                    translate: -100% 0;
+                    rotate: 0 1 0 -180deg;
+                    transform: rotateZ(-180deg);
+                }
+            }
+
             .box_3 {
                 position: relative;
                 padding: 2rem 1rem;
                 box-shadow: var(--box-shadow-bottom);
                 overflow: hidden;
+                height: 100%;
+                width: 100%;
+                background-color: $background-color;
 
                 .main_box {
                     border: 1px solid #dbbc95;
                     border-radius: 0.6rem;
                     padding: 1rem;
+                    height: 100%;
+
+                    .content {
+                        position: relative;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
 
                     .lable1 {
                         font-weight: $font-bold;
@@ -274,10 +335,11 @@
                 }
 
                 .main_box {
-                    height: 100%;
                     text-align: center;
                     z-index: 1;
                     position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
 
                     .title {
                         font-family: "Pinyon Script";
@@ -370,11 +432,17 @@
                 position: relative;
                 overflow: hidden;
                 box-shadow: var(--box-shadow-bottom);
+                &.back {
+                    background-color: #fdeeee;
+                }
 
                 .main_box {
                     padding: 2rem 0 2rem 0;
                     text-align: center;
                     width: 100%;
+                    position: relative;
+                    transform: translateY(-100%);
+                    top: 100%;
 
                     .title {
                         text-transform: uppercase;
@@ -397,6 +465,83 @@
             }
         }
     }
+}
+
+.wap.open {
+    .container {
+        .main {
+            transition: transform linear 1.2s;
+            transform: scale(1) translateY(0);
+            .page {
+                transition:
+                    transform 1s,
+                    rotate 1s ease-in;
+                &.page1,
+                &.page3 {
+                    rotate: 1 0 0 0deg;
+                }
+            }
+        }
+    }
+}
+
+.open_wap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+
+    button {
+        font-size: 1.6rem;
+        font-family: "Dancing Script";
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.toolbars {
+    position: fixed;
+    right: 17px;
+    bottom: 8rem;
+    z-index: 1;
+
+    a {
+        display: block;
+        margin: 0.4rem 0;
+        padding: 0.8rem;
+        border: 1px solid #fdeeee;
+        border-radius: 0.4rem;
+        background-color: #fdeeee;
+        cursor: pointer;
+
+        :global(.icon-svg) {
+            margin-right: 0;
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: $note-color;
+        }
+
+        &:hover {
+            background-color: $note-color;
+            border-color: $note-color;
+            :global(.icon-svg) {
+                fill: #fff;
+            }
+        }
+    }
+}
+
+.accept {
+    position: fixed;
+    z-index: 1;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.6rem 0.8rem;
 }
 
 @media (min-width: 640px) {
@@ -422,7 +567,7 @@
                                 transform: none;
                             }
 
-                            .and{
+                            .and {
                                 display: inline-block;
                             }
                         }

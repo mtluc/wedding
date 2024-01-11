@@ -1,0 +1,20 @@
+.wapper {
+    max-width: 26rem;
+    padding-top: 1rem;
+
+    :global(.mtl-control) {
+        padding: 0.4rem 2rem;
+    }
+
+    .description {
+        line-height: 1.45;
+        color: $note-color;
+        font-style: italic;
+    }
+
+    .toolbars {
+        border-top: 1px solid $border-color;
+        padding: 0.6rem;
+        text-align: center;
+    }
+}
