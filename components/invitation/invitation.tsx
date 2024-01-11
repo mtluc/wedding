@@ -76,7 +76,7 @@ const Invitation = ({
               </div>
             </div>
             <div className={classNames.page}>
-              <div className={classNames.box_3}>
+              <div className={buildClass([classNames.box_3, classNames.front])}>
                 <div className={classNames.main_box}>
                   <div className={classNames.content}>
                     <div className={classNames.lable1}>Trân trọng kính mời</div>

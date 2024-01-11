@@ -80,10 +80,6 @@ export default function WeddingPage({
       ...(guest as GuestBook),
       GuestDate: parseDate(guest?.GuestDate),
     });
-    console.log({
-      ...(guest as GuestBook),
-      GuestDate: parseDate(guest?.GuestDate),
-    });
   }, [guest, wedding]);
   return (
     <>
