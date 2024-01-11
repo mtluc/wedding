@@ -76,7 +76,12 @@ const Invitation = ({
               </div>
             </div>
             <div className={classNames.page}>
-              <div className={buildClass([classNames.box_3, classNames.front])}>
+              <div
+                className={buildClass([classNames.box_3, classNames.front])}
+                style={{
+                  visibility: isOpen ? "visible" : "collapse",
+                }}
+              >
                 <div className={classNames.main_box}>
                   <div className={classNames.content}>
                     <div className={classNames.lable1}>Trân trọng kính mời</div>
