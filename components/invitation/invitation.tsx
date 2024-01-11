@@ -309,7 +309,7 @@ const Invitation = ({
         </div>
       ) : null}
 
-      {showButtons && !guest.Agree ? (
+      {showButtons && guest.IsConfirm && !guest.Agree ? (
         <button
           className={buildClass(["btn-primary-ltr", classNames.accept])}
           type="button"
