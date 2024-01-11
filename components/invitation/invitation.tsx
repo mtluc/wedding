@@ -33,6 +33,7 @@ const Invitation = ({
     }
   }, [image]);
 
+  const [taked, setTaked] = useState(false);
   const [isOpen, setOpen] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
   const [showGift, setShowGift] = useState(false);
@@ -47,7 +48,12 @@ const Invitation = ({
           isOpen ? classNames.open : "",
         ])}
       >
-        <div className={classNames.container}>
+        <div
+          style={{
+            display: !taked ? "none" : "block",
+          }}
+          className={classNames.container}
+        >
           <div className={classNames.main}>
             <div className={buildClass([classNames.page, classNames.page1])}>
               <div className={buildClass([classNames.box_2, classNames.front])}>
@@ -234,13 +240,13 @@ const Invitation = ({
         </div>
       </div>
 
-      {image && isOpen ? (
+      {image && taked ? (
         <Snowfall
           style={{
             zIndex: 1000,
             position: "fixed",
           }}
-          snowflakeCount={7}
+          snowflakeCount={10}
           rotationSpeed={[0, 0]}
           radius={[8, 26]}
           images={[image]}
@@ -251,15 +257,20 @@ const Invitation = ({
         <>
           <div
             className={classNames.open_wap}
-            hidden={isOpen}
+            hidden={taked}
             onClick={() => {
-              setOpen(!isOpen);
+              setTaked(true);
               setTimeout(() => {
-                setShowButtons(true);
-              }, 2000);
+                setOpen(!isOpen);
+                setTimeout(() => {
+                  setShowButtons(true);
+                }, 2000);
+              }, 1000);
             }}
           >
-            <button className="btn-primary-ltr">Click để mở thiệp</button>
+            <div className={classNames.mail_box}>
+              <span className={classNames.text}>Nhận</span>
+            </div>
           </div>
         </>
       }
@@ -286,7 +297,7 @@ const Invitation = ({
           {wedding.BankId && wedding.BankAccountNo ? (
             <a
               className="btn"
-              title="Hộp quà cưới"
+              title="Gửi quà tặng"
               onClick={(e) => {
                 e.preventDefault();
                 setShowGift(true);

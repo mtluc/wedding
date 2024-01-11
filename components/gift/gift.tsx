@@ -15,7 +15,7 @@ const Gift = ({
   };
 }) => {
   return (
-    <Modal title="Hộp quà cưới" onClose={onClose}>
+    <Modal title="Gửi quà tặng" onClose={onClose}>
       <div className={classNames.wapper}>
         <div className={classNames.bank_qr_code}>
           <img
