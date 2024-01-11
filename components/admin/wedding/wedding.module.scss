@@ -1,11 +1,9 @@
 .wap {
-    display: flex;
-    overflow: hidden;
     height: 100%;
 
     .from {
         flex: 1;
-        min-width: 60rem;
+        height: 100%;
 
         .form {
             display: flex;
@@ -16,46 +14,51 @@
             .controls {
                 flex: 1;
                 height: 100%;
-                padding: 1rem;
-                margin: auto;
 
-                :global(.mtl-control) {
-                    label {
-                        width: 8rem;
-                    }
-
-                    .time {
-                        display: flex;
-                        align-items: center;
-                        position: relative;
-
-                        :global(.invalid-msg) {
-                            bottom: -0.8rem;
-                        }
-                    }
-                }
-
-                fieldset {
-                    margin: 1rem;
-                    padding: 0.6rem;
-                    display: block;
-                    border: 1px solid $border-color;
-                    border-radius: 0.4rem;
-                    position: relative;
-
-                    legend {
-                        display: block;
-                        background-color: $background-color;
-                        position: absolute;
-                        padding: 0.4rem 0.6rem;
-                        left: 0.6rem;
-                        top: 0;
-                        transform: translateY(-50%);
-                    }
+                .controls_wap {
+                    height: 100%;
+                    padding: 1rem;
+                    max-width: 68rem;
+                    margin: auto;
 
                     :global(.mtl-control) {
                         label {
-                            width: 6.5rem;
+                            width: 8rem;
+                        }
+
+                        .time {
+                            display: flex;
+                            align-items: center;
+                            position: relative;
+
+                            :global(.invalid-msg) {
+                                bottom: -0.8rem;
+                            }
+                        }
+                    }
+
+                    fieldset {
+                        margin: 1rem;
+                        padding: 0.6rem;
+                        display: block;
+                        border: 1px solid $border-color;
+                        border-radius: 0.4rem;
+                        position: relative;
+
+                        legend {
+                            display: block;
+                            background-color: $background-color;
+                            position: absolute;
+                            padding: 0.4rem 0.6rem;
+                            left: 0.6rem;
+                            top: 0;
+                            transform: translateY(-50%);
+                        }
+
+                        :global(.mtl-control) {
+                            label {
+                                width: 6.5rem;
+                            }
                         }
                     }
                 }
@@ -87,6 +90,19 @@
 
             &::before {
                 position: absolute;
+            }
+        }
+    }
+}
+
+
+@media (max-width:767.99px){
+    .wap {
+        .from {
+
+            .controls {
+                .controls_wap {
+                }
             }
         }
     }
