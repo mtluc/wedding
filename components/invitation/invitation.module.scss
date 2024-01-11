@@ -712,7 +712,7 @@
 
 @media (min-width: 920px) {
     .open_wap {
-        background-position: center top;
+        background-position: center -268px;
     }
     .wap {
         position: fixed;
@@ -722,7 +722,7 @@
         bottom: 0;
 
         &::before {
-            background-position: center top;
+            background-position: center -268px;
         }
 
         .container {
