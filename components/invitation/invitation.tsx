@@ -240,7 +240,7 @@ const Invitation = ({
         </div>
       </div>
 
-      {image && taked ? (
+      {image ? (
         <Snowfall
           style={{
             zIndex: 1000,
