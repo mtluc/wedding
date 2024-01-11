@@ -7,6 +7,7 @@ import { GuestBook } from "@/model/GuestBook/GuestBook";
 import { Wedding as IWedding } from "@/model/Wedding/wedding";
 import getConfig from "next/config";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 const { publicRuntimeConfig } = getConfig();
 
 export const getServerSideProps = withSessionSsr(
@@ -66,16 +67,20 @@ export default function WeddingPage({
     description: "Thiệp mời",
     title: "Thiệp mời",
   };
-  const _wedding: IWedding = {
-    ...(wedding as IWedding),
-    PartyDate: parseDate(wedding?.PartyDate),
-    WeddingDate: parseDate(wedding?.WeddingDate),
-  };
+  const [_wedding, setWedding] = useState(undefined as any as IWedding);
+  const [_guest, setGuest] = useState(undefined as any as GuestBook);
+  useEffect(() => {
+    setWedding({
+      ...(wedding as IWedding),
+      PartyDate: parseDate(wedding?.PartyDate),
+      WeddingDate: parseDate(wedding?.WeddingDate),
+    });
 
-  const _guest: GuestBook = {
-    ...(guest as GuestBook),
-    GuestDate: parseDate(guest?.GuestDate),
-  };
+    setGuest({
+      ...(guest as GuestBook),
+      GuestDate: parseDate(guest?.GuestDate),
+    });
+  }, [guest, wedding]);
   return (
     <>
       <Head>
@@ -119,7 +124,9 @@ export default function WeddingPage({
         <meta name="keywords" content="wedding|wedding online" />
       </Head>
       <main>
-        <Invitation wedding={_wedding} guest={_guest}/>
+        {_wedding && _guest ? (
+          <Invitation wedding={_wedding} guest={_guest} />
+        ) : null}
       </main>
     </>
   );
