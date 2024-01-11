@@ -246,7 +246,7 @@ const Invitation = ({
             zIndex: 1000,
             position: "fixed",
           }}
-          snowflakeCount={10}
+          snowflakeCount={7}
           rotationSpeed={[0, 0]}
           radius={[8, 26]}
           images={[image]}
@@ -309,7 +309,7 @@ const Invitation = ({
         </div>
       ) : null}
 
-      {showButtons ? (
+      {showButtons && !guest.Agree ? (
         <button
           className={buildClass(["btn-primary-ltr", classNames.accept])}
           type="button"
