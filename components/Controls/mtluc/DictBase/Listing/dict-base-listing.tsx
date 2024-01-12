@@ -440,7 +440,7 @@ abstract class DictBaseListing<
           case "ADD":
             _data = this.localFilter([...datas, actionResult.record]);
             this.setState({
-              datas: [...datas, actionResult.record],
+              datas: [..._data],
               singlePageInfo: {
                 countItem: _data.length as any,
                 totalItem: (this.state.singlePageInfo.totalItem + 1) as any,
@@ -461,7 +461,7 @@ abstract class DictBaseListing<
             datas[idx] = actionResult.record;
             _data = this.localFilter([...datas]);
             this.setState({
-              datas,
+              datas:_data,
               singlePageInfo: {
                 countItem: _data.length as any,
                 totalItem: this.state.singlePageInfo.totalItem,
@@ -492,7 +492,7 @@ abstract class DictBaseListing<
               this.rowSelected = undefined;
             }
             this.setState({
-              datas,
+              datas:_data,
               singlePageInfo: {
                 countItem: _data.length as any,
                 totalItem: (this.state.singlePageInfo.totalItem - 1) as any,
