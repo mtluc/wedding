@@ -412,13 +412,14 @@
                         margin-top: -1rem;
                         margin: auto;
                         max-width: 30rem;
+                        justify-content: space-evenly;
 
                         .flex_1 {
                             flex: 1;
                         }
 
                         .group {
-                            margin: 0;
+                            margin: 0.4rem;
                             margin-top: 0.5rem;
                             font-size: 1rem;
                             white-space: nowrap;
@@ -430,6 +431,10 @@
                             .father,
                             .mother {
                                 text-transform: uppercase;
+                            }
+
+                            .address_info {
+                                font-size: 0.9rem;
                             }
                         }
                     }
@@ -611,7 +616,7 @@
         -moz-animation: ring 4s 0.7s ease-in-out infinite;
         animation: ring 6s 0.7s ease-in-out infinite;
 
-        .text{
+        .text {
             position: absolute;
             display: block;
             bottom: 2rem;
