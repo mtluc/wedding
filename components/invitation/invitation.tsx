@@ -197,6 +197,11 @@ const Invitation = ({
                           ? wedding.GroomFullName
                           : wedding.BrideFullName}
                       </div>
+                      <div className={classNames.address_info}>
+                        {wedding.IsGroom
+                          ? wedding.GroomAddress
+                          : wedding.BrideAddress}
+                      </div>
                     </div>
                     <div className={classNames.flex_1}></div>
                     <div className={classNames.group}>
@@ -218,6 +223,11 @@ const Invitation = ({
                         {!wedding.IsGroom
                           ? wedding.GroomFullName
                           : wedding.BrideFullName}
+                      </div>
+                      <div className={classNames.address_info}>
+                        {!wedding.IsGroom
+                          ? wedding.GroomAddress
+                          : wedding.BrideAddress}
                       </div>
                     </div>
                   </div>
