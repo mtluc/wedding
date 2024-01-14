@@ -494,6 +494,10 @@
                 &.page3 {
                     rotate: 1 0 0 0deg;
                 }
+
+                .box_3 {
+                    transition: opacity 2s linear;
+                }
             }
         }
     }

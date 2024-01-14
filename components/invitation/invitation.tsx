@@ -85,7 +85,7 @@ const Invitation = ({
               <div
                 className={buildClass([classNames.box_3, classNames.front])}
                 style={{
-                  visibility: isOpen ? "visible" : "collapse",
+                  opacity: isOpen ? 1 : 0,
                 }}
               >
                 <div className={classNames.main_box}>
