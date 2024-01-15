@@ -1,4 +1,5 @@
 import { DictBaseApi } from "@/base/api/dict-base-api";
+import { parseDate } from "@/components/Controls/mtluc/base/common";
 import { GuestBook } from "@/model/GuestBook/GuestBook";
 import { GuestBookBl } from "@/model/GuestBook/GuestBook.Bl";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -18,6 +19,7 @@ class Api extends DictBaseApi<GuestBookBl> {
             guest = await this._bl.edit({
               ...guest,
               Agree: accept,
+              GuestDate: parseDate(guest.GuestDate),
             });
 
             this.res.status(200).json(guest || null);
