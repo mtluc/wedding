@@ -193,7 +193,7 @@ class GuestBookEditor extends DictBaseEditor<
             className={buildClass([classNames.label, "mtl-lable"])}
             htmlFor="Relationship"
           >
-            Quan hệ<span>*</span>
+            Quan hệ
           </label>
           <div className="flex-1">
             <ComboBox
