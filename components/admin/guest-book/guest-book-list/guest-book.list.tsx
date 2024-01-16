@@ -93,12 +93,20 @@ class GuestBookList extends DictBaseListing<
         if ((res?.data as any as Wedding)?.GroomName) {
           navigator
             .share({
-              title: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}`,
-              text: `Trân trọng kính mời ${row.Relationship} ${row.ShortName}!`,
+              title: [
+                `Trân trọng kính mời`,
+                row.Relationship,
+                row.ShortName,
+              ].join(" "),
+              text: [
+                `Trân trọng kính mời`,
+                row.Relationship,
+                row.ShortName,
+              ].join(" "),
               url: `${
                 publicRuntimeConfig.shareHost
               }/thiep-moi/${removeVietnameseTones(
-                `${row.Relationship} ${row.ShortName}`
+                [row.Relationship, row.ShortName].join(" ")
               )
                 .toLowerCase()
                 .replace(/ /gi, "-")}/${btoa(
