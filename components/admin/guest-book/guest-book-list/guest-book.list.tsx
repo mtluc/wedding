@@ -180,7 +180,7 @@ class GuestBookList extends DictBaseListing<
       },
       {
         Id: "FullName",
-        Title: "Tên đầy đủ",
+        Title: "Họ tên",
         MinWidth: 200,
       },
       {
