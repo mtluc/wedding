@@ -92,7 +92,7 @@ const Invitation = ({
                   <div className={classNames.content}>
                     <div className={classNames.lable1}>Trân trọng kính mời</div>
                     <div className={classNames.customer_name}>
-                      {guest.Relationship}
+                      {guest.Relationship ? guest.Relationship  : guest.ShortName }
                     </div>
                     <div className={classNames.lable2}>
                       Tới dự bữa cơm thân mật chung vui cùng gia đình chúng tôi

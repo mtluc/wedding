@@ -201,7 +201,6 @@ class GuestBookEditor extends DictBaseEditor<
               name="Relationship"
               dataSource={Relationship}
               fieldId="Name"
-              required
               placeholder="Quan hệ"
             />
           </div>
