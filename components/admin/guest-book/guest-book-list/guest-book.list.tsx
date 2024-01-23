@@ -210,6 +210,13 @@ class GuestBookList extends DictBaseListing<
         MinWidth: 300,
       },
       {
+        Id: "Amount",
+        Title: "Tiền",
+        MinWidth: 200,
+        Type: "number",
+        Format: 0,
+      },
+      {
         Id: "IsConfirm",
         Title: "Hỏi tham dự",
         Type: "check",

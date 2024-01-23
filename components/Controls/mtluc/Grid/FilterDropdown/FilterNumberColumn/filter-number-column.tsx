@@ -63,7 +63,7 @@ const FilterNumberColumn = ({ col, value, onChange }: IFilterNumberColumn) => {
         <Numeric
           name={`filter_ctr_${col.Id}`}
           className={"filte-col-control"}
-          format={col.Format}
+          format={`n${col.Format}`}
           creaseButton="none"
           value={filter.Value}
           onChange={(e, ctr, v) => {
