@@ -1,5 +1,5 @@
 export class GuestBook {
-  Id: number = 0;
+  _id: string = "";
   Relationship: string = "";
   ShortName: string = "";
   FullName: string = "";

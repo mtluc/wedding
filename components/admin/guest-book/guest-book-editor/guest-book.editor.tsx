@@ -25,7 +25,7 @@ class GuestBookEditor extends DictBaseEditor<
   override title: string = "Khách mời";
   override service: DictBaseService = new GuestBookService();
   override width: number = 720;
-  fieldId: string = "Id";
+  fieldId: string = "_id";
   fieldName: string = "FullName";
 
   override view(currentRow: any): void {

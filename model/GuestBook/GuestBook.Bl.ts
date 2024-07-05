@@ -1,29 +1,21 @@
-import { BaseBl } from "@/base/Bl/base-bl";
+// import { BaseBl } from "@/base/Bl/base-bl";
+import { BaseBl } from "@/base/Bl/base-bl.mongo";
 import { GuestBook } from "./GuestBook";
 
 export class GuestBookBl extends BaseBl<GuestBook> {
   _tableName: string = "GuestBook";
-  _idField: string = "Id";
+  _idField: string = "_id";
 
   async getItemId(id: any) {
-    return await this.dbContext.get<GuestBook>(
-      `SELECT * FROM ${this._tableName} WHERE ${this._idField} = ?;`,
-      [id]
-    );
-  }
-
-  async getById(id: any) {
-    return await this.dbContext.get<GuestBook>(
-      `SELECT * FROM ${this._tableName} WHERE ${this._idField} = ?;`,
-      [id]
-    );
+    return await this.getData({
+      [this._idField]: id,
+    });
   }
 
   async getAll() {
-    return await this.dbContext.getAll<GuestBook>(
-      `SELECT * FROM ${this._tableName} WHERE UserName = ?;`,
-      [this.auth?.user?.UserName]
-    );
+    return await this.getDatas({
+      UserName: this.auth?.user?.UserName,
+    });
   }
 
   protected override async checkBusiness(

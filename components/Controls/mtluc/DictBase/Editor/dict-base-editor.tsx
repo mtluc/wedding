@@ -280,10 +280,6 @@ abstract class DictBaseEditor<
           this.formCtx?.clearError();
           break;
         case "EDIT":
-          console.log({
-            [this.fieldId]: this.currentRow[this.fieldId],
-            ...param,
-          });
           respon = await this.service.updateItem({
             [this.fieldId]: this.currentRow[this.fieldId],
             ...param,

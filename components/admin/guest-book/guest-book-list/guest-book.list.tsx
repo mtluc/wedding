@@ -39,7 +39,7 @@ class GuestBookList extends DictBaseListing<
 
   override title: string = "Khách mời";
   override showTitle: boolean = false;
-  override fieldId: string = "Id";
+  override fieldId: string = "_id";
   override fieldName: string = "FullName";
   override service: DictBaseService = new GuestBookService();
   override calssWap: string = classNames.wap;
@@ -112,7 +112,7 @@ class GuestBookList extends DictBaseListing<
                 .replace(/ /gi, "-")}/${btoa(
                 encodeURIComponent(
                   JSON.stringify({
-                    id: row.Id,
+                    id: row._id,
                     user: this.ctx.auth?.user?.UserName,
                   })
                 )

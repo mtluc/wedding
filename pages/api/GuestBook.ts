@@ -12,9 +12,9 @@ class Api extends DictBaseApi<GuestBookBl> {
   async accept() {
     try {
       if (this.req.method == "PUT") {
-        const { id, accept } = this.body;
-        if (id && accept != undefined) {
-          let guest = await this._bl.getItemId(id);
+        const { _id, accept } = this.body;
+        if (_id && accept != undefined) {
+          let guest = await this._bl.getItemId(_id);
           if (guest) {
             guest = await this._bl.edit({
               ...guest,

@@ -26,6 +26,10 @@ export abstract class BaseBl<T extends object> implements IBaseBL<T> {
   }
 
   async getById(id: any) {
+    if(this._idField == '_id'){
+      id = ObjectId.createFromBase64(id);
+      console.log('ObjectId',id)
+    } 
     return await this.dbContext.find<T>(this._tableName, {
       [this._idField]: id,
     } as any);
@@ -106,7 +110,6 @@ export abstract class BaseBl<T extends object> implements IBaseBL<T> {
       } as any,
       paramValue
     );
-    console.log(result);
     if (result.modifiedCount > 0 || result.upsertedCount > 0) {
       return await this.getById((obj as any)[this._idField]);
     } else {

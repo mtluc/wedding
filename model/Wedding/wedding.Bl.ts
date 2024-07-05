@@ -1,4 +1,5 @@
-import { BaseBl } from "@/base/Bl/base-bl";
+// import { BaseBl } from "@/base/Bl/base-bl";
+import { BaseBl } from "@/base/Bl/base-bl.mongo";
 import { Wedding } from "./wedding";
 
 export class WeddingBl extends BaseBl<Wedding> {

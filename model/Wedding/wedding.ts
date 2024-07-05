@@ -2,6 +2,7 @@
  * Lễ cưới
  */
 export class Wedding {
+  _id: string = "";
   /**
    * UserName
    */
