@@ -7,9 +7,7 @@ export class GuestBookBl extends BaseBl<GuestBook> {
   _idField: string = "_id";
 
   async getItemId(id: any) {
-    return await this.getData({
-      [this._idField]: id,
-    });
+    return await this.getById(id);
   }
 
   async getAll() {

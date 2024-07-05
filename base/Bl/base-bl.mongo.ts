@@ -27,8 +27,7 @@ export abstract class BaseBl<T extends object> implements IBaseBL<T> {
 
   async getById(id: any) {
     if(this._idField == '_id'){
-      id = ObjectId.createFromBase64(id);
-      console.log('ObjectId',id)
+      id = ObjectId.createFromHexString(id);
     } 
     return await this.dbContext.find<T>(this._tableName, {
       [this._idField]: id,
@@ -75,6 +74,9 @@ export abstract class BaseBl<T extends object> implements IBaseBL<T> {
   }
 
   protected async delete(id: any) {
+    if(this._idField == '_id'){
+      id = ObjectId.createFromHexString(id);
+    } 
     const result = await this.dbContext.delete(this._tableName, {
       [this._idField]: id,
     } as any);
@@ -103,10 +105,15 @@ export abstract class BaseBl<T extends object> implements IBaseBL<T> {
       }
     });
 
+    let id = (obj as any)[this._idField];
+    if(this._idField == '_id'){
+      id = ObjectId.createFromHexString(id);
+    } 
+
     const result = await this.dbContext.update(
       this._tableName,
       {
-        [this._idField]: (obj as any)[this._idField],
+        [this._idField]: id,
       } as any,
       paramValue
     );
