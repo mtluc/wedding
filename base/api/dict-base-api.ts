@@ -54,7 +54,6 @@ export abstract class DictBaseApi<T extends IBaseBL<any>> extends BaseApi<T> {
 
   override run() {
     if (this.action) {
-      console.log(this.query.id, this.action);
       const actionName = [
         ...Object.getOwnPropertyNames(DictBaseApi.prototype),
       ].find(
