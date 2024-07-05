@@ -43,14 +43,6 @@ export class UserBl extends BaseBl<User> {
     return result;
   }
 
-  override async getById(id: any): Promise<User | null> {
-    const result = await super.getById(id);
-    if (result) {
-      result.Password = "";
-    }
-    return result;
-  }
-
   override async add(obj: User): Promise<User | null | undefined> {
     const result = await super.add(obj);
     if (result) {
