@@ -24,7 +24,7 @@ const Accept = ({
     try {
       e.preventDefault();
       setAppLoading(true);
-      const res = await new GuestBookService().accept(guest.Id, accept);
+      const res = await new GuestBookService().accept(guest._id, accept);
       onClose(accept);
       pushNotification({
         type:'success',
