@@ -1,4 +1,4 @@
-import { BaseDb } from "@/model/MongoDB/weddingDbContext";
+import { BaseDb, weddingDb } from "@/model/MongoDB/weddingDbContext";
 import { IAuthData } from "../api/auth";
 import { Filter, ObjectId } from "mongodb";
 import { IBaseBL } from "./base-bl.interface";
@@ -10,7 +10,7 @@ export abstract class BaseBl<T extends object> implements IBaseBL<T> {
   abstract _idField: string;
   protected activator: () => T;
 
-  constructor(type: { new (): T }, _dbContext?: BaseDb) {
+  constructor(type: { new (): T }, _dbContext: BaseDb = weddingDb) {
     this.activator = () => {
       return new type();
     };

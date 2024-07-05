@@ -13,7 +13,6 @@ import {
   setAppLoading,
 } from "@/components/Controls/mtluc/base/common";
 import IconSvg from "@/components/Controls/mtluc/icon/icon-svg";
-import Invitation from "@/components/invitation/invitation";
 import { banks } from "@/model/Bank/bank";
 import { Wedding as IWedding } from "@/model/Wedding/wedding";
 import { FormEvent, useEffect, useState } from "react";
