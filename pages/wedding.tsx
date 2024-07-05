@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/google-font-display */
-import { httpClient } from "@/base/httpClient";
 import { withSessionSsr } from "@/base/session";
 import { parseDate } from "@/components/Controls/mtluc/base/common";
 import Invitation from "@/components/invitation/invitation";
 import { GuestBook } from "@/model/GuestBook/GuestBook";
-import { Wedding as IWedding } from "@/model/Wedding/wedding";
+import { GuestBookBl } from "@/model/GuestBook/GuestBook.Bl";
+import { Wedding as IWedding, Wedding } from "@/model/Wedding/wedding";
+import { WeddingBl } from "@/model/Wedding/wedding.Bl";
 import getConfig from "next/config";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -22,18 +23,20 @@ export const getServerSideProps = withSessionSsr(
         };
 
         if (data.id && data.user) {
-          const res = await httpClient.getJson(
-            `${publicRuntimeConfig.rootApi}/api/Wedding/getWeddingInfo`,
-            data
-          );
+          // const res = await httpClient.getJson(
+          //   `${publicRuntimeConfig.rootApi}/api/Wedding/getWeddingInfo`,
+          //   data
+          // );
 
-          if (res?.data) {
-            return {
-              props: {
-                ...res.data,
-              },
-            };
-          }
+          const wedding = await new WeddingBl(Wedding).getById(data.user);
+          const guest = await new GuestBookBl(GuestBook).getItemId(data.id);
+
+          return {
+            props: {
+              wedding: JSON.parse(JSON.stringify(wedding)),
+              guest: JSON.parse(JSON.stringify(guest))
+            },
+          };
         }
       }
 
@@ -81,6 +84,8 @@ export default function WeddingPage({
       GuestDate: parseDate(guest?.GuestDate),
     });
   }, [guest, wedding]);
+
+  
   return (
     <>
       <Head>
