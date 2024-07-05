@@ -51,6 +51,19 @@ class Api extends BaseApi<UserBl> {
       this.processError(error);
     }
   }
+
+  async getPass() {
+    try {
+      if (this.req.method == "GET") {
+        const { Password } = this.query;
+        this.res.status(200).json(MD5(Password));
+      } else {
+        this.processMethodNotAllowed();
+      }
+    } catch (error) {
+      this.processError(error);
+    }
+  }
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

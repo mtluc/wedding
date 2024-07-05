@@ -1,6 +1,7 @@
-import { BaseBl } from "@/base/Bl/base-bl";
+// import { BaseBl } from "@/base/Bl/base-bl";
 import { MD5 } from "@/components/Controls/mtluc/base/common";
 import { User } from "./User";
+import { BaseBl } from "@/base/Bl/base-bl.mongo";
 
 export class UserBl extends BaseBl<User> {
   _tableName: string = "User";
@@ -27,5 +28,34 @@ export class UserBl extends BaseBl<User> {
         break;
     }
     await super.checkBusiness(obj, mode);
+  }
+
+  override async edit(obj: User): Promise<User | null> {
+    const result = await super.edit(obj);
+    return { ...obj, ...result, Password: "" };
+  }
+
+  override async getAll(): Promise<User[]> {
+    let result = await super.getAll();
+    result = result.map((x) => {
+      return { ...x, Password: "" };
+    });
+    return result;
+  }
+
+  override async getById(id: any): Promise<User | null> {
+    const result = await super.getById(id);
+    if (result) {
+      result.Password = "";
+    }
+    return result;
+  }
+
+  override async add(obj: User): Promise<User | null | undefined> {
+    const result = await super.add(obj);
+    if (result) {
+      result.Password = "";
+    }
+    return result;
   }
 }

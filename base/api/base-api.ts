@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { BaseBl } from "../Bl/base-bl";
 import { ISession } from "../session";
 import { Auth, IAuth } from "./auth";
+import { IBaseBL } from "../Bl/base-bl.interface";
 
-export abstract class BaseApi<T extends BaseBl<any>> {
+export abstract class BaseApi<T extends IBaseBL<any>> {
   query: any;
   body: any;
   action?: string;

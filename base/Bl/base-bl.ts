@@ -1,28 +1,29 @@
 import { IAuthData } from "../api/auth";
 import { DbContext } from "../model/dbcontext/dbcontext";
+import { IBaseBL } from "./base-bl.interface";
 
-export abstract class BaseBl<T extends object> {
+export abstract class BaseBl<T extends object> implements IBaseBL<T> {
   dbContext!: DbContext;
   auth?: IAuthData;
   abstract _tableName: string;
   abstract _idField: string;
   protected activator: () => T;
 
-  constructor(type: { new(): T }, _dbContext?: DbContext) {
+  constructor(type: { new (): T }, _dbContext?: DbContext) {
     this.activator = () => {
       return new type();
     };
     this.dbContext = _dbContext || new DbContext();
   }
 
-  async getById(id: any) {
+  async getById(id: any): Promise<T | undefined> {
     return await this.dbContext.get<T>(
       `SELECT * FROM ${this._tableName} WHERE ${this._idField} = ?`,
       [id]
     );
   }
 
-  async getAll() {
+  async getAll(): Promise<T[] | undefined> {
     return await this.dbContext.getAll<T>(
       `SELECT * FROM ${this._tableName}`,
       []

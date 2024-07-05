@@ -1,7 +1,7 @@
-import { BaseBl } from "../Bl/base-bl";
+import { IBaseBL } from "../Bl/base-bl.interface";
 import { BaseApi } from "./base-api";
 
-export abstract class DictBaseApi<T extends BaseBl<any>> extends BaseApi<T> {
+export abstract class DictBaseApi<T extends IBaseBL<any>> extends BaseApi<T> {
   override async get() {
     try {
       this.checkAuth();
