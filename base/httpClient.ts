@@ -22,7 +22,7 @@ const setAuth = (httpOption: any) => {
 export const httpClient = {
   getUri: (url: string) => {
     if (location.origin != publicRuntimeConfig.rootApi || location.origin == 'http://localhost:3000') {
-      return `/service${url.replace(/^\/api/, "")}`;
+      //return `/service${url.replace(/^\/api/, "")}`;
     }
     return url;
   },
