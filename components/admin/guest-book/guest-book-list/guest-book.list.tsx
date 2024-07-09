@@ -78,7 +78,7 @@ class GuestBookList extends DictBaseListing<
           button.disabled = !currentRow;
           break;
         case "PHONE":
-          button.disabled = !currentRow || !currentRow.Phone;
+          button.disabled = !currentRow || !currentRow.row.Phone;
           break;
       }
     });
@@ -86,8 +86,11 @@ class GuestBookList extends DictBaseListing<
   }
 
   override checkShowHideButton(row: any, btn: IToolbar): boolean {
-    if (!row.Phone) {
-      return false;
+    switch (btn.id) {
+      case "PHONE":
+        if (!row.Phone) {
+          return false;
+        }
     }
     return super.checkShowHideButton(row, btn);
   }
