@@ -2,7 +2,6 @@ import DiaLogManager from "@/components/Controls/mtluc/DialogManager/dialog-mana
 import Loading from "@/components/Controls/mtluc/Loading/loading";
 import NotificationManager from "@/components/Controls/mtluc/NotificationManager/notification-manager";
 import "@/styles/globals.scss";
-import Head from "next/head";
 import { useMemo } from "react";
 import "../components/Controls/mtluc/mtl.control.scss";
 
@@ -13,13 +12,6 @@ function MyApp({ Component, pageProps }: any) {
   }, [pageProps]);
   return (
     <>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1"
-        />
-        
-      </Head>
       {component}
       <Loading
         isLoading={false}
