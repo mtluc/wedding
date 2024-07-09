@@ -165,11 +165,19 @@ export default function WeddingPage({
         <meta name="keywords" content="wedding|wedding online" />
       </Head>
       <main>
-        <img src="/images/background/bg1.png" alt="" hidden />
-        <img src="/images/background/bg.jpg" alt="" hidden />
-        <img src="/images/background/bca.png" alt="" hidden />
-        <img src="/images/background/mail.png" alt="" hidden />
-        <img src="/images/icon/heart.png" alt="" hidden />
+        <div
+          style={{
+            width: 0,
+            height: 0,
+            overflow: "hidden",
+          }}
+        >
+          <img src="/images/background/bg1.png" alt="" hidden />
+          <img src="/images/background/bg.jpg" alt="" hidden />
+          <img src="/images/background/bca.png" alt="" hidden />
+          <img src="/images/background/mail.png" alt="" hidden />
+          <img src="/images/icon/heart.png" alt="" hidden />
+        </div>
 
         {_wedding && _guest ? (
           <Invitation wedding={_wedding} guest={_guest} />
