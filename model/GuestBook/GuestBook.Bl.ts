@@ -1,10 +1,15 @@
 // import { BaseBl } from "@/base/Bl/base-bl";
 import { BaseBl } from "@/base/Bl/base-bl.mongo";
 import { GuestBook } from "./GuestBook";
+import { weddingDb } from "../MongoDB/weddingDbContext";
 
 export class GuestBookBl extends BaseBl<GuestBook> {
   _tableName: string = "GuestBook";
   _idField: string = "_id";
+
+  constructor(type: { new(): GuestBook }) {
+    super(type, weddingDb);
+  }
 
   async getItemId(id: any) {
     return await this.getById(id);

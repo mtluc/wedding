@@ -1,10 +1,15 @@
 // import { BaseBl } from "@/base/Bl/base-bl";
 import { BaseBl } from "@/base/Bl/base-bl.mongo";
 import { Wedding } from "./wedding";
+import { weddingDb } from "../MongoDB/weddingDbContext";
 
 export class WeddingBl extends BaseBl<Wedding> {
   _tableName: string = "Wedding";
   _idField: string = "UserName";
+
+  constructor(type: { new(): Wedding }) {
+    super(type, weddingDb);
+  }
 
   override async edit(obj: Wedding) {
     const oldObj = await this.getById((obj as any)[this._idField]);

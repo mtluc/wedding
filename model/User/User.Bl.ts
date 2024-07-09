@@ -2,10 +2,18 @@
 import { MD5 } from "@/components/Controls/mtluc/base/common";
 import { User } from "./User";
 import { BaseBl } from "@/base/Bl/base-bl.mongo";
+import { weddingDb } from "../MongoDB/weddingDbContext";
 
 export class UserBl extends BaseBl<User> {
   _tableName: string = "User";
   _idField: string = "UserName";
+
+  /**
+   *
+   */
+  constructor(type: { new(): User }) {
+    super(type, weddingDb);
+  }
 
   protected override async checkBusiness(
     obj: User,

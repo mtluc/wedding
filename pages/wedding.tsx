@@ -122,6 +122,7 @@ export default function WeddingPage({
   useEffect(() => {
     initData();
   }, [initData]);
+
   return (
     <>
       <Head>
@@ -149,15 +150,15 @@ export default function WeddingPage({
 
         <meta
           property="og:image"
-          content={`/service/bg?name=${encodeURIComponent(
+          content={`/api/bg?name=${encodeURIComponent(
             `${guest?.Relationship} ${guest?.ShortName}`
           )}`}
           itemProp="thumbnailUrl"
         />
         <meta
           property="og:image:secure_url"
-          content={`/service/bg?name=${encodeURIComponent(
-            `${_guest?.Relationship} ${guest?.ShortName}`
+          content={`/api/bg?name=${encodeURIComponent(
+            `${guest?.Relationship} ${guest?.ShortName}`
           )}`}
         />
         <meta property="og:image:type" content="image/png" />
