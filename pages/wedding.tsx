@@ -78,7 +78,6 @@ export default function WeddingPage({
     try {
       setAppLoading(true);
       if (id && user) {
-        console.log(id, user);
         const res = await httpClient.getJson<{
           wedding: IWedding;
           guest: GuestBook;
@@ -166,6 +165,8 @@ export default function WeddingPage({
         <meta name="keywords" content="wedding|wedding online" />
       </Head>
       <main>
+        <img src="/images/background/bg1.png" alt="" hidden />
+
         {_wedding && _guest ? (
           <Invitation wedding={_wedding} guest={_guest} />
         ) : null}

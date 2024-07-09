@@ -14,7 +14,6 @@ export class DBContext {
   protected db!: string;
 
   constructor(uri: string, db: string) {
-    console.log('create client')
     this.db = db;
     this.client = new MongoClient(uri, {
       serverApi: {
