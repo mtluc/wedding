@@ -79,11 +79,17 @@ class GuestBookList extends DictBaseListing<
           break;
         case "PHONE":
           button.disabled = !currentRow || !currentRow.Phone;
-          button.hideMobile =  !currentRow.Phone;
           break;
       }
     });
     this.setState({ toolbars });
+  }
+
+  override checkShowHideButton(row: any, btn: IToolbar): boolean {
+    if (!row.Phone) {
+      return false;
+    }
+    return super.checkShowHideButton(row, btn);
   }
 
   shareClick = async (row: GuestBook) => {
@@ -179,6 +185,10 @@ class GuestBookList extends DictBaseListing<
     } catch (error) {
       handlerRequertException(error);
     }
+  }
+
+  override loadData(): Promise<any[]> {
+    return super.loadData();
   }
 
   override initColums(): IColumn[] {

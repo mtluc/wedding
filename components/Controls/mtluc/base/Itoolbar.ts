@@ -8,6 +8,4 @@ export interface IToolbar {
   iconCls?: string;
   iconKey?: IconKeys;
   responsive?: boolean;
-  hide?: boolean;
-  hideMobile?: boolean;
 }

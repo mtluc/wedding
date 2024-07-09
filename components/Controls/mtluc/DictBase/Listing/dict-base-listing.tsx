@@ -603,12 +603,16 @@ abstract class DictBaseListing<
     }
   }
 
+  public checkShowHideButton(row: any, btn: IToolbar) {
+    return true;
+  }
+
   public MobileActions(row: any, rowIdx: number): React.ReactNode {
     if (this.responsiveGrid) {
       return this.state.toolbars
         .filter((x) => x.responsive)
         .map((btn, idx) => {
-          if (!btn.hide && !btn.hideMobile) {
+          if (this.checkShowHideButton(row, btn)) {
             return (
               <button
                 key={idx}
@@ -627,7 +631,6 @@ abstract class DictBaseListing<
                   }, 100);
                 }}
                 title={btn.text}
-                disabled={btn.disabled}
               >
                 {btn.iconKey ? (
                   <IconSvg className={btn.iconCls} iconKeys={btn.iconKey} />
@@ -711,30 +714,25 @@ abstract class DictBaseListing<
                   );
                 }
 
-                if (!btn.hide) {
-                  return (
-                    <button
-                      key={idx}
-                      className={buildClass([
-                        btn.class,
-                        btn.responsive ? "btn-respon" : "",
-                      ])}
-                      type="button"
-                      onClick={(e) => {
-                        this.handlerToolBarClick(e, btn);
-                      }}
-                      disabled={btn.disabled}
-                    >
-                      {btn.iconKey ? (
-                        <IconSvg
-                          className={btn.iconCls}
-                          iconKeys={btn.iconKey}
-                        />
-                      ) : null}
-                      <span>{btn.text}</span>
-                    </button>
-                  );
-                }
+                return (
+                  <button
+                    key={idx}
+                    className={buildClass([
+                      btn.class,
+                      btn.responsive ? "btn-respon" : "",
+                    ])}
+                    type="button"
+                    onClick={(e) => {
+                      this.handlerToolBarClick(e, btn);
+                    }}
+                    disabled={btn.disabled}
+                  >
+                    {btn.iconKey ? (
+                      <IconSvg className={btn.iconCls} iconKeys={btn.iconKey} />
+                    ) : null}
+                    <span>{btn.text}</span>
+                  </button>
+                );
               })}
             </div>
           ) : null}
