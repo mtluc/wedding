@@ -20,6 +20,8 @@ export default async function handler(
 
   const fontsPath = `${path.resolve(__dirname).split(".next")[0]}/public/fonts`;
 
+  console.log(fontsPath);
+
   svg2img(
     svg,
     {
