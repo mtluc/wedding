@@ -18,9 +18,9 @@ export default async function handler(
     <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="350" y1="472" x2="930" y2="472" stroke-dasharray="2,5"/>
 </svg>`;
 
-  const fontsPath = `${path.resolve(__dirname).split(".next")[0]}/public/fonts`;
+  const fontsPath = path.resolve('public/fonts');//`${path.resolve(__dirname).split(".next")[0]}/public/fonts`;
 
-  console.log(fontsPath);
+  console.log(path.resolve('public/fonts'),`${path.resolve(__dirname).split(".next")[0]}/public/fonts`);
 
   svg2img(
     svg,
