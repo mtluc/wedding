@@ -74,9 +74,12 @@ class GuestBookList extends DictBaseListing<
         case "EDIT":
         case "DELETE":
         case "DUPLICATE":
-        case "PHONE":
         case "SHARE":
           button.disabled = !currentRow;
+          break;
+        case "PHONE":
+          button.disabled = !currentRow || !currentRow.Phone;
+          button.hideMobile =  !currentRow.Phone;
           break;
       }
     });

@@ -461,7 +461,7 @@ abstract class DictBaseListing<
             datas[idx] = actionResult.record;
             _data = this.localFilter([...datas]);
             this.setState({
-              datas:_data,
+              datas: _data,
               singlePageInfo: {
                 countItem: _data.length as any,
                 totalItem: this.state.singlePageInfo.totalItem,
@@ -492,7 +492,7 @@ abstract class DictBaseListing<
               this.rowSelected = undefined;
             }
             this.setState({
-              datas:_data,
+              datas: _data,
               singlePageInfo: {
                 countItem: _data.length as any,
                 totalItem: (this.state.singlePageInfo.totalItem - 1) as any,
@@ -608,30 +608,33 @@ abstract class DictBaseListing<
       return this.state.toolbars
         .filter((x) => x.responsive)
         .map((btn, idx) => {
-          return (
-            <button
-              key={idx}
-              className={buildClass([
-                btn.class,
-                btn.responsive ? "btn-respon" : "",
-              ])}
-              type="button"
-              onClick={(e) => {
-                this.rowSelected = {
-                  idx: rowIdx,
-                  row: row,
-                };
-                setTimeout(() => {
-                  this.handlerToolBarClick(e, btn);
-                }, 100);
-              }}
-              title={btn.text}
-            >
-              {btn.iconKey ? (
-                <IconSvg className={btn.iconCls} iconKeys={btn.iconKey} />
-              ) : null}
-            </button>
-          );
+          if (!btn.hide && !btn.hideMobile) {
+            return (
+              <button
+                key={idx}
+                className={buildClass([
+                  btn.class,
+                  btn.responsive ? "btn-respon" : "",
+                ])}
+                type="button"
+                onClick={(e) => {
+                  this.rowSelected = {
+                    idx: rowIdx,
+                    row: row,
+                  };
+                  setTimeout(() => {
+                    this.handlerToolBarClick(e, btn);
+                  }, 100);
+                }}
+                title={btn.text}
+                disabled={btn.disabled}
+              >
+                {btn.iconKey ? (
+                  <IconSvg className={btn.iconCls} iconKeys={btn.iconKey} />
+                ) : null}
+              </button>
+            );
+          }
         });
     }
     return null;
@@ -707,25 +710,31 @@ abstract class DictBaseListing<
                     </button>
                   );
                 }
-                return (
-                  <button
-                    key={idx}
-                    className={buildClass([
-                      btn.class,
-                      btn.responsive ? "btn-respon" : "",
-                    ])}
-                    type="button"
-                    onClick={(e) => {
-                      this.handlerToolBarClick(e, btn);
-                    }}
-                    disabled={btn.disabled}
-                  >
-                    {btn.iconKey ? (
-                      <IconSvg className={btn.iconCls} iconKeys={btn.iconKey} />
-                    ) : null}
-                    <span>{btn.text}</span>
-                  </button>
-                );
+
+                if (!btn.hide) {
+                  return (
+                    <button
+                      key={idx}
+                      className={buildClass([
+                        btn.class,
+                        btn.responsive ? "btn-respon" : "",
+                      ])}
+                      type="button"
+                      onClick={(e) => {
+                        this.handlerToolBarClick(e, btn);
+                      }}
+                      disabled={btn.disabled}
+                    >
+                      {btn.iconKey ? (
+                        <IconSvg
+                          className={btn.iconCls}
+                          iconKeys={btn.iconKey}
+                        />
+                      ) : null}
+                      <span>{btn.text}</span>
+                    </button>
+                  );
+                }
               })}
             </div>
           ) : null}
