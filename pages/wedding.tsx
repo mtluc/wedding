@@ -82,7 +82,7 @@ export default function WeddingPage({
         const res = await httpClient.getJson<{
           wedding: IWedding;
           guest: GuestBook;
-        }>(`${publicRuntimeConfig.rootApi}/api/Wedding/getWeddingInfo`, {
+        }>(`/api/Wedding/getWeddingInfo`, {
           id,
           user,
         });
