@@ -144,8 +144,8 @@ export default function WeddingPage({
         <meta name="description" content={obj.description} />
         <meta property="og:description" content={obj.description} />
 
-        <meta property="og:url" content="https://mtluc.id.vn" />
-        <link rel="canonical" href={`https://mtluc.id.vn`} />
+        <meta property="og:url" content={publicRuntimeConfig.rootApi} />
+        <link rel="canonical" href={publicRuntimeConfig.rootApi} />
 
         <meta
           property="og:image"

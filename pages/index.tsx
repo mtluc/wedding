@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/google-font-display */
 import { withSessionSsr } from "@/base/session";
 import Invitation from "@/components/invitation/invitation";
+import getConfig from "next/config";
 import Head from "next/head";
+const { publicRuntimeConfig } = getConfig();
 
 export const getServerSideProps = withSessionSsr(
   async ({ req, res, query }) => {
@@ -39,8 +41,8 @@ export default function Home({ query }: { query: { name: string } }) {
         <meta name="description" content={obj.description} />
         <meta property="og:description" content={obj.description} />
 
-        <meta property="og:url" content="https://mtluc.id.vn" />
-        <link rel="canonical" href={`https://mtluc.id.vn`} />
+        <meta property="og:url" content={publicRuntimeConfig.rootApi} />
+        <link rel="canonical" href={publicRuntimeConfig.rootApi} />
 
         <meta property="og:image" content={`/service/bg?name=${encodeURIComponent(query.name || "")}`} itemProp="thumbnailUrl"/>
         <meta
