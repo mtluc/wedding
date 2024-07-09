@@ -112,14 +112,14 @@ class GuestBookList extends DictBaseListing<
                 .toLowerCase()
                 .replace(/ /gi, "-")}/${btoa(
                 encodeURIComponent(
-                  JSON.stringify({
-                    id: row._id,
-                    user: this.ctx.auth?.user?.UserName,
-                    guest: {
-                      Relationship: row.Relationship,
-                      ShortName: row.ShortName,
-                    },
-                  })
+                  [
+                    row._id,
+                    this.ctx.auth?.user?.UserName,
+                    row.Relationship,
+                    row.ShortName,
+                  ]
+                    .map((x) => x?.replaceAll('"', '""') || "")
+                    .join('","')
                 )
               )}`,
             })

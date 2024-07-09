@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/google-font-display */
 import { httpClient } from "@/base/httpClient";
 import { withSessionSsr } from "@/base/session";
@@ -18,20 +19,19 @@ export const getServerSideProps = withSessionSsr(
   async ({ req, res, query }) => {
     try {
       if (query.param) {
-        const data = JSON.parse(
-          decodeURIComponent(atob(query.param as string))
-        ) as {
-          id: string;
-          user: string;
-          guest: {
-            Relationship: string;
-            ShortName: string;
-          };
-        };
+        //id,user,Relationship,ShortName
+        const datas = (decodeURIComponent(atob(query.param as string)) || "")
+          .split('","')
+          .map((x) => x.replaceAll('""', '"'));
 
         return {
           props: {
-            ...data,
+            id: datas[0],
+            user: datas[1],
+            guest: {
+              Relationship: datas[2],
+              ShortName: datas[3],
+            },
           },
         };
       }
