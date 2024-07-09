@@ -12,14 +12,15 @@ import {
   pushDialog,
   removeVietnameseTones,
 } from "@/components/Controls/mtluc/base/common";
+import { GuestBook } from "@/model/GuestBook/GuestBook";
+import { Wedding } from "@/model/Wedding/wedding";
 import AppContext, { IAppContext } from "@/store/app-context";
+import getConfig from "next/config";
 import { JSX, MouseEvent, ReactElement } from "react";
+import WeddingService from "../../wedding/wedding.service";
 import GuestBookEditor from "../guest-book-editor/guest-book.editor";
 import GuestBookService from "../guest-book.service";
 import classNames from "./guest-book-list.module.scss";
-import WeddingService from "../../wedding/wedding.service";
-import { Wedding } from "@/model/Wedding/wedding";
-import getConfig from "next/config";
 const { publicRuntimeConfig } = getConfig();
 
 interface IGuestBookListProps extends IDictBaseListProps {}
@@ -82,10 +83,10 @@ class GuestBookList extends DictBaseListing<
     this.setState({ toolbars });
   }
 
-  shareClick = async (row: any) => {
+  shareClick = async (row: GuestBook) => {
     try {
       if (navigator.share) {
-        this.setLoading(false);
+        this.setLoading(true);
         const res = await new WeddingService().getById(
           this.ctx.auth?.user?.UserName
         );
@@ -114,6 +115,10 @@ class GuestBookList extends DictBaseListing<
                   JSON.stringify({
                     id: row._id,
                     user: this.ctx.auth?.user?.UserName,
+                    guest: {
+                      Relationship: row.Relationship,
+                      ShortName: row.ShortName,
+                    },
                   })
                 )
               )}`,

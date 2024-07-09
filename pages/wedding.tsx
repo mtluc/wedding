@@ -1,13 +1,17 @@
 /* eslint-disable @next/next/google-font-display */
 import { httpClient } from "@/base/httpClient";
 import { withSessionSsr } from "@/base/session";
-import { parseDate } from "@/components/Controls/mtluc/base/common";
+import {
+  handlerRequertException,
+  parseDate,
+  setAppLoading,
+} from "@/components/Controls/mtluc/base/common";
 import Invitation from "@/components/invitation/invitation";
 import { GuestBook } from "@/model/GuestBook/GuestBook";
 import { Wedding as IWedding } from "@/model/Wedding/wedding";
 import getConfig from "next/config";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 const { publicRuntimeConfig } = getConfig();
 
 export const getServerSideProps = withSessionSsr(
@@ -19,22 +23,17 @@ export const getServerSideProps = withSessionSsr(
         ) as {
           id: string;
           user: string;
+          guest: {
+            Relationship: string;
+            ShortName: string;
+          };
         };
 
-        if (data.id && data.user) {
-          const res = await httpClient.getJson(
-            `${publicRuntimeConfig.rootApi}/api/Wedding/getWeddingInfo`,
-            data
-          );
-
-          if (res?.data) {
-            return {
-              props: {
-                ...res.data,
-              },
-            };
-          }
-        }
+        return {
+          props: {
+            ...data,
+          },
+        };
       }
 
       return {
@@ -57,11 +56,16 @@ export const getServerSideProps = withSessionSsr(
   }
 );
 export default function WeddingPage({
-  wedding,
+  id,
+  user,
   guest,
 }: {
-  wedding?: IWedding;
-  guest?: GuestBook;
+  id: string;
+  user: string;
+  guest: {
+    Relationship: string;
+    ShortName: string;
+  };
 }) {
   const obj = {
     description: "Thiệp mời",
@@ -69,18 +73,55 @@ export default function WeddingPage({
   };
   const [_wedding, setWedding] = useState(undefined as any as IWedding);
   const [_guest, setGuest] = useState(undefined as any as GuestBook);
-  useEffect(() => {
-    setWedding({
-      ...(wedding as IWedding),
-      PartyDate: parseDate(wedding?.PartyDate),
-      WeddingDate: parseDate(wedding?.WeddingDate),
-    });
 
-    setGuest({
-      ...(guest as GuestBook),
-      GuestDate: parseDate(guest?.GuestDate),
-    });
-  }, [guest, wedding]);
+  const initData = useCallback(async () => {
+    try {
+      setAppLoading(true);
+      if (id && user) {
+        console.log(id, user);
+        const res = await httpClient.getJson<{
+          wedding: IWedding;
+          guest: GuestBook;
+        }>(`${publicRuntimeConfig.rootApi}/api/Wedding/getWeddingInfo`, {
+          id,
+          user,
+        });
+
+        if (res?.data) {
+          if (res.data.wedding) {
+            setWedding({
+              ...res.data.wedding,
+              PartyDate: parseDate(res.data.wedding.PartyDate),
+              WeddingDate: parseDate(res.data.wedding.WeddingDate),
+            });
+
+            if (res.data.guest) {
+              setGuest({
+                ...res.data.guest,
+                GuestDate: parseDate(res.data.guest.GuestDate),
+              });
+            } else {
+              location.href = "/error-404";
+            }
+          } else {
+            location.href = "/error-404";
+          }
+        } else {
+          location.href = "/error-404";
+        }
+      } else {
+        location.href = "/error-404";
+      }
+    } catch (error) {
+      handlerRequertException(error);
+    } finally {
+      setAppLoading(false);
+    }
+  }, [id, user]);
+
+  useEffect(() => {
+    initData();
+  }, [initData]);
   return (
     <>
       <Head>
@@ -116,7 +157,7 @@ export default function WeddingPage({
         <meta
           property="og:image:secure_url"
           content={`/service/bg?name=${encodeURIComponent(
-            `${guest?.Relationship} ${guest?.ShortName}`
+            `${_guest?.Relationship} ${guest?.ShortName}`
           )}`}
         />
         <meta property="og:image:type" content="image/png" />
