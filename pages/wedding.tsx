@@ -167,9 +167,11 @@ export default function WeddingPage({
       <main>
         <div
           style={{
+            position: "fixed",
             width: 0,
             height: 0,
             overflow: "hidden",
+            zIndex: -1,
           }}
         >
           <img src="/images/background/bg1.png" alt="" hidden />

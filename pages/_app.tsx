@@ -4,6 +4,7 @@ import NotificationManager from "@/components/Controls/mtluc/NotificationManager
 import "@/styles/globals.scss";
 import { useMemo } from "react";
 import "../components/Controls/mtluc/mtl.control.scss";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: any) {
   const component = useMemo(() => {
@@ -12,6 +13,12 @@ function MyApp({ Component, pageProps }: any) {
   }, [pageProps]);
   return (
     <>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1"
+        />
+      </Head>
       {component}
       <Loading
         isLoading={false}
